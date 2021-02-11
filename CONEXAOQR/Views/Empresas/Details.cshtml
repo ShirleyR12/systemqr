@@ -1,0 +1,123 @@
+﻿@model CONEXAOQR.Models.Empresa
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Empresa</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cnpj)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cnpj)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.telefone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.telefone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.endereco)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.endereco)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nomeFantasia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nomeFantasia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gerente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gerente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.diretor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.diretor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mqi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mqi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.crm)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.crm)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.site)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.site)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RedesSociais.nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RedesSociais.nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoNegocio.nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoNegocio.nome)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

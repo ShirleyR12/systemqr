@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DSDatos" targetNamespace="http://tempuri.org/DSDatos.xsd" xmlns:mstns="http://tempuri.org/DSDatos.xsd" xmlns="http://tempuri.org/DSDatos.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DSDatos" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DSDatos" msprop:Generator_UserDSName="DSDatos">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="ReporteHistorial" msprop:Generator_TableClassName="ReporteHistorialDataTable" msprop:Generator_TableVarName="tableReporteHistorial" msprop:Generator_TablePropName="ReporteHistorial" msprop:Generator_RowDeletingName="ReporteHistorialRowDeleting" msprop:Generator_RowChangingName="ReporteHistorialRowChanging" msprop:Generator_RowEvHandlerName="ReporteHistorialRowChangeEventHandler" msprop:Generator_RowDeletedName="ReporteHistorialRowDeleted" msprop:Generator_UserTableName="ReporteHistorial" msprop:Generator_RowChangedName="ReporteHistorialRowChanged" msprop:Generator_RowEvArgName="ReporteHistorialRowChangeEvent" msprop:Generator_RowClassName="ReporteHistorialRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Id" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:string" minOccurs="0" />
+              <xs:element name="Usuario" msprop:Generator_ColumnVarNameInTable="columnUsuario" msprop:Generator_ColumnPropNameInRow="Usuario" msprop:Generator_ColumnPropNameInTable="UsuarioColumn" msprop:Generator_UserColumnName="Usuario" type="xs:string" minOccurs="0" />
+              <xs:element name="FechayHora" msprop:Generator_ColumnVarNameInTable="columnFechayHora" msprop:Generator_ColumnPropNameInRow="FechayHora" msprop:Generator_ColumnPropNameInTable="FechayHoraColumn" msprop:Generator_UserColumnName="FechayHora" type="xs:string" minOccurs="0" />
+              <xs:element name="TipoDeAccion" msprop:Generator_ColumnVarNameInTable="columnTipoDeAccion" msprop:Generator_ColumnPropNameInRow="TipoDeAccion" msprop:Generator_ColumnPropNameInTable="TipoDeAccionColumn" msprop:Generator_UserColumnName="TipoDeAccion" type="xs:string" minOccurs="0" />
+              <xs:element name="Accion" msprop:Generator_ColumnVarNameInTable="columnAccion" msprop:Generator_ColumnPropNameInRow="Accion" msprop:Generator_ColumnPropNameInTable="AccionColumn" msprop:Generator_UserColumnName="Accion" type="xs:string" minOccurs="0" />
+              <xs:element name="OcultarUsuario" msprop:Generator_ColumnVarNameInTable="columnOcultarUsuario" msprop:Generator_ColumnPropNameInRow="OcultarUsuario" msprop:Generator_ColumnPropNameInTable="OcultarUsuarioColumn" msprop:Generator_UserColumnName="OcultarUsuario" type="xs:string" minOccurs="0" />
+              <xs:element name="OcultarFechayHora" msprop:Generator_ColumnVarNameInTable="columnOcultarFechayHora" msprop:Generator_ColumnPropNameInRow="OcultarFechayHora" msprop:Generator_ColumnPropNameInTable="OcultarFechayHoraColumn" msprop:Generator_UserColumnName="OcultarFechayHora" type="xs:string" minOccurs="0" />
+              <xs:element name="OcultarTipoDeAccion" msprop:Generator_ColumnVarNameInTable="columnOcultarTipoDeAccion" msprop:Generator_ColumnPropNameInRow="OcultarTipoDeAccion" msprop:Generator_ColumnPropNameInTable="OcultarTipoDeAccionColumn" msprop:Generator_UserColumnName="OcultarTipoDeAccion" type="xs:string" minOccurs="0" />
+              <xs:element name="OcultarAccion" msprop:Generator_ColumnVarNameInTable="columnOcultarAccion" msprop:Generator_ColumnPropNameInRow="OcultarAccion" msprop:Generator_ColumnPropNameInTable="OcultarAccionColumn" msprop:Generator_UserColumnName="OcultarAccion" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

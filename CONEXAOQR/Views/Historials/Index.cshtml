@@ -1,0 +1,296 @@
+﻿
+@model PagedList.IPagedList<CONEXAOQR.Models.Historial>
+@using System.Web.UI.WebControls
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<link href="~/Scripts/jquery-ui-1.12.0.custom/jquery-ui.css" rel="stylesheet" />
+<link href="~/Scripts/jquery-ui-1.12.0.custom/jquery-ui.structure.css" rel="stylesheet" />
+<link href="~/Scripts/jquery-ui-1.12.0.custom/jquery-ui.theme.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-ui-1.12.0.custom/jquery-ui.js"></script>
+<link href="~/Scripts/skins/flat/green.css" rel="stylesheet" />
+<script src="~/Scripts/icheck.min.js"></script>
+<link href="~/Scripts/bootstrap-select-1.12.2/css/bootstrap-select.min.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap-select-1.12.2/js/bootstrap-select.min.js"></script>
+<script src="~/Scripts/bootstrap-select-1.12.2/js/i18n/defaults-es_ES.js"></script>
+<script src="~/Scripts/dknotus-tour.js"></script>
+@{
+    ViewBag.Title = "Historial";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts {
+    @Styles.Render("~/Content/datepicker")
+    @Scripts.Render("~/bundles/datePicker")
+    <script>
+        $(document).ready(function () {
+            $("#divProgress").css("display", "none");
+        });
+        $(document).ready(function () {
+            $("#searchString").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/Historials/GetUsuarios",
+                        type: "POST",
+                        dataType: "json",
+                        data: { Prefix: request.term },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return { label: item.Name, value: item.Name };
+                            }));
+
+                        }
+                    });
+                },
+                messages: {
+                    noResults: "noResult",
+                    results: " Result"
+                }
+            });
+        });
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+        $(document).ready(function () {
+            $('.flat').iCheck({
+                checkboxClass: 'icheckbox_flat-green'
+
+            });
+        });
+
+        $('#all').on('ifChecked', function () {
+            $(".flat").iCheck('check');
+
+        });
+        $('#all').on('ifUnchecked', function () {
+            $(".flat").iCheck('uncheck');
+        });
+        $("#historial_usuarios").addClass('active');
+        function Ayuda() {
+
+            Tour.run([
+                 {
+                     element: $('#AyudaNavbar'),
+                     content: 'Este es el menú principal y permite navegar en el sitio.',
+                     position: 'bottom'
+                 },
+                {
+                    element: $('#AyudaReporte'),
+                    content: 'Haga click en este botón para acceder al formulario en el cual se puede introducir el nombre del reporte, seleccionar el formato y los campos que se quieren mostrar en el mismo.El contenido del reporte depende de la información que se filtre.',
+                    position: 'bottom'
+                },
+
+
+
+                 {
+                     element: $('#searchString'),
+                     content: 'Este campo permite filtrar los usuarios, tiene autocompletamiento directo desde la base de datos si se introduce algo que no se autocomplete al dar click en el botón filtrar no va a devolver nada.',
+                     position: 'bottom'
+                 },
+                  {
+                      element: $('#AyudaFecha'),
+                      content: 'Este campo permite filtrar los usuarios por la fecha en que realizó la acción.',
+                      position: 'bottom'
+                  },
+                   {
+                       element: $('#AyudaAccion'),
+                       content: 'Este campo permite filtrar los usuarios por el tipo de acción.',
+                       position: 'bottom'
+                   },
+                  {
+                      element: $('#AyudaPaginado'),
+                      content: 'Este es un campo que modifica el paginado de la tabla, el número que se introduce va a ser la cantidad de filas que va a mostrar por página.',
+                      position: 'bottom'
+                  },
+                {
+                    element: $('#AyudaOrdenarNombre'),
+                    content: 'Haga click en <strong>Usuario</strong> para organizar los usuarios de forma ascendente o descendente.',
+                    position: 'bottom'
+                },
+            {
+                element: $('#AyudaOrdenarFecha'),
+                content: 'Haga click en <strong>Fecha y hora</strong> para organizar el historial por fechas de forma ascendente o descendente.',
+            position: 'bottom'
+        }
+
+
+            ], { language: "es" });
+        }
+        function LoadJavaScript(parameters) {
+            $(document).ready(function () {
+                $('[data-toggle="tooltip"]').tooltip();
+            });
+
+            $('.selectpicker').selectpicker('refresh');
+            Tour.close();
+            $(document).ready(function () {
+                $('.flat').iCheck({
+                    checkboxClass: 'icheckbox_flat-green'
+
+                });
+            });
+
+            $('#all').on('ifChecked', function () {
+                $(".flat").iCheck('check');
+
+            });
+            $('#all').on('ifUnchecked', function () {
+                $(".flat").iCheck('uncheck');
+            });
+
+
+
+
+        }
+        function Ordenar() {
+            $("#Ordenar").submit();
+        }
+        function OrdenarF() {
+            $("#OrdenarF").submit();
+        }
+        $(document).ready(function () {
+
+            $('.datepicker').datetimepicker({
+                locale: ('es'),
+                format: 'l'
+            });
+
+        });
+        function Reporte() {
+
+
+            var badge = $("#Cant");
+            if (badge.text()!=="0") {
+                $('#myModal').modal('show');
+            }
+
+
+        }
+        function LoadJavaReport(parameters) {
+
+
+            var reporte = document.getElementById("BadgeMyReport").value;
+
+            var badge = $("#Cant");
+            badge.text(reporte);
+        }
+        function ValidarForm() {
+            var checkboxes = document.getElementsByTagName('input'); //obtenemos todos los controles del tipo Input
+            var cont = 0;
+            for (var i = 0; i < checkboxes.length; i++) //recoremos todos los controles
+            {
+                if (checkboxes[i].type === "checkbox") //solo si es un checkbox entramos
+                {
+                    if (checkboxes[i].id === "columUsuario" || checkboxes[i].id === "columFechayHora" || checkboxes[i].id === "columTipoDeAccion" || checkboxes[i].id === "columAccion" ) {
+                        if (checkboxes[i].checked === true) {
+                            cont++;
+                        }
+                    }
+
+
+                }
+
+            }
+            if (cont !== 0) {
+                return true;
+
+            } else {
+                $.toast({
+                    heading: 'Información',
+                    text: 'Seleccione al menos un campo para mostrar en el reporte',
+                    hideAfter: 10000,
+                    position: 'bottom-right',
+                    stack: false,
+                    showHideTransition: 'Plain',
+                    loader: false,
+                    icon: 'error'
+                });
+                return false;
+            }
+
+        }
+        function Selectrefresh() {
+            $('.selectpicker').selectpicker('refresh');
+
+
+        }
+    </script>
+}
+<br>
+<div class="col-md-12">
+
+
+
+
+
+    @using (Ajax.BeginForm(
+                                 new AjaxOptions
+                                 {
+                                     HttpMethod = "post",
+                                     InsertionMode = InsertionMode.Replace,
+                                     UpdateTargetId = "HistorialTable",
+                                     LoadingElementId = "divProgress",
+                                     OnSuccess = "LoadJavaScript",
+                                     OnComplete = "LoadJavaReport"
+                             //LoadingElementDuration = 1000
+                         }
+                                 ))
+    {
+        <div class="row w3-animate-opacity">
+            <div class="col-md-2">
+
+                <a onclick="Reporte();" id="AyudaReporte" class="btn btn-success btn-lg w3-card-12"> <span class="fa fa-arrow-down"></span> Reporte <span data-toggle="tooltip" data-placement="right" title="Total de registros que se van a mostrar en el reporte" id="Cant" class="badge">@ViewBag.CantRegistros</span></a>
+            </div>
+
+
+            <div class="col-md-2">
+                <input type="text" class="form-control" name="searchString" id="searchString" placeholder="Nombre">
+            </div>
+            <div class="col-md-2">
+                <input type="text" id="AyudaFecha" class="datepicker form-control" name="entrega" placeholder="Fecha">
+            </div>
+            <div class="form-group col-md-2">
+                <select id="AyudaAccion" name="accion" class="selectpicker show-menu-arrow" data-width="90%">
+                    <option name="accion" value="">Tipo de acción</option>
+
+
+                    <option style="text-align: center" name="accion" data-content="<span class='label label-primary'>Crear</span>" value="Crear">Crear</option>
+                    <option style="text-align: center" name="accion" data-content="<span class='label label-warning'>Editar</span>" value="Editar">Editar</option>
+                    <option style="text-align: center" name="accion" data-content="<span class='label label-danger'>Eliminar</span>" value="Eliminar">Eliminar</option>
+                    <option style="text-align: center" name="accion" data-content="<span class='label label-success'>Iniciar sesión</span>" value="Iniciar sesión">Iniciar sesión</option>
+                    <option style="text-align: center" name="accion" data-content="<span class='label label-default'>Cerrar sesión</span>" value="Cerrar sesión">Cerrar sesión</option>
+                </select>
+            </div>
+            <div class="col-md-1">
+                <input type="text" pattern="^[1-9]+[0-9]*$" maxlength="6" id="AyudaPaginado" class="form-control" name="cantpage" title="Cantidad de filas por página" placeholder="Ver" value="">
+            </div>
+
+            <div class="col-md-1">
+
+                <button type="submit" class="btn btn-default">
+                    <span class="glyphicon glyphicon-search"></span> Filtrar
+                </button>
+
+            </div>
+            <div class="col-md-1">
+                <button data-toggle="tooltip" title="Limpiar filtro" data-placement="bottom" onclick="Selectrefresh();" type="reset" class="btn btn-default">
+                    <span class="glyphicon glyphicon-refresh"></span>
+                </button>
+            </div>
+            <div class="col-md-1">
+                <button data-toggle="tooltip" title="Ayuda" data-placement="bottom" type="button" onclick="Ayuda();" class="btn btn-default">
+                    <span class="fa fa-question-circle"></span>
+                </button>
+            </div>
+        </div>
+
+
+
+    }
+    <div style="position: absolute; top: 40px; left: 175px" id="divProgress">
+        <img src="~/Content/Imagenes/loading.gif" />
+    </div>
+    <hr />
+
+
+    @Html.Partial("HistorialPartial")
+</div>

@@ -1,0 +1,32 @@
+﻿@model CONEXAOQR.Models.TipoNegocio
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutTheme.cshtml";
+
+}
+    <div class="container-fluid">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Detalhes</h6>
+            </div>
+
+            <div>
+                <br/>
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.nome)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.nome)
+                    </dd>
+
+                </dl>
+            </div>
+            <p>
+                @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+                @Html.ActionLink("Voltar", "Index")
+            </p>
+    </div>
+</div>
