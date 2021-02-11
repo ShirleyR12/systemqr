@@ -1,0 +1,231 @@
+﻿
+@model PagedList.IPagedList<CONEXAOQR.Models.Historial>
+@using System.Web.UI.WebControls
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<div id="HistorialTable">
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form method="POST" onsubmit="return ValidarForm();">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <div style="text-align: center">
+                            <button type="button" class="btn btn-success btn-xs glyphicon glyphicon-arrow-down"></button>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+
+
+                        <div class="row">
+                            <div class="col-md-5">
+
+                                <dl class="dl-horizontal">
+                                    <dt>
+                                        Marcar/Desmarcar
+                                    </dt>
+
+                                    <dd>
+                                        <input type="checkbox" class="flat" id="all" />
+                                    </dd>
+                                    <dt>
+                                        Usuario
+                                    </dt>
+
+                                    <dd>
+                                        <input id="columUsuario" class="flat" name="columUsuario" type="checkbox" />
+                                    </dd>
+                                    <dt>
+                                        Fecha y Hora
+                                    </dt>
+
+                                    <dd>
+                                        <input id="columFechayHora" class="flat" name="columFechayHora" type="checkbox" />
+                                    </dd>
+
+                                    <dt>
+                                        Tipo de acción
+                                    </dt>
+
+                                    <dd>
+                                        <input id="columTipoDeAccion" class="flat" name="columTipoDeAccion" type="checkbox" />
+                                    </dd>
+
+                                    <dt>
+                                        Acción
+                                    </dt>
+
+                                    <dd>
+                                        <input id="columAccion" class="flat" name="columAccion" type="checkbox" />
+                                    </dd>
+
+
+                                </dl>
+                            </div>
+                            <div class="col-md-4">
+                                <input required="" maxlength="50" placeholder="Nombre del reporte" class="form-control" id="nameReport" name="nameReport" type="text">
+                            </div>
+                            <br />
+                            <br />
+                            <br />
+                            <div style="text-align: center" class="col-md-4">
+                                <label> Seleccione el formato</label>
+                                <select class="selectpicker" data-width="fit" name="formato">
+                                    <option data-icon="fa fa-file-word-o w3-text-blue" name="formato" value="Word">Word</option>
+                                    <option data-icon="fa fa-file-pdf-o w3-text-red" name="formato" value="PDF">PDF</option>
+                                    <option data-icon="fa fa-file-excel-o w3-text-green" name="formato" value="Excel">Excel</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <input type="hidden" name="d" value="d">
+
+                        <input type="hidden" name="sortOrder" value="@ViewBag.CurrentSort" />
+
+                        <input type="hidden" name="currentFilter" value="@ViewBag.CurrentFilter">
+                        <input type="hidden" name="currentFilteren" value="@ViewBag.CurrentFilteren">
+                        <input type="hidden" name="currentFilteraccion" value="@ViewBag.CurrentFilteraccion" />
+                        <input type="hidden" name="currentFiltercantpage" value="@ViewBag.CurrentFiltercantpage">
+                        <input type="hidden" name="currentFilterpage" value="@ViewBag.CurrentFilterpage">
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="submit" id="enviar" class="btn btn-success">Descargar</button>
+
+
+
+                    </div>
+
+
+
+                </div><!-- /.modal-content -->
+            </form>
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <input type="hidden" value="@ViewBag.CantRegistros" id="BadgeMyReport" />
+    <table class="table table-responsive table-hover table-bordered w3-card-12 w3-animate-opacity">
+        <tr class="btn-primary disabled">
+            @if (ViewBag.NameSortParm == "name_desc")
+            {
+                <th id="AyudaOrdenarNombre" style="text-align: center">
+                    <i class="fa fa-sort-alpha-asc"></i><a data-toggle="tooltip" data-placement="top" title="Ordenar" class="w3-text-sand" href="javascript:Ordenar();"> Usuario</a>
+                </th>
+            }
+            else
+            {
+                <th id="AyudaOrdenarNombre" style="text-align: center">
+                    <i class="fa fa-sort-alpha-desc"></i><a data-toggle="tooltip" data-placement="top" title="Ordenar" class="w3-text-sand" href="javascript:Ordenar();"> Usuario</a>
+                </th>
+            }
+            <th id="AyudaOrdenarFecha" style="text-align: center">
+                <i class="fa fa-calendar"></i><a data-toggle="tooltip" data-placement="top" title="Ordenar" class="w3-text-sand" href="javascript:OrdenarF();"> Fecha y hora</a>
+            </th>
+            <th style="text-align: center">
+                Tipo de acción
+            </th>
+            <th style="text-align: center">
+                Acción
+            </th>
+
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td style="text-align: center">
+                    @Html.DisplayFor(modelItem => item.Usuario)
+                </td>
+                <td style="text-align: center">
+                    @item.FechaHora.ToString("d/M/yyyy HH:mm:ss")
+                </td>
+                <td style="text-align: center">
+                    @if (item.TipoAccion == "Crear")
+                    {
+                        <span class="label label-primary">Crear</span>
+                    }
+                    else if (item.TipoAccion == "Editar")
+                    {
+                        <span class="label label-warning">Editar</span>
+                    }
+                    else if (item.TipoAccion == "Cerrar sesión")
+                    {
+                        <span class="label label-default">Cerrar sesión</span>
+                    }
+                    else if (item.TipoAccion == "Iniciar sesión")
+                    {
+                        <span class="label label-success">Iniciar sesión</span>
+                    }
+                    else
+                    {
+                        <span class="label label-danger">Eliminar</span>
+                    }
+
+                </td>
+                <td style="text-align: center">
+                    @Html.DisplayFor(modelItem => item.Accion)
+                </td>
+                @*<td>
+                        @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+                    </td>*@
+            </tr>
+        }
+
+    </table>
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, cantpage = ViewBag.CurrentFiltercantpage, currentFilteraccion = ViewBag.CurrentFilteraccion, currentFilteren = ViewBag.CurrentFilteren, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions()
+    {
+        DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+        DisplayLinkToLastPage = PagedListDisplayMode.Always,
+        DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+        DisplayLinkToNextPage = PagedListDisplayMode.Always,
+        DisplayLinkToIndividualPages = true,
+        ContainerDivClasses = null,
+        UlElementClasses = new[] { "pagination w3-card-12" },
+
+        MaximumPageNumbersToDisplay = 10,
+        DisplayPageCountAndCurrentLocation = true,
+        PageCountAndCurrentLocationFormat = "{0} de {1}",
+        ClassToApplyToFirstListItemInPager = null,
+        ClassToApplyToLastListItemInPager = null,
+        LinkToPreviousPageFormat = "Anterior",
+        LinkToNextPageFormat = "Siguiente"
+
+    }, new AjaxOptions()
+    {
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "HistorialTable",
+        LoadingElementId = "divProgress",
+
+    }))
+    <form id="Ordenar" method="POST" data-ajax="true" data-ajax-loading="#divProgress" data-ajax-complete="LoadJavaScript" data-ajax-method="post" data-ajax-mode="replace" data-ajax-update="#HistorialTable">
+
+
+
+        <input type="hidden" name="sortOrder" value="@ViewBag.NameSortParm" />
+        <input type="hidden" name="currentFilter" value="@ViewBag.CurrentFilter">
+        <input type="hidden" name="currentFilteren" value="@ViewBag.CurrentFilteren">
+        <input type="hidden" name="currentFilteraccion" value="@ViewBag.CurrentFilteraccion" />
+        <input type="hidden" name="currentFiltercantpage" value="@ViewBag.CurrentFiltercantpage">
+        <input type="hidden" name="currentFilterpage" value="@ViewBag.CurrentFilterpage">
+
+
+
+
+
+
+
+    </form>
+    <form id="OrdenarF" method="POST" data-ajax="true" data-ajax-loading="#divProgress" data-ajax-complete="LoadJavaScript" data-ajax-method="post" data-ajax-mode="replace" data-ajax-update="#HistorialTable">
+
+        <input type="hidden" name="sortOrder" value="@ViewBag.DateSortParm" />
+        <input type="hidden" name="currentFilter" value="@ViewBag.CurrentFilter">
+        <input type="hidden" name="currentFilteren" value="@ViewBag.CurrentFilteren">
+        <input type="hidden" name="currentFilteraccion" value="@ViewBag.CurrentFilteraccion" />
+        <input type="hidden" name="currentFiltercantpage" value="@ViewBag.CurrentFiltercantpage">
+        <input type="hidden" name="currentFilterpage" value="@ViewBag.CurrentFilterpage">
+
+
+    </form>
+</div>

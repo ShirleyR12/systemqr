@@ -1,0 +1,99 @@
+﻿@model CONEXAOQR.Models.Filial
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Filial</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gerente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gerente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.telefone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.telefone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.endereco)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.endereco)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mqi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mqi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.crm)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.crm)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.site)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.site)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RedesSociais.nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RedesSociais.nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Empresa.nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Empresa.nome)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

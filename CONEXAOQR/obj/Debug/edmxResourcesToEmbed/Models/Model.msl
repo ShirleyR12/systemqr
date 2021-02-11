@@ -1,0 +1,294 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="ModelContainer">
+    <EntitySetMapping Name="Historial">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Historial)">
+        <MappingFragment StoreEntitySet="Historial">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FechaHora" ColumnName="FechaHora" />
+          <ScalarProperty Name="TipoAccion" ColumnName="TipoAccion" />
+          <ScalarProperty Name="Accion" ColumnName="Accion" />
+          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CanalAtracaoSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.CanalAtracao)">
+        <MappingFragment StoreEntitySet="CanalAtracaoSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CorretorSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Corretor)">
+        <MappingFragment StoreEntitySet="CorretorSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="telefone" ColumnName="telefone" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="dtCadastro" ColumnName="dtCadastro" />
+          <ScalarProperty Name="dtNascimento" ColumnName="dtNascimento" />
+          <ScalarProperty Name="FilialId" ColumnName="FilialId" />
+          <ScalarProperty Name="EmpresaId" ColumnName="EmpresaId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmpresaSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Empresa)">
+        <MappingFragment StoreEntitySet="EmpresaSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="cnpj" ColumnName="cnpj" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="telefone" ColumnName="telefone" />
+          <ScalarProperty Name="endereco" ColumnName="endereco" />
+          <ScalarProperty Name="nomeFantasia" ColumnName="nomeFantasia" />
+          <ScalarProperty Name="gerente" ColumnName="gerente" />
+          <ScalarProperty Name="diretor" ColumnName="diretor" />
+          <ScalarProperty Name="mqi" ColumnName="mqi" />
+          <ScalarProperty Name="crm" ColumnName="crm" />
+          <ScalarProperty Name="site" ColumnName="site" />
+          <ScalarProperty Name="RedesSociaisId" ColumnName="RedesSociaisId" />
+          <ScalarProperty Name="TipoNegocioId" ColumnName="TipoNegocioId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JustContatoSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.JustContato)">
+        <MappingFragment StoreEntitySet="JustContatoSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="ativo" ColumnName="ativo" />
+          <ScalarProperty Name="descricao" ColumnName="descricao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EtapaFunilSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.EtapaFunil)">
+        <MappingFragment StoreEntitySet="EtapaFunilSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="porcentagem" ColumnName="porcentagem" />
+          <ScalarProperty Name="cor" ColumnName="cor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CanalComunicacaoSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.CanalComunicacao)">
+        <MappingFragment StoreEntitySet="CanalComunicacaoSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoImoveisSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.TipoImoveis)">
+        <MappingFragment StoreEntitySet="TipoImoveisSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="ativo" ColumnName="ativo" />
+          <ScalarProperty Name="sigla" ColumnName="sigla" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GestaoLeadsSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.GestaoLeads)">
+        <MappingFragment StoreEntitySet="GestaoLeadsSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="dtEntrada" ColumnName="dtEntrada" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="qtdContato" ColumnName="qtdContato" />
+          <ScalarProperty Name="dtPrimeiraVisita" ColumnName="dtPrimeiraVisita" />
+          <ScalarProperty Name="tempoEntrada" ColumnName="tempoEntrada" />
+          <ScalarProperty Name="bandB" ColumnName="bandB" />
+          <ScalarProperty Name="bandA" ColumnName="bandA" />
+          <ScalarProperty Name="bandN" ColumnName="bandN" />
+          <ScalarProperty Name="bandD" ColumnName="bandD" />
+          <ScalarProperty Name="etapaLEAD" ColumnName="etapaLEAD" />
+          <ScalarProperty Name="etapaATENDIMENTO" ColumnName="etapaATENDIMENTO" />
+          <ScalarProperty Name="etapaAGENDAMENTO" ColumnName="etapaAGENDAMENTO" />
+          <ScalarProperty Name="etapaVISITA" ColumnName="etapaVISITA" />
+          <ScalarProperty Name="etapaPROPOSTA" ColumnName="etapaPROPOSTA" />
+          <ScalarProperty Name="etapaVENDA" ColumnName="etapaVENDA" />
+          <ScalarProperty Name="observacao" ColumnName="observacao" />
+          <ScalarProperty Name="dtCadastro" ColumnName="dtCadastro" />
+          <ScalarProperty Name="JustContatoId" ColumnName="JustContatoId" />
+          <ScalarProperty Name="CanalAtracaoId" ColumnName="CanalAtracaoId" />
+          <ScalarProperty Name="CanalComunicacaoId" ColumnName="CanalComunicacaoId" />
+          <ScalarProperty Name="midiaOrigem" ColumnName="midiaOrigem" />
+          <ScalarProperty Name="TipoContatoId" ColumnName="TipoContatoId" />
+          <ScalarProperty Name="sexo" ColumnName="sexo" />
+          <ScalarProperty Name="cidade" ColumnName="cidade" />
+          <ScalarProperty Name="TipoImoveisId" ColumnName="TipoImoveisId" />
+          <ScalarProperty Name="VisitasId" ColumnName="VisitasId" />
+          <ScalarProperty Name="SituacaoId" ColumnName="SituacaoId" />
+          <ScalarProperty Name="EmpresaId" ColumnName="EmpresaId" />
+          <ScalarProperty Name="JustAvancoId" ColumnName="JustAvancoId" />
+          <ScalarProperty Name="FilialId" ColumnName="FilialId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoContatoSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.TipoContato)">
+        <MappingFragment StoreEntitySet="TipoContatoSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FilialSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Filial)">
+        <MappingFragment StoreEntitySet="FilialSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="gerente" ColumnName="gerente" />
+          <ScalarProperty Name="telefone" ColumnName="telefone" />
+          <ScalarProperty Name="endereco" ColumnName="endereco" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="mqi" ColumnName="mqi" />
+          <ScalarProperty Name="crm" ColumnName="crm" />
+          <ScalarProperty Name="site" ColumnName="site" />
+          <ScalarProperty Name="RedesSociaisId" ColumnName="RedesSociaisId" />
+          <ScalarProperty Name="EmpresaId" ColumnName="EmpresaId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoNegocioSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.TipoNegocio)">
+        <MappingFragment StoreEntitySet="TipoNegocioSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RedesSociaisSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.RedesSociais)">
+        <MappingFragment StoreEntitySet="RedesSociaisSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="link" ColumnName="link" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AtividadesSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Atividades)">
+        <MappingFragment StoreEntitySet="AtividadesSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="data" ColumnName="data" />
+          <ScalarProperty Name="observacao" ColumnName="observacao" />
+          <ScalarProperty Name="TipoAtividadeId" ColumnName="TipoAtividadeId" />
+          <ScalarProperty Name="SituacaoId" ColumnName="SituacaoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SituacaoSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Situacao)">
+        <MappingFragment StoreEntitySet="SituacaoSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoAtividadeSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.TipoAtividade)">
+        <MappingFragment StoreEntitySet="TipoAtividadeSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GestaoLeadsAtividadesSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.GestaoLeadsAtividades)">
+        <MappingFragment StoreEntitySet="GestaoLeadsAtividadesSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AtividadesId" ColumnName="AtividadesId" />
+          <ScalarProperty Name="GestaoLeadsId" ColumnName="GestaoLeadsId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FaseEtapaFunilSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.FaseEtapaFunil)">
+        <MappingFragment StoreEntitySet="FaseEtapaFunilSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="EtapaFunilId" ColumnName="EtapaFunilId" />
+          <ScalarProperty Name="EtapaFunilId1" ColumnName="EtapaFunilId1" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C__MigrationHistory">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.C__MigrationHistory)">
+        <MappingFragment StoreEntitySet="C__MigrationHistory">
+          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+          <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetRoles">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.AspNetRoles)">
+        <MappingFragment StoreEntitySet="AspNetRoles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserClaims">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.AspNetUserClaims)">
+        <MappingFragment StoreEntitySet="AspNetUserClaims">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+          <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserLogins">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.AspNetUserLogins)">
+        <MappingFragment StoreEntitySet="AspNetUserLogins">
+          <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+          <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUsers">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.AspNetUsers)">
+        <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+          <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+          <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+          <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+          <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JustAvancoSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.JustAvanco)">
+        <MappingFragment StoreEntitySet="JustAvancoSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="descricao" ColumnName="descricao" />
+          <ScalarProperty Name="ativo" ColumnName="ativo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="AspNetUserRoles" TypeName="Model.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+      <EndProperty Name="AspNetRoles">
+        <ScalarProperty Name="Id" ColumnName="AspNetRoles_Id" />
+      </EndProperty>
+      <EndProperty Name="AspNetUsers">
+        <ScalarProperty Name="Id" ColumnName="AspNetUsers_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

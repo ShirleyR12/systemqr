@@ -1,0 +1,51 @@
+﻿@model CONEXAOQR.Models.Atividades
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Atividades</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.data)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.data)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.observacao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.observacao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoAtividade.nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoAtividade.nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Situacao.nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Situacao.nome)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

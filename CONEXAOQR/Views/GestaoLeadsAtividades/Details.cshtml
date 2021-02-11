@@ -1,0 +1,35 @@
+﻿@model CONEXAOQR.Models.GestaoLeadsAtividades
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>GestaoLeadsAtividades</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Atividades.observacao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Atividades.observacao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GestaoLeads.dtEntrada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GestaoLeads.dtEntrada)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
