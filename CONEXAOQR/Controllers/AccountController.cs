@@ -58,6 +58,7 @@ namespace CONEXAOQR.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -87,15 +88,21 @@ namespace CONEXAOQR.Controllers
 
                     Historial historial = new Historial();
 
-                    historial.Usuario = model.Email;
+                    historial.Usuario = model.Email ;
                     historial.TipoAccion = "Iniciar sesión";
                     historial.FechaHora = DateTime.Now;
                     historial.Accion = "Dirección IP: " +
                                        lblIPAddress + " | " +
-                                       "Nombre de la computadora: " + strHostName;
+                                       "Nombre de la computadora: " + strHostName ;
 
                     dbSeguridad.Historial.Add(historial);
                     dbSeguridad.SaveChanges();
+
+
+                    var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                    Session["userIdSession"] = user.Id;
+                    Session["emailSession"] = user.Email;
+
                     return RedirectToAction("Index", "Home");
                   
                 case SignInStatus.LockedOut:
@@ -174,14 +181,18 @@ namespace CONEXAOQR.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
                     // Para obter mais informações sobre como habilitar a confirmação da conta e redefinição de senha, visite https://go.microsoft.com/fwlink/?LinkID=320771
                     // Enviar um email com este link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirmar sua conta", "Confirme sua conta clicando <a href=\"" + callbackUrl + "\">aqui</a>");
 
-                    return RedirectToAction("Index", "Home");
+                   
+                    var userId = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                    Session["userIdSession"] = userId.Id;
+
+                    return RedirectToAction("Index", "Usuarios");
                 }
                 AddErrors(result);
             }
@@ -409,6 +420,8 @@ namespace CONEXAOQR.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
+
+            Session.Remove("userIdSession");
             string strHostName = Dns.GetHostName();
             IPHostEntry ipEntry = Dns.GetHostEntry(strHostName);
 

@@ -19,6 +19,7 @@ namespace CONEXAOQR.Models
         {
             this.Corretor = new HashSet<Corretor>();
             this.GestaoLeads = new HashSet<GestaoLeads>();
+            this.Usuario = new HashSet<Usuario>();
         }
     
         public int Id { get; set; }
@@ -39,5 +40,7 @@ namespace CONEXAOQR.Models
         public virtual ICollection<Corretor> Corretor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GestaoLeads> GestaoLeads { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Usuario> Usuario { get; set; }
     }
 }

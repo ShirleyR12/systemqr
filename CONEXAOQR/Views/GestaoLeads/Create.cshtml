@@ -1,334 +1,546 @@
 ﻿@model CONEXAOQR.Models.GestaoLeads
 
 @{
-    ViewBag.Title = "Create";
-       Layout = "~/Views/Shared/_LayoutTheme.cshtml";
+    ViewBag.Title = "Cadastrar";
+    Layout = "~/Views/Shared/_LayoutTheme.cshtml";
 }
 
-<div class="container-fluid">
-    <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary" style="color:#ff471a !important">Gestão de Leads</h6>
-        </div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#EmpresaId").change(function () {
+            $("#FilialId").empty();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("FilialCombo")',
+                dataType: 'json',
+                data: { id: $("#EmpresaId").val() },
+                success: function (filial) {
+                    $.each(filial, function (i, filial_) {
+                        $("#FilialId").append('<option value="' + filial_.Value + '">' +
+                        filial_.Text + '</option>');
+
+                    });
+                },
+            })
+        });
+
+      //FUNÇÃO PARA MARCAR TODOS CHECKBOX ANTERIOR ETAPA DO LEAD
+
+       $("#etapaLEAD").click(function () {
+          $('#etapaATENDIMENTO').not(this).prop('checked', false);
+          $('#etapaAGENDAMENTO').not(this).prop('checked', false);
+          $('#etapaVISITA').not(this).prop('checked', false);
+          $('#etapaPROPOSTA').not(this).prop('checked', false);
+          $('#etapaVENDA').not(this).prop('checked', false);
+      });
+
+      $("#etapaATENDIMENTO").click(function () {
+          $('#etapaLEAD').not(this).prop('checked', this.checked);
+          $('#etapaAGENDAMENTO').not(this).prop('checked', false);
+          $('#etapaVISITA').not(this).prop('checked', false);
+          $('#etapaPROPOSTA').not(this).prop('checked', false);
+          $('#etapaVENDA').not(this).prop('checked', false);
+        //MARCA TODOS $('input:checkbox').not(this).prop('checked', this.checked);
+      });
+
+      $("#etapaAGENDAMENTO").click(function(){
+          $('#etapaLEAD').not(this).prop('checked', this.checked);
+          $('#etapaATENDIMENTO').not(this).prop('checked', this.checked);
+          $('#etapaVISITA').not(this).prop('checked', false);
+          $('#etapaPROPOSTA').not(this).prop('checked', false);
+          $('#etapaVENDA').not(this).prop('checked', false);
+      });
+
+      $("#etapaVISITA").click(function(){
+          $('#etapaLEAD').not(this).prop('checked', this.checked);
+          $('#etapaATENDIMENTO').not(this).prop('checked', this.checked);
+          $('#etapaAGENDAMENTO').not(this).prop('checked', this.checked);
+          $('#etapaPROPOSTA').not(this).prop('checked', false);
+          $('#etapaVENDA').not(this).prop('checked', false);
+      });
+
+       $("#etapaPROPOSTA").click(function(){
+          $('#etapaLEAD').not(this).prop('checked', this.checked);
+          $('#etapaATENDIMENTO').not(this).prop('checked', this.checked);
+          $('#etapaAGENDAMENTO').not(this).prop('checked', this.checked);
+          $('#etapaVISITA').not(this).prop('checked', this.checked);
+          $('#etapaVENDA').not(this).prop('checked', false);
+       });
+
+        $("#etapaVENDA").click(function(){
+          $('#etapaLEAD').not(this).prop('checked', this.checked);
+          $('#etapaATENDIMENTO').not(this).prop('checked', this.checked);
+          $('#etapaAGENDAMENTO').not(this).prop('checked', this.checked);
+          $('#etapaVISITA').not(this).prop('checked', this.checked);
+          $('#etapaPROPOSTA').not(this).prop('checked', this.checked);
+      });
+
+    });
+
+    function days_between() {
+        var date1 = new Date($("#dtEntrada").val());
+        var date2 = new Date($("#dtPrimeiraVisita").val());
+       
+        var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+        var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+       // alert(diffDays);
+        $("#totalDias").append(diffDays); 
+       // return diffDays;
+
+    };
 
 
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
+</script>
+<style>
+    .btn.btn-primary {
+        color: black!important;
+        background-color: #fff!important;
+       
+    }
+    .text-primary {
+   /* color: #f44336 !important;*/
+}
+    .sidebar[data-color="purple"] li.active>a {
+    background-color: #9c27b0;
+    box-shadow: 0 4px 20px 0px rgb(0 0 0 / 14%), 0 7px 10px -5px rgb(156 39 176 / 40%);
+}
+    .sidebar[data-color="orange"] li.active>a {
+    background-color: #ff9800;
+    box-shadow: 0 4px 20px 0px rgb(0 0 0 / 14%), 0 7px 10px -5px rgb(255 152 0 / 40%);
+}
 
-            <div class="form-horizontal">
-                <br />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+</style>
 
-                <div class="form-group">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <tr>
-                            <th colspan="2">@Html.LabelFor(model => model.Empresa.nome, "Empresa", htmlAttributes: new { @class = "m-0 font-weight-bold text-primary" })</th>
-                            <th>@Html.LabelFor(model => model.FilialId, "Filial", htmlAttributes: new { @class = "m-0 font-weight-bold text-primary" })</th>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                @Html.DropDownList("EmpresaId", null, htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.EmpresaId, "", new { @class = "text-danger" })
-                            </td>
-                            <td>
-                                @Html.DropDownList("FilialId1", null, htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.FilialId, "", new { @class = "text-danger" })
-                            </td>
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
 
-                        </tr>
-                        <tr>
-                            <th class="m-0 font-weight-bold text-primary">Gerente</th>
-                            <th class="m-0 font-weight-bold text-primary">Diretor</th>
-                            <th class="m-0 font-weight-bold text-primary">MSL 1 - Pré Atendimento</th>
-                        </tr>
-                        <tr>
-                            <td>teste gerente (tem que trazer o gerente da empresa ou filial)</td>
-                            <td> retornar da empresa ou filial</td>
-                            <td> sim/não</td>
-                        </tr>
-                    </table>
-                </div>
-                <hr />
-                <p />
-                <div class="form-group">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <tr>
-                            <th colspan="2">@Html.LabelFor(model => model.nome, "Nome do Lead", htmlAttributes: new { @class = "m-0 font-weight-bold" })</th>
-                            <th> @Html.LabelFor(model => model.dtEntrada, "Data de Entrada do Lead", htmlAttributes: new { @class = "m-0 font-weight-bold" })</th>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                @Html.EditorFor(model => model.nome, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.nome, "", new { @class = "text-danger" })
-                            </td>
-                            <td>
+            <div class="col-md-12">
+                <div class="card">
 
-                                @*@Html.EditorFor(model => model.dtEntrada, new { htmlAttributes = new { @class = "form-control" } })*@
-                                <input class="form-control text-box single-lin" id="dtPrimeiraVisita" name="dtEntrada" type="date" value="">
-                                @Html.ValidationMessageFor(model => model.dtEntrada, "", new { @class = "text-danger" })
-                            </td>
-                        </tr>
-
-                        <tr>
-
-                            <th>@Html.LabelFor(model => model.qtdContato, "Tentativas de Contato", htmlAttributes: new { @class = "m-0 font-weight-bold" })</th>
-                            <th> @Html.LabelFor(model => model.dtPrimeiraVisita, "Data da primeira visita ao imóvel", htmlAttributes: new { @class = "m-0 font-weight-bold" })</th>
-                            <th> @Html.LabelFor(model => model.TipoContatoId, "Contato com o Lead por:", htmlAttributes: new { @class = "m-0 font-weight-bold" })</th>
-                        </tr>
-                        <tr>
-
-                            <td>
-                                @Html.EditorFor(model => model.qtdContato, new { htmlAttributes = new { @class = "form-control" } }) Tentativa(s)
-                                @Html.ValidationMessageFor(model => model.qtdContato, "", new { @class = "text-danger" })
-                            </td>
-                            <td>
-                                <input class="form-control text-box single-lin" id="dtPrimeiraVisita" name="dtPrimeiraVisita" type="date" value="">
-                                @Html.ValidationMessageFor(model => model.dtPrimeiraVisita, "", new { @class = "text-danger" })
-                            </td>
-                            <td>
-                                @Html.DropDownList("TipoContatoId", null, htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.TipoContato.nome, "", new { @class = "text-danger" })
-                            </td>
-                        </tr>
-
-
-                        <tr>
-
-                            <th> @Html.LabelFor(model => model.tempoEntrada, htmlAttributes: new { @class = "m-0 font-weight-bold" })</th>
-                            <th>  @Html.LabelFor(model => model.bandB, htmlAttributes: new { @class = "m-0 font-weight-bold" })</th>
-                            <th> @Html.LabelFor(model => model.bandA, htmlAttributes: new { @class = "m-0 font-weight-bold" }) </th>
-                        <tr>
-
-                            <td>
-                                @Html.EditorFor(model => model.tempoEntrada, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.tempoEntrada, "", new { @class = "text-danger" })
-                             </td>
-                            <td>
-                                <input id="bandB" class="flat" name="bandB" type="checkbox" />
-                                @Html.ValidationMessageFor(model => model.bandB, "", new { @class = "text-danger" })
-                            </td>
-                            <td>
-                            </td>
-
-                        </tr>
-
-
-
-
-
-                    </table>
-
-                </div>
-
-                <div class="form-group">
-                   
-                    <div class="col-md-10">
-                        <div class="checkbox">
-                            @Html.EditorFor(model => model.bandA)
-                            @Html.ValidationMessageFor(model => model.bandA, "", new { @class = "text-danger" })
-                        </div>
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title"><i class="material-icons">person</i> &nbsp;&nbsp;Gestão de Leads</h4>
+                        <p class="card-category">Dados</p>
                     </div>
-                </div>
+                    <div class="card-body table-responsive">
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.bandN, htmlAttributes: new { @class = "m-0 font-weight-bold" })
-                    <div class="col-md-10">
-                        <div class="checkbox">
-                            @Html.EditorFor(model => model.bandN)
-                            @Html.ValidationMessageFor(model => model.bandN, "", new { @class = "text-danger" })
-                        </div>
+                        @using (Html.BeginForm(null, null, new { @id = string.Empty }, FormMethod.Post,
+                        new { @id = "signupform" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <div class="card-body">
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="profile">
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div class="card-body">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <div class="form-group">
+                                                                        <label class="bmd-label-floating">@Html.LabelFor(model => model.Empresa.nome, "Empresa", htmlAttributes: new { @class = "m-0 font-weight-bold text-primary" })</label>
+                                                                        @Html.DropDownList("EmpresaId", null, htmlAttributes: new { @class = "btn btn-primary" })
+                                                                        @Html.ValidationMessageFor(model => model.EmpresaId, "", new { @class = "text-danger" })
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <div class="form-group">
+                                                                        <label class="bmd-label-floating">@Html.LabelFor(model => model.FilialId, "Filial", htmlAttributes: new { @class = "m-0 font-weight-bold text-primary" })</label>
+                                                                        @Html.DropDownList("FilialId", null, htmlAttributes: new { @class = "btn btn-primary dropdown-toggle" })
+                                                                        @Html.ValidationMessageFor(model => model.FilialId, "", new { @class = "text-danger" })
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <div class="form-group">
+                                                                        <label class="bmd-label-floating">Gerente</label>
+                                                                        <input type="text" class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <div class="form-group">
+                                                                        <label class="bmd-label-floating">Diretor</label>
+                                                                        <input type="text" name="diretor" class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <!--dados lead-->
+
+                                        <div class="card border-left-info shadow h-100 py-2">
+                                            <div class="col-auto">
+                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">DADOS DO LEAD</div>
+                                            </div>
+
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="card-body">
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <h4 class="card-title">
+                                                                            <i class="material-icons">library_books</i> FAROL ETAPA DO ATENDIMENTO:
+                                                                        </h4>
+                                                                        <div class="form-group">
+                                                                            <div class="form-check">
+                                                                                <label class="form-check-label">
+                                                                                    <input class="form-check-input" type="radio" name="observacao" id="observacao" value="vermelho" role="alert">
+                                                                                    <p class="text-danger">FAROL VERMELHO - Lead com NOME e E-MAIL</p>
+                                                                                    <span class="circle">
+                                                                                        <span class="check"></span>
+                                                                                    </span>
+                                                                                </label><br />
+                                                                                <label class="form-check-label">
+                                                                                    <input class="form-check-input" type="radio" name="observacao" id="observacao" value="amarelo">
+                                                                                    <p class="text-warning">FAROL AMARELO - Lead com NOME e TELEFONE</p>
+                                                                                    <span class="circle">
+                                                                                        <span class="check"></span>
+                                                                                    </span>
+                                                                                </label><br />
+                                                                                <label class="form-check-label">
+                                                                                    <input class="form-check-input" type="radio" name="observacao" id="observacao" value="verde">
+                                                                                    <p class="text-success">FAROL VERDE - Apenas lead de VISITA ou LIGAÇÃO ou WHATSAPP </p>
+                                                                                    <span class="circle">
+                                                                                        <span class="check"></span>
+                                                                                    </span>
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div><br />
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <div class="form-group">
+                                                                            <label class="bmd-label-floating">
+                                                                                @Html.LabelFor(model => model.nome, "Nome do Lead", htmlAttributes: new { @class = "m-0 font-weight-bold" })
+                                                                                @Html.ValidationMessageFor(model => model.nome, "", new { @class = "text-danger" })
+                                                                            </label>
+                                                                            @Html.EditorFor(model => model.nome, "", new { htmlAttributes = new { @class = "form-control", maxlength = "100" } })
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <div class="form-group">
+                                                                            <label class="">@Html.LabelFor(model => model.dtEntrada, "Data de Entrada do Lead", htmlAttributes: new { @class = "m-0 font-weight-bold" })</label>
+                                                                            <input class="form-control datetimepicker" id="dtEntrada" name="dtEntrada" type="date">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <div class="form-group">
+                                                                            <label class="bmd-label-floating"> @Html.LabelFor(model => model.valorImovel, "Valor do Imóvel", htmlAttributes: new { @class = "m-0 font-weight-bold" })</label>
+                                                                            <input type="text" name="valorImovel" id="valorImovel" class="form-control">
+                                                                            @Html.ValidationMessageFor(model => model.valorImovel, "", new { @class = "text-danger" })
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                </div>
+
+                                                                <div class="row">
+
+                                                                    <div class="col-md-4">
+                                                                        <div class="form-group">
+                                                                            <label class="bmd-label-floating">@Html.LabelFor(model => model.sexo, "Sexo", htmlAttributes: new { @class = "m-0 font-weight-bold" })</label>
+                                                                            @Html.ValidationMessageFor(model => model.sexo, "", new { @class = "text-danger" })
+                                                                            <select id="sexo" name="sexo" class="btn btn-primary dropdown-toggle">
+                                                                                <option value="Outros">Outros </option>
+                                                                                <option value="Masculino">Masculino</option>
+                                                                                <option value="Feminino">Feminino</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-md-4">
+                                                                        <div class="form-group">
+                                                                            <label class="bmd-label-floating">@Html.LabelFor(model => model.TipoContatoId, "Conseguiu contato com o Lead por:", htmlAttributes: new { @class = "m-0 font-weight-bold" })</label>
+                                                                            @Html.DropDownList("TipoContatoId", null, htmlAttributes: new { @class = "btn btn-primary dropdown-toggle" })
+                                                                            @Html.ValidationMessageFor(model => model.TipoContato.nome, "", new { @class = "text-danger" })
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-md-4">
+                                                                        <div class="form-group">
+                                                                            <label class="bmd-label-floating">
+                                                                                @Html.LabelFor(model => model.TipoImoveisId, "Tipo de Imóvel", htmlAttributes: new { @class = "m-0 font-weight-bold" })
+                                                                            </label>
+                                                                            @Html.DropDownList("TipoImoveisId", null, htmlAttributes: new { @class = "btn btn-primary dropdown-toggle" })
+                                                                            @Html.ValidationMessageFor(model => model.TipoImoveisId, "", new { @class = "text-danger" })
+                                                                        </div>
+                                                                    </div>
+                                                                </div><br />
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <div class="form-group">
+                                                                            <label class="bmd-label-floating">@Html.LabelFor(model => model.qtdContato, "Número de tentativas de Contato com o Lead", htmlAttributes: new { @class = "m-0 font-weight-bold" })</label>
+                                                                            <br />@Html.ValidationMessageFor(model => model.qtdContato, "", new { @class = "text-danger" })
+                                                                            <select id="qtdContato" name="qtdContato" class="btn btn-primary dropdown-toggle">
+                                                                                <option value="">Nenhuma</option>
+                                                                                <option value="1">1 Tentativa </option>
+                                                                                <option value="2">2 Tentativas </option>
+                                                                                <option value="3">3 Tentativas </option>
+                                                                                <option value="4">4 Tentativas </option>
+                                                                                <option value="5">5 Tentativas </option>
+                                                                                <option value="6">6 Tentativas </option>
+                                                                                <option value="7">7 Tentativas </option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <div class="form-group">
+                                                                            <label class="bmd-label-floating">@Html.LabelFor(model => model.JustContatoId, "Justificativa de Contato (depois da 7° tentativa)", htmlAttributes: new { @class = "m-0 font-weight-bold" })</label>
+                                                                            @Html.DropDownList("JustContatoId", null, htmlAttributes: new { @class = "btn btn-primary dropdown-toggle" })
+                                                                            @Html.ValidationMessageFor(model => model.JustContato.nome, "", new { @class = "text-danger" })
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <div class="form-group">
+                                                                            <label class="bmd-label-floating">@Html.LabelFor(model => model.CanalAtracaoId, "Canal de Atração (mídia que atraiu o lead para sua empresa)", htmlAttributes: new { @class = "m-0 font-weight-bold" })</label>
+                                                                            @Html.DropDownList("CanalAtracaoId", null, htmlAttributes: new { @class = "btn btn-primary dropdown-toggle" })
+                                                                            @Html.ValidationMessageFor(model => model.CanalAtracaoId, "", new { @class = "text-danger" })
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div><br />
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <div class="form-group">
+                                                                            <label class="">@Html.LabelFor(model => model.dtPrimeiraVisita, "Data da primeira visita ao imóvel", htmlAttributes: new { @class = "m-0 font-weight-bold" })</label>
+                                                                            <input class="form-control datetimepicker" id="dtPrimeiraVisita" name="dtPrimeiraVisita" type="date" onblur="days_between();">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <div class="form-group">
+                                                                            <label class="bmd-label-floating">Tempo entre a entrada do lead e a sua 1ª visita: </label>
+                                                                            <h6 class="alert-dark">dias &nbsp;<span id="totalDias"></span></h6>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <div class="form-group">
+                                                                            <label class="bmd-label-floating">@Html.LabelFor(model => model.cidade, "Cidade / Estado", htmlAttributes: new { @class = "m-0 font-weight-bold" })</label>
+                                                                            @Html.EditorFor(model => model.cidade, new { htmlAttributes = new { @class = "form-control" } })
+                                                                            @Html.ValidationMessageFor(model => model.cidade, "", new { @class = "text-danger" })
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+
+
+                                                                <div class="row">
+                                                                    <div class="card border-left-info shadow h-100 py-2">
+                                                                        <div class="card-body">
+                                                                            <div class="row no-gutters align-items-center">
+                                                                                <div class="col mr-2">
+                                                                                    <div class="row no-gutters align-items-center">
+                                                                                        <div class="col-auto">
+                                                                                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">ETAPAS DO BANT: &nbsp; &nbsp;&nbsp; &nbsp;</div>
+                                                                                        </div>
+                                                                                        <div class="col">
+                                                                                            <div class="m-0 font-weight-bold text-primary">
+                                                                                                <div class="form-check">
+                                                                                                    Budget&nbsp;&nbsp;
+                                                                                                    <label class="form-check-label">
+                                                                                                        <input class="form-check-input" type="checkbox" id="bandB" name="bandB" value="true">
+                                                                                                        <span class="form-check-sign">
+                                                                                                            <span class="check"></span>
+                                                                                                        </span>
+                                                                                                    </label>
+                                                                                                    &nbsp;&nbsp;Autoridade&nbsp;&nbsp;
+                                                                                                    <label class="form-check-label">
+                                                                                                        <input class="form-check-input" type="checkbox" id="bandA" name="bandA" value="true">
+                                                                                                        <span class="form-check-sign">
+                                                                                                            <span class="check"></span>
+                                                                                                        </span>
+                                                                                                    </label>
+                                                                                                    &nbsp;&nbsp;Necessidade&nbsp;&nbsp;
+                                                                                                    <label class="form-check-label">
+                                                                                                        <input class="form-check-input" type="checkbox" id="bandN" name="bandN" value="true">
+                                                                                                        <span class="form-check-sign">
+                                                                                                            <span class="check"></span>
+                                                                                                        </span>
+                                                                                                    </label>
+                                                                                                    Time&nbsp;&nbsp;
+                                                                                                    <label class="form-check-label">
+                                                                                                        <input class="form-check-input" type="checkbox" id="bandD" name="bandD" value="true">
+                                                                                                        <span class="form-check-sign">
+                                                                                                            <span class="check"></span>
+                                                                                                        </span>
+                                                                                                    </label>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-auto">
+                                                                                    <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <div class="form-group">
+                                                                            <label class="bmd-label-floating">@Html.LabelFor(model => model.CanalComunicacaoId, "Canal de Comunicação", htmlAttributes: new { @class = "m-0 font-weight-bold" })</label>
+                                                                            @Html.DropDownList("CanalComunicacaoId", null, htmlAttributes: new { @class = "btn btn-primary dropdown-toggle" })
+                                                                            @Html.ValidationMessageFor(model => model.CanalComunicacaoId, "", new { @class = "text-danger" })
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <div class="form-group">
+                                                                            <label class="bmd-label-floating">@Html.LabelFor(model => model.JustAvancoId, "Justifique com base na 'etapa do funil' o motivo do NÃO Avanço", htmlAttributes: new { @class = "m-0 font-weight-bold" })</label>
+                                                                            @Html.DropDownList("JustAvancoId", null, htmlAttributes: new { @class = "btn btn-primary dropdown-toggle" })
+                                                                            @Html.ValidationMessageFor(model => model.JustAvancoId, "", new { @class = "text-danger" })
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                                <br />
+                                                                <div class="col-auto">
+                                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><i class="material-icons">content_paste</i>&nbsp;&nbsp;Marque cada etapa do funil que o lead passou até o dia do preenchimento</div>
+                                                                </div>
+                                                                <br />
+                                                                <div class="row">
+                                                                    
+                                                                    <div class="col-lg-2 mb-0">
+                                                                        <div class="card bg-primary text-white shadow">
+                                                                            <div class="card-body">
+                                                                                <div class="form-check">
+                                                                                    <label class="form-check-label">
+                                                                                        <input class="form-check-input" type="checkbox" id="etapaLEAD" name="etapaLEAD" value="true">
+                                                                                        <span class="form-check-sign">
+                                                                                            <span class="check"></span>
+                                                                                        </span>
+                                                                                    </label>
+                                                                                    <label class="text-white">
+                                                                                        LEAD
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+                                                                            </div>
+                                                                    </div><br />
+                                                                    <div class="col-lg-2 mb-0">
+                                                                        <div class="card bg-success text-white shadow">
+                                                                            <div class="card-body">
+                                                                                <div class="form-check">
+                                                                                    <label class="form-check-label">
+                                                                                        <input class="form-check-input" type="checkbox" id="etapaATENDIMENTO" name="etapaATENDIMENTO" value="true">
+                                                                                        <span class="form-check-sign">
+                                                                                            <span class="check"></span>
+                                                                                        </span>
+                                                                                    </label>
+                                                                                    <label class="text-white">
+                                                                                        ATENDIMENTO
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div><br />
+                                                                    <div class="col-lg-2 mb-0">
+                                                                        <div class="card bg-info text-white shadow">
+                                                                            <div class="card-body">
+                                                                                <div class="form-check">
+                                                                                    <label class="form-check-label">
+                                                                                        <input class="form-check-input" type="checkbox" id="etapaAGENDAMENTO" name="etapaAGENDAMENTO" value="true">
+                                                                                        <span class="form-check-sign">
+                                                                                            <span class="check"></span>
+                                                                                        </span>
+                                                                                    </label>
+                                                                                    <label class="text-white">
+                                                                                        AGENDAMENTO
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-2 mb-0">
+                                                                        <div class="card bg-warning text-white shadow">
+                                                                            <div class="card-body">
+                                                                                <div class="form-check">
+                                                                                    <label class="form-check-label">
+                                                                                        <input class="form-check-input" type="checkbox" id="etapaVISITA" name="etapaVISITA" value="true">
+                                                                                        <span class="form-check-sign">
+                                                                                            <span class="check"></span>
+                                                                                        </span>
+                                                                                    </label>
+                                                                                    <label class="text-white">
+                                                                                        VISITA
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-2 mb-0">
+                                                                        <div class="card bg-danger text-white shadow">
+                                                                            <div class="card-body">
+                                                                                <div class="form-check">
+                                                                                    <label class="form-check-label">
+                                                                                        <input class="form-check-input" type="checkbox" id="etapaPROPOSTA" name="etapaPROPOSTA" value="true">
+                                                                                        <span class="form-check-sign">
+                                                                                            <span class="check"></span>
+                                                                                        </span>
+                                                                                    </label>
+                                                                                    <label class="text-white">
+                                                                                        PROPOSTA
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-2 mb-0">
+                                                                        <div class="card bg-secondary text-white shadow">
+                                                                            <div class="card-body">
+                                                                
+                                                                                <div class="form-check">
+                                                                                    <label class="form-check-label">
+                                                                                        <input class="form-check-input" type="checkbox" id="etapaVENDA" name="etapaVENDA" value="true">
+                                                                                        <span class="form-check-sign">
+                                                                                            <span class="check"></span>
+                                                                                        </span>
+                                                                                    </label>
+                                                                                    <label class="text-white">
+                                                                                        VENDA
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                       
+</tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="card-body">
+
+                                    <a href="javascript:document.getElementById('signupform').submit();" class="btn btn-round btn-fill btn-success">
+                                        <span class="text">Salvar</span>
+                                    </a>
+
+                                    <a href="/GestaoLeads/Index" class="btn btn-round btn-fill btn-default">
+                                        <span class="text">Voltar</span>
+                                    </a>
+
+                                </div>
+                            </div>
+                        }
                     </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.bandD, htmlAttributes: new { @class = "m-0 font-weight-bold" })
-                    <div class="col-md-10">
-                        <div class="checkbox">
-                            @Html.EditorFor(model => model.bandD)
-                            @Html.ValidationMessageFor(model => model.bandD, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.etapaLEAD, htmlAttributes: new { @class = "m-0 font-weight-bold" })
-                    <div class="col-md-10">
-                        <div class="checkbox">
-                            @Html.EditorFor(model => model.etapaLEAD)
-                            @Html.ValidationMessageFor(model => model.etapaLEAD, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.etapaATENDIMENTO, htmlAttributes: new { @class = "m-0 font-weight-bold" })
-                    <div class="col-md-10">
-                        <div class="checkbox">
-                            @Html.EditorFor(model => model.etapaATENDIMENTO)
-                            @Html.ValidationMessageFor(model => model.etapaATENDIMENTO, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.etapaAGENDAMENTO, htmlAttributes: new { @class = "m-0 font-weight-bold" })
-                    <div class="col-md-10">
-                        <div class="checkbox">
-                            @Html.EditorFor(model => model.etapaAGENDAMENTO)
-                            @Html.ValidationMessageFor(model => model.etapaAGENDAMENTO, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.etapaVISITA, htmlAttributes: new { @class = "m-0 font-weight-bold" })
-                    <div class="col-md-10">
-                        <div class="checkbox">
-                            @Html.EditorFor(model => model.etapaVISITA)
-                            @Html.ValidationMessageFor(model => model.etapaVISITA, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.etapaPROPOSTA, htmlAttributes: new { @class = "m-0 font-weight-bold" })
-                    <div class="col-md-10">
-                        <div class="checkbox">
-                            @Html.EditorFor(model => model.etapaPROPOSTA)
-                            @Html.ValidationMessageFor(model => model.etapaPROPOSTA, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.etapaVENDA, htmlAttributes: new { @class = "m-0 font-weight-bold" })
-                    <div class="col-md-10">
-                        <div class="checkbox">
-                            @Html.EditorFor(model => model.etapaVENDA)
-                            @Html.ValidationMessageFor(model => model.etapaVENDA, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.observacao, htmlAttributes: new { @class = "m-0 font-weight-bold" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.observacao, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.observacao, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.JustContatoId, "JustContatoId", htmlAttributes: new { @class = "m-0 font-weight-bold" })
-                    <div class="col-md-10">
-                        @Html.DropDownList("JustContatoId", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.JustContatoId, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.CanalAtracaoId, "CanalAtracaoId", htmlAttributes: new { @class = "m-0 font-weight-bold" })
-                    <div class="col-md-10">
-                        @Html.DropDownList("CanalAtracaoId", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.CanalAtracaoId, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.CanalComunicacaoId, "CanalComunicacaoId", htmlAttributes: new { @class = "m-0 font-weight-bold" })
-                    <div class="col-md-10">
-                        @Html.DropDownList("CanalComunicacaoId", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.CanalComunicacaoId, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.JustAvancoId, "JustAvancoId", htmlAttributes: new { @class = "m-0 font-weight-bold" })
-                    <div class="col-md-10">
-                        @Html.DropDownList("JustAvancoId", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.JustAvancoId, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.midiaOrigem, htmlAttributes: new { @class = "m-0 font-weight-bold" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.midiaOrigem, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.midiaOrigem, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.sexo, htmlAttributes: new { @class = "m-0 font-weight-bold" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.sexo, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.sexo, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.cidade, htmlAttributes: new { @class = "m-0 font-weight-bold" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.cidade, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.cidade, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.TipoImoveisId, "TipoImoveisId", htmlAttributes: new { @class = "m-0 font-weight-bold" })
-                    <div class="col-md-10">
-                        @Html.DropDownList("TipoImoveisId", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.TipoImoveisId, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.VisitasId, htmlAttributes: new { @class = "m-0 font-weight-bold" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.VisitasId, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.VisitasId, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.SituacaoId, htmlAttributes: new { @class = "m-0 font-weight-bold" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.SituacaoId, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.SituacaoId, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="card-body">
-
-                    <a href="#" class="btn btn-success btn-icon-split">
-                        <span class="icon text-white-50">
-                            <i class="fas fa-check"></i>
-                        </span>
-                        <span class="text">Salvar</span>
-                    </a>
-
-                    <a href="#" class="btn btn-secondary btn-icon-split">
-                        <span class="icon text-white-50">
-                            <i class="fas fa-arrow-right"></i>
-                        </span>
-                        <span class="text">Voltar</span>
-                    </a>
-
-
-                </div>
-                <br />
-                <div class="col-md-10">
-                    <input type="submit" value="Salvar" class="btn btn-success btn-icon-split" />
-                    &nbsp;&nbsp;
-                    @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-primary" })
                 </div>
             </div>
 
-        }
-
-
+        </div>
     </div>
-</div> 
+</div>

@@ -2,74 +2,111 @@
 
 @{
     ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutTheme.cshtml";
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>Corretor</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.nome)
-        </dt>
+<style type="text/css">
+    .text-xs {
+        font-size: 13px !important;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.nome)
-        </dd>
+    .text-info {
+        color: #858796 !important;
+    }
+</style>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.telefone)
-        </dt>
+<body id="page-top">
 
-        <dd>
-            @Html.DisplayFor(model => model.telefone)
-        </dd>
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 ml-auto mr-auto">
+                    <div class="card">
+                        <div class="card-header card-header-primary">
+                            <h4 class="card-title"><i class="material-icons">person</i> &nbsp;&nbsp;CORRETOR</h4>
+                            <p class="card-category"> @Html.ActionLink("Alterar", "Edit", new { id = Model.Id })</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive table-upgrade">
+                                <hr />
+                                <dl class="dl-horizontal">
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.nome)
+                                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.email)
-        </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model.nome)
+                                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.email)
-        </dd>
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.telefone)
+                                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.dtCadastro)
-        </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model.telefone)
+                                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.dtCadastro)
-        </dd>
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.email)
+                                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.dtNascimento)
-        </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model.email)
+                                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.dtNascimento)
-        </dd>
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.dtCadastro)
+                                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Filial.nome)
-        </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model.dtCadastro)
+                                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Filial.nome)
-        </dd>
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.dtNascimento)
+                                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Empresa.nome)
-        </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model.dtNascimento)
+                                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Empresa.nome)
-        </dd>
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.Filial.nome)
+                                    </dt>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Filial.nome)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.Empresa.nome)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Empresa.nome)
+                                    </dd>
+
+                                </dl>
+                                <br />
+
+                                <table class="table">
+                                    <tr>
+                                        <td class="text-left">
+                                            <div class="card-body">
+                                                <a href="/Empresas/Index" class="btn btn-round btn-fill btn-default">
+                                                    <span class="text">Voltar</span>
+                                                </a>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+

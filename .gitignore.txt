@@ -1,0 +1,3 @@
+CONEXAOQR/bin
+CONEXAOQR/obj
+.vs

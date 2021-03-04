@@ -5,7 +5,7 @@ namespace CONEXAOQR.Models
 {
     public class ExternalLoginConfirmationViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "E-mail inválido!")]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
@@ -41,19 +41,19 @@ namespace CONEXAOQR.Models
 
     public class ForgotViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "E-mail inválido!")]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
 
     public class LoginViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "E-mail inválido!")]
         [Display(Name = "Email")]
         [EmailAddress]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Senha inválida!")]
         [DataType(DataType.Password)]
         [Display(Name = "Senha")]
         public string Password { get; set; }
@@ -64,7 +64,7 @@ namespace CONEXAOQR.Models
 
     public class RegisterViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "E-mail inválido!")]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }

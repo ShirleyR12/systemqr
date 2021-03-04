@@ -1,355 +1,784 @@
-﻿@{
-    ViewBag.Title = "Home";
+﻿@model CONEXAOQR.Models.GestaoLeads
+
+@{
+    ViewBag.Title = "Dashboard";
     Layout = "~/Views/Shared/_LayoutTheme.cshtml";
 }
+   
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-lg-6 col-md-10">
+                    <div class="card shadow mb-4">
+                        <div class="card-header card-header-success">
+                            <h4 class="card-title">Funil de vendas</h4>
+                            <p class="card-category">Processo de evolução </p>
+                        </div>
+
+                        <div class="card-body">
+                            <div id="chartContainer" style="height: 280px; width: 100%;"></div>
+                            <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+                            <script>
+                                ListaPuntosDeRenta();
+
+                                function ListaPuntosDeRenta() {
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "/Home/teste",
+                                        data: "{}",
+                                        dataType: "json",
+                                        success: function (result) {
+                                            GraficoTeste(result);
+                                        },
+                                        error: function (result) {
+                                            alert("Error");
+                                        }
+                                    });
+                                }
+
+                                function GraficoTeste(result) {
+                                    var num1 = 0;
+                                    var num2 = 0;
+                                    var num3 = 0;
+                                    var num4 = 0;
+                                    var num5 = 0;
+                                    var num6 = 0;
+                                    for (var i = 0; i < result.length; i++) {
+
+                                        if (i == 0) {
+                                            num1 = result[i].y;
+                                        }
+                                        if (i == 1) {
+                                            num2 = result[i].y;
+                                        }
+                                        if (i == 2) {
+                                            num3 = result[i].y;
+                                        }
+                                        if (i == 3) {
+                                            num4 = result[i].y;
+                                        }
+                                        if (i == 4) {
+                                            num5 = result[i].y;
+                                        }
+                                        if (i == 5) {
+                                            num6 = result[i].y;
+                                        }
+                                    }
 
 
-<body id="page-top">
+                                    var chart = new CanvasJS.Chart("chartContainer", {
+                                        animationEnabled: true,
 
-    <div class="container-fluid">
+                                        data: [{
+                                            type: "funnel",
+                                            indexLabel: "{label} - {y}",
+                                            toolTipContent: "<b>{label}</b>: {y} <b>({percentage}%)</b>",
+                                            neckWidth: 15,
+                                            neckHeight: 2,
+                                            valueRepresents: "area",
+                                            dataPoints: [
+                                                { y: num1, label: "LEAD" },
+                                                { y: num2, label: "ATENDIMENTO" },
+                                                { y: num3, label: "AGENDAMENTO" },
+                                                { y: num4, label: "VISITA" },
+                                                { y: num5, label: "PROPOSTA" },
+                                                { y: num6, label: "VENDA" }
+                                            ]
+                                        }]
+                                    });
+                                    calculatePercentage();
+                                    chart.render();
 
-        <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
-            </a>
-        </div>
+                                    function calculatePercentage() {
+                                        var dataPoint = chart.options.data[0].dataPoints;
+                                        var total = dataPoint[0].y;
+                                        for (var i = 0; i < dataPoint.length; i++) {
+                                            if (i == 0) {
+                                                chart.options.data[0].dataPoints[i].percentage = 100;
+                                            } else {
+                                                chart.options.data[0].dataPoints[i].percentage = ((dataPoint[i].y / total) * 100).toFixed(2);
+                                            }
+                                        }
+                                    }
 
-        <!-- Content Row -->
-        <div class="row">
+                                }
+                            </script>
+                        </div>
+                    </div>
+                </div>
+                <!--fim primeiro gráfico-->
+                <!--Inicio do 2° gráfico-->
+                <div class="col-lg-6 col-md-12">
+                    <!-- Approach -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header card-header-danger">
+                            <h4 class="card-title">Canais de Atração</h4>
+                            <p class="card-category">Mídia de origem (atendimentos ativos)</p>
+                        </div>
+                        <div class="card-body">
+                            <p>
+                                <style>
+                                    #chartdiv {
+                                        width: 75%;
+                                        height: 250px;
+                                    }
+                                </style>
 
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-primary shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                    Earnings (Monthly)
-                                </div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                            </div>
+                                <!-- Resources -->
+                                <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+                                <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+                                <script src="https://cdn.amcharts.com/lib/4/themes/material.js"></script>
+                                <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+
+                                <!-- Chart code -->
+                                <script>
+                                    am4core.ready(function () {
+
+                                        // Themes begin
+                                        am4core.useTheme(am4themes_material);
+                                        am4core.useTheme(am4themes_animated);
+                                        // Themes end
+
+                                        // Create chart instance
+                                        var chart = am4core.create("chartdiv", am4charts.PieChart);
+
+                                        // Add data
+                                        chart.data = [{
+                                            "country": "Instagram",
+                                            "litres": 501.9
+                                        }, {
+                                            "country": "Facebook",
+                                            "litres": 301.9
+                                        }, {
+                                            "country": "Site Imobiliária",
+                                            "litres": 201.1
+                                        }, {
+                                            "country": "Site MKTP",
+                                            "litres": 165.8
+                                        }, {
+                                            "country": "Outros",
+                                            "litres": 139.9
+
+                                        }];
+
+                                        // Add and configure Series
+                                        var pieSeries = chart.series.push(new am4charts.PieSeries());
+                                        pieSeries.dataFields.value = "litres";
+                                        pieSeries.dataFields.category = "country";
+                                        pieSeries.slices.template.stroke = am4core.color("#fff");
+                                        pieSeries.slices.template.strokeWidth = 2;
+                                        pieSeries.slices.template.strokeOpacity = 1;
+
+                                        // This creates initial animation
+                                        pieSeries.hiddenState.properties.opacity = 1;
+                                        pieSeries.hiddenState.properties.endAngle = -90;
+                                        pieSeries.hiddenState.properties.startAngle = -90;
+
+                                    }); // end am4core.ready()
+                                </script>
+
+                                <!-- HTML -->
+                                <div id="chartdiv"></div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-success shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                    Earnings (Annual)
-                                </div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
+
+
+
+            <!-- <div class="row">
+
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header card-header-warning card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">content_copy</i>
+                    </div>
+                    <p class="card-category">Used Space</p>
+                    <h3 class="card-title">
+                        49/50
+                        <small>GB</small>
+                    </h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons text-danger">warning</i>
+                        <a href="javascript:;">Get More Space...</a>
                     </div>
                 </div>
-            </div>
-
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-info shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                    Tasks
-                                </div>
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col-auto">
-                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="progress progress-sm mr-2">
-                                            <div class="progress-bar bg-info" role="progressbar"
-                                                 style="width: 50%" aria-valuenow="50" aria-valuemin="0"
-                                                 aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Pending Requests Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-warning shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                    Pending Requests
-                                </div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-comments fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Content Row -->
-
-        <div class="row">
-
-            <!-- Area Chart -->
-            <div class="col-xl-8 col-lg-7">
-                <div class="card shadow mb-4">
-                    <!-- Card Header - Dropdown -->
-                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
-                        <div class="dropdown no-arrow">
-                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                 aria-labelledby="dropdownMenuLink">
-                                <div class="dropdown-header">Dropdown Header:</div>
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Card Body -->
-                    <div class="card-body">
-                        <div class="chart-area">
-                            <canvas id="myAreaChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Pie Chart -->
-            <div class="col-xl-4 col-lg-5">
-                <div class="card shadow mb-4">
-                    <!-- Card Header - Dropdown -->
-                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
-                        <div class="dropdown no-arrow">
-                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                 aria-labelledby="dropdownMenuLink">
-                                <div class="dropdown-header">Dropdown Header:</div>
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Card Body -->
-                    <div class="card-body">
-                        <div class="chart-pie pt-4 pb-2">
-                            <canvas id="myPieChart"></canvas>
-                        </div>
-                        <div class="mt-4 text-center small">
-                            <span class="mr-2">
-                                <i class="fas fa-circle text-primary"></i> Direct
-                            </span>
-                            <span class="mr-2">
-                                <i class="fas fa-circle text-success"></i> Social
-                            </span>
-                            <span class="mr-2">
-                                <i class="fas fa-circle text-info"></i> Referral
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Content Row -->
-        <div class="row">
-
-            <!-- Content Column -->
-            <div class="col-lg-6 mb-4">
-
-                <!-- Project Card Example -->
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
-                    </div>
-                    <div class="card-body">
-                        <h4 class="small font-weight-bold">
-                            Server Migration <span class="float-right">20%</span>
-                        </h4>
-                        <div class="progress mb-4">
-                            <div class="progress-bar bg-danger" role="progressbar" style="width: 20%"
-                                 aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <h4 class="small font-weight-bold">
-                            Sales Tracking <span class="float-right">40%</span>
-                        </h4>
-                        <div class="progress mb-4">
-                            <div class="progress-bar bg-warning" role="progressbar" style="width: 40%"
-                                 aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <h4 class="small font-weight-bold">
-                            Customer Database <span class="float-right">60%</span>
-                        </h4>
-                        <div class="progress mb-4">
-                            <div class="progress-bar" role="progressbar" style="width: 60%"
-                                 aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <h4 class="small font-weight-bold">
-                            Payout Details <span class="float-right">80%</span>
-                        </h4>
-                        <div class="progress mb-4">
-                            <div class="progress-bar bg-info" role="progressbar" style="width: 80%"
-                                 aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <h4 class="small font-weight-bold">
-                            Account Setup <span class="float-right">Complete!</span>
-                        </h4>
-                        <div class="progress">
-                            <div class="progress-bar bg-success" role="progressbar" style="width: 100%"
-                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Color System -->
-                <div class="row">
-                    <div class="col-lg-6 mb-4">
-                        <div class="card bg-primary text-white shadow">
-                            <div class="card-body">
-                                Primary
-                                <div class="text-white-50 small">#4e73df</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mb-4">
-                        <div class="card bg-success text-white shadow">
-                            <div class="card-body">
-                                Success
-                                <div class="text-white-50 small">#1cc88a</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mb-4">
-                        <div class="card bg-info text-white shadow">
-                            <div class="card-body">
-                                Info
-                                <div class="text-white-50 small">#36b9cc</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mb-4">
-                        <div class="card bg-warning text-white shadow">
-                            <div class="card-body">
-                                Warning
-                                <div class="text-white-50 small">#f6c23e</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mb-4">
-                        <div class="card bg-danger text-white shadow">
-                            <div class="card-body">
-                                Danger
-                                <div class="text-white-50 small">#e74a3b</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mb-4">
-                        <div class="card bg-secondary text-white shadow">
-                            <div class="card-body">
-                                Secondary
-                                <div class="text-white-50 small">#858796</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mb-4">
-                        <div class="card bg-light text-black shadow">
-                            <div class="card-body">
-                                Light
-                                <div class="text-black-50 small">#f8f9fc</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mb-4">
-                        <div class="card bg-dark text-white shadow">
-                            <div class="card-body">
-                                Dark
-                                <div class="text-white-50 small">#5a5c69</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="col-lg-6 mb-4">
-
-                <!-- Illustrations -->
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
-                    </div>
-                    <div class="card-body">
-                        <div class="text-center">
-                            <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
-                                 src="img/undraw_posting_photo.svg" alt="">
-                        </div>
-                        <p>
-                            Add some quality, svg illustrations to your project courtesy of <a target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a
-                            constantly updated collection of beautiful svg images that you can use
-                            completely free and without attribution!
-                        </p>
-                        <a target="_blank" rel="nofollow" href="https://undraw.co/">
-                            Browse Illustrations on
-                            unDraw &rarr;
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Approach -->
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
-                    </div>
-                    <div class="card-body">
-                        <p>
-                            SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce
-                            CSS bloat and poor page performance. Custom CSS classes are used to create
-                            custom components and custom utility classes.
-                        </p>
-                        <p class="mb-0">
-                            Before working with this theme, you should become familiar with the
-                            Bootstrap framework, especially the utility classes.
-                        </p>
-                    </div>
-                </div>
-
             </div>
         </div>
-
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header card-header-success card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">store</i>
+                    </div>
+                    <p class="card-category">Revenue</p>
+                    <h3 class="card-title">$34,245</h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">date_range</i> Last 24 Hours
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header card-header-danger card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">info_outline</i>
+                    </div>
+                    <p class="card-category">Fixed Issues</p>
+                    <h3 class="card-title">75</h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">local_offer</i> Tracked from Github
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header card-header-info card-header-icon">
+                    <div class="card-icon">
+                        <i class="fa fa-twitter"></i>
+                    </div>
+                    <p class="card-category">Followers</p>
+                    <h3 class="card-title">+245</h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">update</i> Just Updated
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    
-</body>
+           <div class="row">
+               <div class="col-md-4">
+                   <div class="card card-chart">
+                       <div class="card-header card-header-success">
+                           <div class="ct-chart" id="dailySalesChart"></div>
+                       </div>
+                       <div class="card-body">
+                           <h4 class="card-title">Daily Sales</h4>
+                           <p class="card-category">
+                               <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.
+                           </p>
+                       </div>
+                       <div class="card-footer">
+                           <div class="stats">
+                               <i class="material-icons">access_time</i> updated 4 minutes ago
+                           </div>
+                       </div>
+                   </div>
+               </div>
+               <div class="col-md-4">
+                   <div class="card card-chart">
+                       <div class="card-header card-header-warning">
+                           <div class="ct-chart" id="websiteViewsChart"></div>
+                       </div>
+                       <div class="card-body">
+                           <h4 class="card-title">Email Subscriptions</h4>
+                           <p class="card-category">Last Campaign Performance</p>
+                       </div>
+                       <div class="card-footer">
+                           <div class="stats">
+                               <i class="material-icons">access_time</i> campaign sent 2 days ago
+                           </div>
+                       </div>
+                   </div>
+               </div>
+               <div class="col-md-4">
+                   <div class="card card-chart">
+                       <div class="card-header card-header-danger">
+                           <div class="ct-chart" id="completedTasksChart"></div>
+                       </div>
+                       <div class="card-body">
+                           <h4 class="card-title">Completed Tasks</h4>
+                           <p class="card-category">Last Campaign Performance</p>
+                       </div>
+                       <div class="card-footer">
+                           <div class="stats">
+                               <i class="material-icons">access_time</i> campaign sent 2 days ago
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>-->
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="col-lg-6 col-md-10">
+                        <div class="card shadow mb-4">
+                            <div class="card-header card-header-info">
+                                <h4 class="card-title">Leads </h4>
+                                <p class="card-category">Ativos / Inativos</p>
+                            </div>
+
+                            <div class="card-body">
+
+                                <!-- Chart code -->
+                                <script>
+                                    am4core.ready(function () {
+
+                                        // Themes begin
+                                        am4core.useTheme(am4themes_animated);
+                                        // Themes end
+
+                                        // Create chart instance
+                                        var chart = am4core.create("chartdiv2", am4charts.PieChart);
+
+                                        // Add data
+                                        chart.data = [{
+
+                                            "country": "Ativos",
+                                            "litres": 60
+                                        }, {
+                                            "country": "Inativos",
+                                            "litres": 50
+                                        }];
+
+                                        // Add and configure Series
+                                        var pieSeries = chart.series.push(new am4charts.PieSeries());
+                                        pieSeries.dataFields.value = "litres";
+                                        pieSeries.dataFields.category = "country";
+                                        pieSeries.innerRadius = am4core.percent(50);
+                                        pieSeries.ticks.template.disabled = true;
+                                        pieSeries.labels.template.disabled = true;
+
+                                        var rgm = new am4core.RadialGradientModifier();
+                                        rgm.brightnesses.push(-0.8, -0.8, -0.5, 0, - 0.5);
+                                        pieSeries.slices.template.fillModifier = rgm;
+                                        pieSeries.slices.template.strokeModifier = rgm;
+                                        pieSeries.slices.template.strokeOpacity = 0.4;
+                                        pieSeries.slices.template.strokeWidth = 0;
+
+                                        chart.legend = new am4charts.Legend();
+                                        chart.legend.position = "right";
+
+                                    }); // end am4core.ready()
+                                </script>
+
+                                <!-- HTML -->
+                                <div id="chartdiv2"></div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--Inicio do terceiro Gráfico-->
+                    <div class="col-lg-6 col-md-10">
+                        <div class="card shadow mb-4">
+                            <div class="card-header card-header-info">
+                                <h4 class="card-title">Imóveis X Etapas do Funil</h4>
+                                <p class="card-category">Total</p>
+                            </div>
+
+                            <div class="card-body">
+                                <div id="chartContainer2"></div>
+
+                                <script>
+                                    am4core.ready(function () {
+
+                                        // Themes begin
+                                        am4core.useTheme(am4themes_material);
+                                        am4core.useTheme(am4themes_animated);
+                                        // Themes end
+
+                                        var chart = am4core.create("chartdiv22", am4charts.SlicedChart);
+                                        chart.hiddenState.properties.opacity = 0; // this makes initial fade in effect
+
+                                        chart.data = [{
+                                            "name": "LEAD R$ 8.950,000",
+                                            "value": 8950
+                                        }, {
+                                            "name": "ATENDIMENTO R$ 5.950,000",
+                                            "value": 5950
+                                        }, {
+                                            "name": "AGENDAMENTO R$ 950,000",
+                                            "value": 15560
+                                        }, {
+                                            "name": "VISITA R$ 2.120,00",
+                                            "value": 2120
+                                        }, {
+                                            "name": "PROPOSTA R$ 1.950,000",
+                                            "value": 1950
+                                        }, {
+                                            "name": "VENDA R$ 350,00",
+                                            "value": 350
+                                        }];
+
+                                        var series = chart.series.push(new am4charts.FunnelSeries());
+                                        series.colors.step = 2;
+                                        series.dataFields.value = "value";
+                                        series.dataFields.category = "name";
+                                        series.alignLabels = true;
+
+                                        series.labelsContainer.paddingLeft = 15;
+                                        series.labelsContainer.width = 200;
+
+                                        //series.orientation = "horizontal";
+                                        //series.bottomRatio = 1;
+
+                                        chart.legend = new am4charts.Legend();
+                                        chart.legend.position = "left";
+                                        chart.legend.valign = "bottom";
+                                        chart.legend.margin(5, 5, 20, 5);
+
+                                    }); // end am4core.ready()
+                                </script>
+
+                                <!-- HTML -->
+                                <div id="chartdiv22"></div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
+
+
+
+
+            <div class="row">
+                <div class="col-lg-6 col-md-12">
+                    <!-- <div class="card">
+                    <div class="card-header card-header-tabs card-header-primary">
+                        <div class="nav-tabs-navigation">
+                            <div class="nav-tabs-wrapper">
+                                <span class="nav-tabs-title">Tasks:</span>
+                                <ul class="nav nav-tabs" data-tabs="tabs">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="#profile" data-toggle="tab">
+                                            <i class="material-icons">bug_report</i> Bugs
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#messages" data-toggle="tab">
+                                            <i class="material-icons">code</i> Website
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#settings" data-toggle="tab">
+                                            <i class="material-icons">cloud</i> Server
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="profile">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        <input class="form-check-input" type="checkbox" value="" checked>
+                                                        <span class="form-check-sign">
+                                                            <span class="check"></span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            <td>Sign contract for "What are conference organizers afraid of?"</td>
+                                            <td class="td-actions text-right">
+                                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
+                                                    <i class="material-icons">edit</i>
+                                                </button>
+                                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
+                                                    <i class="material-icons">close</i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        <input class="form-check-input" type="checkbox" value="">
+                                                        <span class="form-check-sign">
+                                                            <span class="check"></span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
+                                            <td class="td-actions text-right">
+                                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
+                                                    <i class="material-icons">edit</i>
+                                                </button>
+                                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
+                                                    <i class="material-icons">close</i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        <input class="form-check-input" type="checkbox" value="">
+                                                        <span class="form-check-sign">
+                                                            <span class="check"></span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
+                                            </td>
+                                            <td class="td-actions text-right">
+                                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
+                                                    <i class="material-icons">edit</i>
+                                                </button>
+                                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
+                                                    <i class="material-icons">close</i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        <input class="form-check-input" type="checkbox" value="" checked>
+                                                        <span class="form-check-sign">
+                                                            <span class="check"></span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            <td>Create 4 Invisible User Experiences you Never Knew About</td>
+                                            <td class="td-actions text-right">
+                                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
+                                                    <i class="material-icons">edit</i>
+                                                </button>
+                                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
+                                                    <i class="material-icons">close</i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane" id="messages">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        <input class="form-check-input" type="checkbox" value="" checked>
+                                                        <span class="form-check-sign">
+                                                            <span class="check"></span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
+                                            </td>
+                                            <td class="td-actions text-right">
+                                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
+                                                    <i class="material-icons">edit</i>
+                                                </button>
+                                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
+                                                    <i class="material-icons">close</i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        <input class="form-check-input" type="checkbox" value="">
+                                                        <span class="form-check-sign">
+                                                            <span class="check"></span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            <td>Sign contract for "What are conference organizers afraid of?"</td>
+                                            <td class="td-actions text-right">
+                                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
+                                                    <i class="material-icons">edit</i>
+                                                </button>
+                                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
+                                                    <i class="material-icons">close</i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane" id="settings">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        <input class="form-check-input" type="checkbox" value="">
+                                                        <span class="form-check-sign">
+                                                            <span class="check"></span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
+                                            <td class="td-actions text-right">
+                                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
+                                                    <i class="material-icons">edit</i>
+                                                </button>
+                                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
+                                                    <i class="material-icons">close</i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        <input class="form-check-input" type="checkbox" value="" checked>
+                                                        <span class="form-check-sign">
+                                                            <span class="check"></span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
+                                            </td>
+                                            <td class="td-actions text-right">
+                                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
+                                                    <i class="material-icons">edit</i>
+                                                </button>
+                                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
+                                                    <i class="material-icons">close</i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        <input class="form-check-input" type="checkbox" value="" checked>
+                                                        <span class="form-check-sign">
+                                                            <span class="check"></span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            <td>Sign contract for "What are conference organizers afraid of?"</td>
+                                            <td class="td-actions text-right">
+                                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
+                                                    <i class="material-icons">edit</i>
+                                                </button>
+                                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
+                                                    <i class="material-icons">close</i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+                    <div class="card">
+                        <div class="card-header card-header-rose">
+                            <h4 class="card-title">Metas de Avanço Corretores</h4>
+                            <p class="card-category">Mês atual</p>
+                        </div>
+                        <div class="card-body table-responsive">
+                            <table class="table table-hover">
+                                <thead class="text-warning">
+                                <th>Name</th>
+                                <th>Meta</th>
+                                <th>Valor atingido</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Natália mendes</td>
+                                        <td>R$ 1.580,000</td>
+                                        <td>R$ 480.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jaimes Cardoso</td>
+                                        <td>R$ 2.500,00</td>
+                                        <td>R$ 250.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Hugo Rodriguez</td>
+                                        <td>R$ 1.800,00</td>
+                                        <td>R$ 1.010,00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Maria </td>
+                                        <td>R$ 3.100,00</td>
+                                        <td>R$ 650.80</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-warning">
+                            <h4 class="card-title">Visitas </h4>
+                            <p class="card-category">agendadas</p>
+                        </div>
+                        <div class="card-body table-responsive">
+                            <table class="table table-hover">
+                                <thead class="text-warning">
+                                <th>Name</th>
+                                <th>Valor do Imóvel</th>
+                                <th>Corretor</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Dakota Rice</td>
+                                        <td>R$ 480.00</td>
+                                        <td>Natália mendes</td>
+                                    </tr>
+                                    <tr>
+                                        <td>João José</td>
+                                        <td>R$ 250.00</td>
+                                        <td>Jaimes Cardoso</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Hugo Rodriguez</td>
+                                        <td>R$ 340.00</td>
+                                        <td>Maria</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Letícia Araújo</td>
+                                        <td>R$ 650.80</td>
+                                        <td>Jaimes Cardoso</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+                        </div>
+
 

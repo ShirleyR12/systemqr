@@ -1,0 +1,286 @@
+﻿@model IEnumerable<CONEXAOQR.Models.PiramideSucesso>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.meta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ir)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.obj1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.obj2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.obj3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.obj4)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.obj5)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.atitude1_obj1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.atitude2_obj1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.atitude3_obj1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.atitude4_obj1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.atitude5_obj1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.atitude1_obj2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.atitude2_obj2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.atitude3_obj2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.atitude4_obj2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.atitude5_obj2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.atitude1_obj3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.atitude2_obj3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.atitude3_obj3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.atitude4_obj3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.atitude5_obj3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.atitude1_obj4)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.atitude2_obj4)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.atitude3_obj4)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.atitude4_obj4)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.atitude5_obj4)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.atitude1_obj5)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.atitude2_obj5)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.atitude3_obj5)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.atitude4_obj5)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.atitude5_obj5)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dtCriacao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dtUltimoUpdate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ativo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.metaBatida)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.observacao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.codValidado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.codUsuarioValidou)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.codUsuarioCriou)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Empresa1.nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Usuario.tipoPessoa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmpresaSet.nome)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.meta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ir)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.obj1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.obj2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.obj3)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.obj4)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.obj5)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.atitude1_obj1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.atitude2_obj1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.atitude3_obj1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.atitude4_obj1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.atitude5_obj1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.atitude1_obj2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.atitude2_obj2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.atitude3_obj2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.atitude4_obj2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.atitude5_obj2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.atitude1_obj3)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.atitude2_obj3)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.atitude3_obj3)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.atitude4_obj3)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.atitude5_obj3)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.atitude1_obj4)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.atitude2_obj4)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.atitude3_obj4)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.atitude4_obj4)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.atitude5_obj4)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.atitude1_obj5)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.atitude2_obj5)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.atitude3_obj5)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.atitude4_obj5)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.atitude5_obj5)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dtCriacao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dtUltimoUpdate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ativo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.metaBatida)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.observacao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.codValidado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.codUsuarioValidou)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.codUsuarioCriou)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Empresa1.nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Usuario.tipoPessoa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmpresaSet.nome)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

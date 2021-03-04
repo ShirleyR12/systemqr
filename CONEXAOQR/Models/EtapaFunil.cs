@@ -18,6 +18,8 @@ namespace CONEXAOQR.Models
         public EtapaFunil()
         {
             this.FaseEtapaFunil = new HashSet<FaseEtapaFunil>();
+            this.LeadEtapa = new HashSet<GestaoLeadEtapaFunil>();
+            this.EtapaPocentagemEmpresa = new HashSet<EtapaEmpresa>();
         }
     
         public int Id { get; set; }
@@ -27,5 +29,9 @@ namespace CONEXAOQR.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FaseEtapaFunil> FaseEtapaFunil { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GestaoLeadEtapaFunil> LeadEtapa { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EtapaEmpresa> EtapaPocentagemEmpresa { get; set; }
     }
 }

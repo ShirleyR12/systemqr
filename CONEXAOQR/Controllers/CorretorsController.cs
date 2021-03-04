@@ -53,6 +53,8 @@ namespace CONEXAOQR.Controllers
         {
             if (ModelState.IsValid)
             {
+                corretor.dtCadastro = DateTime.Now;
+              //  corretor.FilialId  = 1;
                 db.CorretorSet.Add(corretor);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -61,6 +63,15 @@ namespace CONEXAOQR.Controllers
             ViewBag.FilialId = new SelectList(db.FilialSet, "Id", "nome", corretor.FilialId);
             ViewBag.EmpresaId = new SelectList(db.EmpresaSet, "Id", "nome", corretor.EmpresaId);
             return View(corretor);
+        }
+        //Carrega os dados da combo EMPRESA
+        public JsonResult FilialCombo(int Id)
+        {
+            var filial = db.FilialSet.ToList().Where(p => p.EmpresaId == Id);
+            ViewBag.GerenteNome = "GerenteNome";
+            ViewBag.DiretorNome = "DiretorNome";
+
+            return Json(new SelectList(filial, "Id", "nome"));
         }
 
         // GET: Corretors/Edit/5
@@ -89,6 +100,7 @@ namespace CONEXAOQR.Controllers
         {
             if (ModelState.IsValid)
             {
+                corretor.dtCadastro = DateTime.Now;
                 db.Entry(corretor).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

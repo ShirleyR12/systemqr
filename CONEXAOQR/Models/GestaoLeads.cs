@@ -41,7 +41,7 @@ namespace CONEXAOQR.Models
         public Nullable<int> JustContatoId { get; set; }
         public Nullable<int> CanalAtracaoId { get; set; }
         public Nullable<int> CanalComunicacaoId { get; set; }
-        public string midiaOrigem { get; set; }
+        public Nullable<long> valorImovel { get; set; }
         public Nullable<int> TipoContatoId { get; set; }
         public string sexo { get; set; }
         public string cidade { get; set; }
@@ -51,6 +51,14 @@ namespace CONEXAOQR.Models
         public int EmpresaId { get; set; }
         public Nullable<int> JustAvancoId { get; set; }
         public Nullable<int> FilialId { get; set; }
+        public string ativo { get; set; }
+        public Nullable<int> CorretorId { get; set; }
+        public Nullable<System.DateTime> dataHoraDesativou { get; set; }
+        public Nullable<int> idCorretorDesativou { get; set; }
+        public string seguimento { get; set; }
+        public string tempoRespLead { get; set; }
+        public Nullable<int> JustInativaLead { get; set; }
+        public Nullable<bool> importado { get; set; }
     
         public virtual CanalAtracao CanalAtracao { get; set; }
         public virtual JustContato JustContato { get; set; }
@@ -62,5 +70,6 @@ namespace CONEXAOQR.Models
         public virtual ICollection<GestaoLeadsAtividades> GestaoLeadsAtividades { get; set; }
         public virtual JustAvanco JustAvanco { get; set; }
         public virtual Filial Filial { get; set; }
+        public virtual Corretor Corretor { get; set; }
     }
 }

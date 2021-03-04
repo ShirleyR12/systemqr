@@ -1,267 +1,254 @@
 ﻿@model CONEXAOQR.Models.GestaoLeads
 
 @{
-    ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Detalhes";
+    Layout = "~/Views/Shared/_LayoutTheme.cshtml";
 }
 
-<h2>Details</h2>
+<style type="text/css" >
+    .text-xs {
+    font-size: 13px !important;
+}
+    .text-info {
+    color: #858796 !important;
+}
 
-<div>
-    <h4>GestaoLeads</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.dtEntrada)
-        </dt>
+</style>
 
-        <dd>
-            @Html.DisplayFor(model => model.dtEntrada)
-        </dd>
+<body id="page-top">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.nome)
-        </dt>
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 ml-auto mr-auto">
+                    <div class="card">
+                        <div class="card-header card-header-primary">
+                            <h4 class="card-title"><i class="material-icons">person</i> &nbsp;&nbsp;Lead</h4>
+                            <p class="card-category">Dados cadastrais</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive table-upgrade">
+                                <table class="table">
+                                    <tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.nome)
-        </dd>
+                                        <td>
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <b style="color:orangered">Nome:</b>&nbsp; @Html.DisplayFor(model => model.nome)
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <b>Data de entrada:</b>&nbsp; @Html.DisplayFor(model => model.dtEntrada)
+                                        </td>
+                                        <td>
+                                            <b>Quantidade de Tentativas de Contato:</b>&nbsp; @Html.DisplayFor(model => model.qtdContato)
+                                        </td>
+                                        <td>
+                                            <b>Data da primeira visita:</b>&nbsp; @Html.DisplayFor(model => model.dtPrimeiraVisita)
+                                        </td>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.qtdContato)
-        </dt>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>Tempo Entrada do Lead:</b>&nbsp; @Html.DisplayFor(model => model.tempoEntrada)
+                                        </td>
+                                        <td>
+                                            <b>Data de cadastro:</b>&nbsp;@Html.DisplayFor(model => model.dtCadastro)
+                                        </td>
+                                        <td>
+                                            <b>Sexo:</b>&nbsp;@Html.DisplayFor(model => model.sexo)
+                                        </td>
+                                        <td>
+                                            <b>Possui e-mail / telefone?:</b>&nbsp; @Html.DisplayNameFor(model => model.observacao)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>Cidade / Estado:</b>&nbsp;@Html.DisplayFor(model => model.cidade)
+                                        </td>
+                                        <td>
+                                            <b>Canal de Atração:</b>&nbsp; @Html.DisplayFor(model => model.CanalAtracao.nome)
+                                        </td>
+                                        <td>
+                                            <b>Camal de comunicação:</b>&nbsp;  @Html.DisplayFor(model => model.CanalComunicacao.nome)
+                                        </td>
+                                        <td>
+                                            <b>Justificativa do não contato:</b>&nbsp; @Html.DisplayFor(model => model.JustContato.nome)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>Justificativa do não avanço:</b>&nbsp;@Html.DisplayFor(model => model.JustAvanco.nome)
+                                        </td>
+                                        <td>
+                                            <b>Tipo de imóvel:</b>&nbsp;@Html.DisplayFor(model => model.TipoImoveis.nome)
+                                        </td>
+                                        <td>
+                                            <b>Tipo de contato:</b>&nbsp;@Html.DisplayFor(model => model.TipoContato.nome)
+                                        </td>
+                                        <td class="text-center">
+                                        </td>
+                                    </tr>
+                                </table>
 
-        <dd>
-            @Html.DisplayFor(model => model.qtdContato)
-        </dd>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.dtPrimeiraVisita)
-        </dt>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 ml-auto mr-auto">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive table-upgrade">
+                                <div class="col-auto">
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-success"><i class="material-icons">library_books</i> &nbsp;&nbsp;ETAPAS DO BANT:</div>
+                                </div>
+                                <table class="table">
+                                    <tr>
+                                        <td>Budget:  @Html.CheckBox("bandB")</td>
+                                        <td>Autoridade:@Html.CheckBox("bandA")</td>
+                                        <td>Necessidade: @Html.CheckBox("bandN")</td>
+                                        <td>Time: @Html.CheckBox("bandD")</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 ml-auto mr-auto">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive table-upgrade">
+                                <div class="col-auto">
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-danger"><i class="material-icons">content_paste</i> &nbsp;&nbsp;ETAPA DO FUNIL QUE O LEAD PASSOU ATÉ O DIA DO PREENCHIMENTO:</div>
+                                </div>
+                                <br />
+                                <div class="row">
 
-        <dd>
-            @Html.DisplayFor(model => model.dtPrimeiraVisita)
-        </dd>
+                                    <div class="col-lg-2 mb-0">
+                                        <div class="card bg-primary text-white shadow">
+                                            <div class="card-body">
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        @Html.CheckBox("etapaLEAD")
+                                                    </label>
+                                                    <label class="text-white">
+                                                        LEAD
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><br />
+                                    <div class="col-lg-2 mb-0">
+                                        <div class="card bg-success text-white shadow">
+                                            <div class="card-body">
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        @Html.CheckBox("etapaATENDIMENTO")
+                                                    </label>
+                                                    <label class="text-white">
+                                                        ATENDIMENTO
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><br />
+                                    <div class="col-lg-2 mb-0">
+                                        <div class="card bg-info text-white shadow">
+                                            <div class="card-body">
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        @Html.CheckBox("etapaAGENDAMENTO")
+                                                    </label>
+                                                    <label class="text-white">
+                                                        AGENDAMENTO
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 mb-0">
+                                        <div class="card bg-warning text-white shadow">
+                                            <div class="card-body">
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        @Html.CheckBox("etapaVISITA")
+                                                    </label>
+                                                    <label class="text-white">
+                                                        VISITA
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 mb-0">
+                                        <div class="card bg-danger text-white shadow">
+                                            <div class="card-body">
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        @Html.CheckBox("etapaPROPOSTA")
+                                                    </label>
+                                                    <label class="text-white">
+                                                        PROPOSTA
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 mb-0">
+                                        <div class="card bg-secondary text-white shadow">
+                                            <div class="card-body">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.tempoEntrada)
-        </dt>
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        @Html.CheckBox("etapaVENDA")
+                                                    </label>
+                                                    <label class="text-white">
+                                                        VENDA
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.tempoEntrada)
-        </dd>
+                                    <br />
 
-        <dt>
-            @Html.DisplayNameFor(model => model.bandB)
-        </dt>
+                                    <table class="table">
+                                        <tr>
+                                            <td class="text-left">
+                                                <div class="card-body">
+                                                    <a href="/GestaoLeads/Index" class="btn btn-round btn-fill btn-default">
+                                                        <span class="text">Voltar</span>
+                                                    </a>
 
-        <dd>
-            @Html.DisplayFor(model => model.bandB)
-        </dd>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.bandA)
-        </dt>
+                                </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.bandA)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.bandN)
-        </dt>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.bandN)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.bandD)
-        </dt>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.bandD)
-        </dd>
+   
 
-        <dt>
-            @Html.DisplayNameFor(model => model.etapaLEAD)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.etapaLEAD)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.etapaATENDIMENTO)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.etapaATENDIMENTO)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.etapaAGENDAMENTO)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.etapaAGENDAMENTO)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.etapaVISITA)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.etapaVISITA)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.etapaPROPOSTA)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.etapaPROPOSTA)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.etapaVENDA)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.etapaVENDA)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.observacao)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.observacao)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.dtCadastro)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.dtCadastro)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FilialId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FilialId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.midiaOrigem)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.midiaOrigem)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.sexo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.sexo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.cidade)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.cidade)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.VisitasId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.VisitasId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SituacaoId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SituacaoId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CanalAtracao.nome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CanalAtracao.nome)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.JustContato.nome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.JustContato.nome)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CanalComunicacao.nome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CanalComunicacao.nome)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.JustAvanco.nome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.JustAvanco.nome)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TipoImoveis.nome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TipoImoveis.nome)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TipoContato.nome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TipoContato.nome)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Empresa.nome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Empresa.nome)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Filial.nome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Filial.nome)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+    
+</body>

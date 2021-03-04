@@ -4,211 +4,74 @@
     ViewBag.Title = "Gestão de Leads";
     Layout = "~/Views/Shared/_LayoutTheme.cshtml";
 }
-
+    <link href="~/Scripts/templete/assets/css/material-dashboard.min.css?v=2.1.2" rel="stylesheet" />
     <body id="page-top">
 
-        <h2>Index</h2>
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header card-header-success">
+                                <h4 class="card-title ">LEADS</h4>
+                                <p class="card-category">  @Html.ActionLink("Cadastrar novo Lead", "Create")</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class=" text-primary">
+                                            <tr>
+                                                <th>
+                                                    Nome
+                                                </th>
+                                                <th>
+                                                    Data de Entrada
+                                                </th>
+                                                <th>
+                                                    Canal de Atração
+                                                </th>
+                                                <th>
+                                                    Funil
+                                                </th>
+                                                <th>
+                                                    Ações
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                            <tr>
 
-        <p>
-            @Html.ActionLink("Create New", "Create")
-        </p>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.nome)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.dtEntrada)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.CanalAtracao.nome)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.observacao)
+                                                </td>
+                                                <td>
+                                                    @Html.ActionLink("Editar", "Edit",  new { id = item.Id }) |
+                                                    @Html.ActionLink("Detalhes", "Details", new { id = item.Id }) |
+                                                    @Html.ActionLink("Deletar", "Delete", new { id = item.Id })
 
+                                                </td>
+                                            </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-            <table class="table">
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.dtEntrada)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.nome)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.qtdContato)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.dtPrimeiraVisita)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.tempoEntrada)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.bandB)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.bandA)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.bandN)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.bandD)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.etapaLEAD)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.etapaATENDIMENTO)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.etapaAGENDAMENTO)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.etapaVISITA)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.etapaPROPOSTA)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.etapaVENDA)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.observacao)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.dtCadastro)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.midiaOrigem)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.sexo)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.cidade)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.VisitasId)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.SituacaoId)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CanalAtracao.nome)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.JustContato.nome)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CanalComunicacao.nome)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.JustAvanco.nome)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.TipoImoveis.nome)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.TipoContato.nome)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Empresa.nome)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Filial.nome)
-                    </th>
-                    <th></th>
-                </tr>
-
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.dtEntrada)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.nome)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.qtdContato)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.dtPrimeiraVisita)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.tempoEntrada)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.bandB)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.bandA)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.bandN)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.bandD)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.etapaLEAD)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.etapaATENDIMENTO)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.etapaAGENDAMENTO)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.etapaVISITA)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.etapaPROPOSTA)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.etapaVENDA)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.observacao)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.dtCadastro)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.midiaOrigem)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.sexo)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.cidade)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.VisitasId)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.SituacaoId)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CanalAtracao.nome)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.JustContato.nome)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CanalComunicacao.nome)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.JustAvanco.nome)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TipoImoveis.nome)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TipoContato.nome)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Empresa.nome)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Filial.nome)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                        </td>
-                    </tr>
-                }
-
-            </table>
+        
     </body>

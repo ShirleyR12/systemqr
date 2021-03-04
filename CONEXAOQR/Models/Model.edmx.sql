@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 02/10/2021 18:57:37
+-- Date Created: 03/04/2021 12:48:35
 -- Generated from EDMX file: V:\001 Shirley\QR\versao1\CONEXAOQR\CONEXAOQR\CONEXAOQR\Models\Model.edmx
 -- --------------------------------------------------
 
@@ -17,20 +17,68 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_AspNetRolesAspNetUserRoles]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AspNetUserRoles] DROP CONSTRAINT [FK_AspNetRolesAspNetUserRoles];
+GO
+IF OBJECT_ID(N'[dbo].[FK_AspNetUserLoginsAspNetUsers]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AspNetUserLogins] DROP CONSTRAINT [FK_AspNetUserLoginsAspNetUsers];
+GO
+IF OBJECT_ID(N'[dbo].[FK_AspNetUsersAspNetUserRoles]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AspNetUserRoles] DROP CONSTRAINT [FK_AspNetUsersAspNetUserRoles];
+GO
+IF OBJECT_ID(N'[dbo].[FK_AtividadesGestaoLeadsAtividades]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GestaoLeadsAtividadesSet] DROP CONSTRAINT [FK_AtividadesGestaoLeadsAtividades];
+GO
 IF OBJECT_ID(N'[dbo].[FK_CanalAtracaoGestaoLeads]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[GestaoLeadsSet] DROP CONSTRAINT [FK_CanalAtracaoGestaoLeads];
-GO
-IF OBJECT_ID(N'[dbo].[FK_JustContatoGestaoLeads]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[GestaoLeadsSet] DROP CONSTRAINT [FK_JustContatoGestaoLeads];
 GO
 IF OBJECT_ID(N'[dbo].[FK_CanalComunicacaoGestaoLeads]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[GestaoLeadsSet] DROP CONSTRAINT [FK_CanalComunicacaoGestaoLeads];
 GO
-IF OBJECT_ID(N'[dbo].[FK_TipoImoveisGestaoLeads]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[GestaoLeadsSet] DROP CONSTRAINT [FK_TipoImoveisGestaoLeads];
+IF OBJECT_ID(N'[dbo].[FK_CorretorEmpresa]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CorretorSet] DROP CONSTRAINT [FK_CorretorEmpresa];
 GO
-IF OBJECT_ID(N'[dbo].[FK_TipoContatoGestaoLeads]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[GestaoLeadsSet] DROP CONSTRAINT [FK_TipoContatoGestaoLeads];
+IF OBJECT_ID(N'[dbo].[FK_CorretorFilial]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CorretorSet] DROP CONSTRAINT [FK_CorretorFilial];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CorretorGestaoLeads]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GestaoLeadsSet] DROP CONSTRAINT [FK_CorretorGestaoLeads];
+GO
+IF OBJECT_ID(N'[dbo].[FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AspNetUserClaims] DROP CONSTRAINT [FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId];
+GO
+IF OBJECT_ID(N'[dbo].[FK_EmpresaFilial]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[FilialSet] DROP CONSTRAINT [FK_EmpresaFilial];
+GO
+IF OBJECT_ID(N'[dbo].[FK_EmpresaGestaoLeads]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GestaoLeadsSet] DROP CONSTRAINT [FK_EmpresaGestaoLeads];
+GO
+IF OBJECT_ID(N'[dbo].[FK_EtapaFunilFaseEtapaFunil]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[FaseEtapaFunilSet] DROP CONSTRAINT [FK_EtapaFunilFaseEtapaFunil];
+GO
+IF OBJECT_ID(N'[dbo].[FK_EtapaFunilLeadEtapa]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GestaoLeadEtapaFunilSet] DROP CONSTRAINT [FK_EtapaFunilLeadEtapa];
+GO
+IF OBJECT_ID(N'[dbo].[FK_EtapaPocentagemEmpresaEmpresa]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[EtapaEmpresaSet] DROP CONSTRAINT [FK_EtapaPocentagemEmpresaEmpresa];
+GO
+IF OBJECT_ID(N'[dbo].[FK_EtapaPocentagemEmpresaEtapaFunil]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[EtapaEmpresaSet] DROP CONSTRAINT [FK_EtapaPocentagemEmpresaEtapaFunil];
+GO
+IF OBJECT_ID(N'[dbo].[FK_FilialGestaoLeads]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GestaoLeadsSet] DROP CONSTRAINT [FK_FilialGestaoLeads];
+GO
+IF OBJECT_ID(N'[dbo].[FK_GestaoLeadsGestaoLeadsAtividades]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GestaoLeadsAtividadesSet] DROP CONSTRAINT [FK_GestaoLeadsGestaoLeadsAtividades];
+GO
+IF OBJECT_ID(N'[dbo].[FK_JustAvancoGestaoLeads]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GestaoLeadsSet] DROP CONSTRAINT [FK_JustAvancoGestaoLeads];
+GO
+IF OBJECT_ID(N'[dbo].[FK_JustContatoGestaoLeads]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GestaoLeadsSet] DROP CONSTRAINT [FK_JustContatoGestaoLeads];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PiramideSucessoEmpresa1]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PiramideSucessoSet] DROP CONSTRAINT [FK_PiramideSucessoEmpresa1];
 GO
 IF OBJECT_ID(N'[dbo].[FK_RedesSociaisEmpresa]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[EmpresaSet] DROP CONSTRAINT [FK_RedesSociaisEmpresa];
@@ -38,116 +86,32 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_RedesSociaisFilial]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[FilialSet] DROP CONSTRAINT [FK_RedesSociaisFilial];
 GO
-IF OBJECT_ID(N'[dbo].[FK_TipoAtividadeAtividades]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AtividadesSet] DROP CONSTRAINT [FK_TipoAtividadeAtividades];
-GO
-IF OBJECT_ID(N'[dbo].[FK_AtividadesGestaoLeadsAtividades]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[GestaoLeadsAtividadesSet] DROP CONSTRAINT [FK_AtividadesGestaoLeadsAtividades];
-GO
 IF OBJECT_ID(N'[dbo].[FK_SituacaoAtividades]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[AtividadesSet] DROP CONSTRAINT [FK_SituacaoAtividades];
 GO
-IF OBJECT_ID(N'[dbo].[FK_EtapaFunilFaseEtapaFunil]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[FaseEtapaFunilSet] DROP CONSTRAINT [FK_EtapaFunilFaseEtapaFunil];
+IF OBJECT_ID(N'[dbo].[FK_TipoAtividadeAtividades]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AtividadesSet] DROP CONSTRAINT [FK_TipoAtividadeAtividades];
 GO
-IF OBJECT_ID(N'[dbo].[FK_EmpresaGestaoLeads]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[GestaoLeadsSet] DROP CONSTRAINT [FK_EmpresaGestaoLeads];
+IF OBJECT_ID(N'[dbo].[FK_TipoContatoGestaoLeads]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GestaoLeadsSet] DROP CONSTRAINT [FK_TipoContatoGestaoLeads];
 GO
-IF OBJECT_ID(N'[dbo].[FK_GestaoLeadsGestaoLeadsAtividades]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[GestaoLeadsAtividadesSet] DROP CONSTRAINT [FK_GestaoLeadsGestaoLeadsAtividades];
-GO
-IF OBJECT_ID(N'[dbo].[FK_EmpresaFilial]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[FilialSet] DROP CONSTRAINT [FK_EmpresaFilial];
-GO
-IF OBJECT_ID(N'[dbo].[FK_CorretorFilial]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CorretorSet] DROP CONSTRAINT [FK_CorretorFilial];
+IF OBJECT_ID(N'[dbo].[FK_TipoImoveisGestaoLeads]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GestaoLeadsSet] DROP CONSTRAINT [FK_TipoImoveisGestaoLeads];
 GO
 IF OBJECT_ID(N'[dbo].[FK_TipoNegocioEmpresa]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[EmpresaSet] DROP CONSTRAINT [FK_TipoNegocioEmpresa];
 GO
-IF OBJECT_ID(N'[dbo].[FK_CorretorEmpresa]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CorretorSet] DROP CONSTRAINT [FK_CorretorEmpresa];
+IF OBJECT_ID(N'[dbo].[FK_UsuarioEmpresa]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[UsuarioSet] DROP CONSTRAINT [FK_UsuarioEmpresa];
 GO
-IF OBJECT_ID(N'[dbo].[FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AspNetUserClaims] DROP CONSTRAINT [FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId];
-GO
-IF OBJECT_ID(N'[dbo].[FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AspNetUserLogins] DROP CONSTRAINT [FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId];
-GO
-IF OBJECT_ID(N'[dbo].[FK_AspNetUserRoles_AspNetRoles]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AspNetUserRoles] DROP CONSTRAINT [FK_AspNetUserRoles_AspNetRoles];
-GO
-IF OBJECT_ID(N'[dbo].[FK_AspNetUserRoles_AspNetUsers]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AspNetUserRoles] DROP CONSTRAINT [FK_AspNetUserRoles_AspNetUsers];
-GO
-IF OBJECT_ID(N'[dbo].[FK_JustAvancoGestaoLeads]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[GestaoLeadsSet] DROP CONSTRAINT [FK_JustAvancoGestaoLeads];
-GO
-IF OBJECT_ID(N'[dbo].[FK_FilialGestaoLeads]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[GestaoLeadsSet] DROP CONSTRAINT [FK_FilialGestaoLeads];
+IF OBJECT_ID(N'[dbo].[FK_UsuarioFilial]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[UsuarioSet] DROP CONSTRAINT [FK_UsuarioFilial];
 GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[Historial]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Historial];
-GO
-IF OBJECT_ID(N'[dbo].[CanalAtracaoSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[CanalAtracaoSet];
-GO
-IF OBJECT_ID(N'[dbo].[CorretorSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[CorretorSet];
-GO
-IF OBJECT_ID(N'[dbo].[EmpresaSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[EmpresaSet];
-GO
-IF OBJECT_ID(N'[dbo].[JustContatoSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[JustContatoSet];
-GO
-IF OBJECT_ID(N'[dbo].[EtapaFunilSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[EtapaFunilSet];
-GO
-IF OBJECT_ID(N'[dbo].[CanalComunicacaoSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[CanalComunicacaoSet];
-GO
-IF OBJECT_ID(N'[dbo].[TipoImoveisSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[TipoImoveisSet];
-GO
-IF OBJECT_ID(N'[dbo].[GestaoLeadsSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[GestaoLeadsSet];
-GO
-IF OBJECT_ID(N'[dbo].[TipoContatoSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[TipoContatoSet];
-GO
-IF OBJECT_ID(N'[dbo].[FilialSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[FilialSet];
-GO
-IF OBJECT_ID(N'[dbo].[TipoNegocioSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[TipoNegocioSet];
-GO
-IF OBJECT_ID(N'[dbo].[RedesSociaisSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[RedesSociaisSet];
-GO
-IF OBJECT_ID(N'[dbo].[AtividadesSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[AtividadesSet];
-GO
-IF OBJECT_ID(N'[dbo].[SituacaoSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[SituacaoSet];
-GO
-IF OBJECT_ID(N'[dbo].[TipoAtividadeSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[TipoAtividadeSet];
-GO
-IF OBJECT_ID(N'[dbo].[GestaoLeadsAtividadesSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[GestaoLeadsAtividadesSet];
-GO
-IF OBJECT_ID(N'[dbo].[FaseEtapaFunilSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[FaseEtapaFunilSet];
-GO
-IF OBJECT_ID(N'[dbo].[C__MigrationHistory]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[C__MigrationHistory];
-GO
 IF OBJECT_ID(N'[dbo].[AspNetRoles]', 'U') IS NOT NULL
     DROP TABLE [dbo].[AspNetRoles];
 GO
@@ -157,14 +121,83 @@ GO
 IF OBJECT_ID(N'[dbo].[AspNetUserLogins]', 'U') IS NOT NULL
     DROP TABLE [dbo].[AspNetUserLogins];
 GO
+IF OBJECT_ID(N'[dbo].[AspNetUserRoles]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[AspNetUserRoles];
+GO
 IF OBJECT_ID(N'[dbo].[AspNetUsers]', 'U') IS NOT NULL
     DROP TABLE [dbo].[AspNetUsers];
+GO
+IF OBJECT_ID(N'[dbo].[AtividadesSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[AtividadesSet];
+GO
+IF OBJECT_ID(N'[dbo].[C__MigrationHistory]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[C__MigrationHistory];
+GO
+IF OBJECT_ID(N'[dbo].[CanalAtracaoSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CanalAtracaoSet];
+GO
+IF OBJECT_ID(N'[dbo].[CanalComunicacaoSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CanalComunicacaoSet];
+GO
+IF OBJECT_ID(N'[dbo].[CorretorSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CorretorSet];
+GO
+IF OBJECT_ID(N'[dbo].[EmpresaSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[EmpresaSet];
+GO
+IF OBJECT_ID(N'[dbo].[EtapaEmpresaSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[EtapaEmpresaSet];
+GO
+IF OBJECT_ID(N'[dbo].[EtapaFunilSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[EtapaFunilSet];
+GO
+IF OBJECT_ID(N'[dbo].[FaseEtapaFunilSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[FaseEtapaFunilSet];
+GO
+IF OBJECT_ID(N'[dbo].[FilialSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[FilialSet];
+GO
+IF OBJECT_ID(N'[dbo].[GestaoLeadEtapaFunilSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[GestaoLeadEtapaFunilSet];
+GO
+IF OBJECT_ID(N'[dbo].[GestaoLeadsAtividadesSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[GestaoLeadsAtividadesSet];
+GO
+IF OBJECT_ID(N'[dbo].[GestaoLeadsSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[GestaoLeadsSet];
+GO
+IF OBJECT_ID(N'[dbo].[Historial]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Historial];
 GO
 IF OBJECT_ID(N'[dbo].[JustAvancoSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[JustAvancoSet];
 GO
-IF OBJECT_ID(N'[dbo].[AspNetUserRoles]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[AspNetUserRoles];
+IF OBJECT_ID(N'[dbo].[JustContatoSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[JustContatoSet];
+GO
+IF OBJECT_ID(N'[dbo].[PiramideSucessoSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PiramideSucessoSet];
+GO
+IF OBJECT_ID(N'[dbo].[RedesSociaisSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[RedesSociaisSet];
+GO
+IF OBJECT_ID(N'[dbo].[SituacaoSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[SituacaoSet];
+GO
+IF OBJECT_ID(N'[dbo].[TipoAtividadeSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TipoAtividadeSet];
+GO
+IF OBJECT_ID(N'[dbo].[TipoContatoSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TipoContatoSet];
+GO
+IF OBJECT_ID(N'[dbo].[TipoImoveisSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TipoImoveisSet];
+GO
+IF OBJECT_ID(N'[dbo].[TipoNegocioSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TipoNegocioSet];
+GO
+IF OBJECT_ID(N'[dbo].[UsuarioSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[UsuarioSet];
 GO
 
 -- --------------------------------------------------
@@ -197,7 +230,8 @@ CREATE TABLE [dbo].[CorretorSet] (
     [dtCadastro] datetime  NOT NULL,
     [dtNascimento] datetime  NULL,
     [FilialId] int  NULL,
-    [EmpresaId] int  NOT NULL
+    [EmpresaId] int  NOT NULL,
+    [tipoPessoa] int  NOT NULL
 );
 GO
 
@@ -277,7 +311,7 @@ CREATE TABLE [dbo].[GestaoLeadsSet] (
     [JustContatoId] int  NULL,
     [CanalAtracaoId] int  NULL,
     [CanalComunicacaoId] int  NULL,
-    [midiaOrigem] nvarchar(max)  NULL,
+    [valorImovel] bigint  NULL,
     [TipoContatoId] int  NULL,
     [sexo] nvarchar(max)  NULL,
     [cidade] nvarchar(max)  NULL,
@@ -286,7 +320,15 @@ CREATE TABLE [dbo].[GestaoLeadsSet] (
     [SituacaoId] int  NOT NULL,
     [EmpresaId] int  NOT NULL,
     [JustAvancoId] int  NULL,
-    [FilialId] int  NULL
+    [FilialId] int  NULL,
+    [ativo] nvarchar(max)  NULL,
+    [CorretorId] int  NULL,
+    [dataHoraDesativou] datetime  NULL,
+    [idCorretorDesativou] int  NULL,
+    [seguimento] nvarchar(max)  NULL,
+    [tempoRespLead] nvarchar(max)  NULL,
+    [JustInativaLead] int  NULL,
+    [importado] bit  NULL
 );
 GO
 
@@ -364,8 +406,7 @@ GO
 CREATE TABLE [dbo].[FaseEtapaFunilSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [nome] nvarchar(max)  NOT NULL,
-    [EtapaFunilId] int  NOT NULL,
-    [EtapaFunilId1] int  NOT NULL
+    [EtapaFunilId] int  NOT NULL
 );
 GO
 
@@ -428,10 +469,96 @@ CREATE TABLE [dbo].[JustAvancoSet] (
 );
 GO
 
+-- Creating table 'GestaoLeadEtapaFunilSet'
+CREATE TABLE [dbo].[GestaoLeadEtapaFunilSet] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [GestaoLeadsId] int  NOT NULL,
+    [EtapaFunilId] int  NOT NULL,
+    [dtEntrada] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'EtapaEmpresaSet'
+CREATE TABLE [dbo].[EtapaEmpresaSet] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [etapa] nvarchar(max)  NOT NULL,
+    [porcentagem] nvarchar(max)  NULL,
+    [EmpresaId] int  NULL,
+    [EtapaFunilId] int  NULL,
+    [atividades] nvarchar(max)  NULL,
+    [notaPassagem] nvarchar(max)  NULL,
+    [objetivo] nvarchar(max)  NULL
+);
+GO
+
 -- Creating table 'AspNetUserRoles'
 CREATE TABLE [dbo].[AspNetUserRoles] (
-    [AspNetRoles_Id] nvarchar(128)  NOT NULL,
-    [AspNetUsers_Id] nvarchar(128)  NOT NULL
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [RoleId] nvarchar(128)  NOT NULL,
+    [UserId] nvarchar(128)  NOT NULL
+);
+GO
+
+-- Creating table 'PiramideSucessoSet'
+CREATE TABLE [dbo].[PiramideSucessoSet] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [meta] nvarchar(max)  NULL,
+    [ir] nvarchar(max)  NULL,
+    [obj1] nvarchar(max)  NULL,
+    [obj2] nvarchar(max)  NULL,
+    [obj3] nvarchar(max)  NULL,
+    [obj4] nvarchar(max)  NULL,
+    [obj5] nvarchar(max)  NULL,
+    [atitude1_obj1] nvarchar(max)  NULL,
+    [atitude2_obj1] nvarchar(max)  NULL,
+    [atitude3_obj1] nvarchar(max)  NULL,
+    [atitude4_obj1] nvarchar(max)  NULL,
+    [atitude5_obj1] nvarchar(max)  NULL,
+    [atitude1_obj2] nvarchar(max)  NULL,
+    [atitude2_obj2] nvarchar(max)  NULL,
+    [atitude3_obj2] nvarchar(max)  NULL,
+    [atitude4_obj2] nvarchar(max)  NULL,
+    [atitude5_obj2] nvarchar(max)  NULL,
+    [atitude1_obj3] nvarchar(max)  NULL,
+    [atitude2_obj3] nvarchar(max)  NULL,
+    [atitude3_obj3] nvarchar(max)  NULL,
+    [atitude4_obj3] nvarchar(max)  NULL,
+    [atitude5_obj3] nvarchar(max)  NULL,
+    [atitude1_obj4] nvarchar(max)  NULL,
+    [atitude2_obj4] nvarchar(max)  NULL,
+    [atitude3_obj4] nvarchar(max)  NULL,
+    [atitude4_obj4] nvarchar(max)  NULL,
+    [atitude5_obj4] nvarchar(max)  NULL,
+    [atitude1_obj5] nvarchar(max)  NULL,
+    [atitude2_obj5] nvarchar(max)  NULL,
+    [atitude3_obj5] nvarchar(max)  NULL,
+    [atitude4_obj5] nvarchar(max)  NULL,
+    [atitude5_obj5] nvarchar(max)  NULL,
+    [dtCriacao] datetime  NULL,
+    [dtUltimoUpdate] datetime  NULL,
+    [ativo] bit  NULL,
+    [metaBatida] bit  NULL,
+    [observacao] nvarchar(max)  NULL,
+    [codValidado] bit  NULL,
+    [codUsuarioValidou] int  NULL,
+    [codUsuarioCriou] int  NULL,
+    [EmpresaId1] int  NULL,
+    [EmpresaId] int  NULL
+);
+GO
+
+-- Creating table 'UsuarioSet'
+CREATE TABLE [dbo].[UsuarioSet] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [ativo] bit  NOT NULL,
+    [tipoPessoa] nvarchar(max)  NOT NULL,
+    [observacao] nvarchar(max)  NULL,
+    [EmpresaId] int  NOT NULL,
+    [FilialId] int  NOT NULL,
+    [imagem] nvarchar(max)  NULL,
+    [nome] nvarchar(max)  NOT NULL,
+    [telefone] nvarchar(max)  NULL,
+    [dtCriacao] datetime  NOT NULL
 );
 GO
 
@@ -583,10 +710,34 @@ ADD CONSTRAINT [PK_JustAvancoSet]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [AspNetRoles_Id], [AspNetUsers_Id] in table 'AspNetUserRoles'
+-- Creating primary key on [Id] in table 'GestaoLeadEtapaFunilSet'
+ALTER TABLE [dbo].[GestaoLeadEtapaFunilSet]
+ADD CONSTRAINT [PK_GestaoLeadEtapaFunilSet]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'EtapaEmpresaSet'
+ALTER TABLE [dbo].[EtapaEmpresaSet]
+ADD CONSTRAINT [PK_EtapaEmpresaSet]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'AspNetUserRoles'
 ALTER TABLE [dbo].[AspNetUserRoles]
 ADD CONSTRAINT [PK_AspNetUserRoles]
-    PRIMARY KEY CLUSTERED ([AspNetRoles_Id], [AspNetUsers_Id] ASC);
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'PiramideSucessoSet'
+ALTER TABLE [dbo].[PiramideSucessoSet]
+ADD CONSTRAINT [PK_PiramideSucessoSet]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'UsuarioSet'
+ALTER TABLE [dbo].[UsuarioSet]
+ADD CONSTRAINT [PK_UsuarioSet]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
 -- --------------------------------------------------
@@ -743,21 +894,6 @@ ON [dbo].[AtividadesSet]
     ([SituacaoId]);
 GO
 
--- Creating foreign key on [EtapaFunilId1] in table 'FaseEtapaFunilSet'
-ALTER TABLE [dbo].[FaseEtapaFunilSet]
-ADD CONSTRAINT [FK_EtapaFunilFaseEtapaFunil]
-    FOREIGN KEY ([EtapaFunilId1])
-    REFERENCES [dbo].[EtapaFunilSet]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_EtapaFunilFaseEtapaFunil'
-CREATE INDEX [IX_FK_EtapaFunilFaseEtapaFunil]
-ON [dbo].[FaseEtapaFunilSet]
-    ([EtapaFunilId1]);
-GO
-
 -- Creating foreign key on [EmpresaId] in table 'GestaoLeadsSet'
 ALTER TABLE [dbo].[GestaoLeadsSet]
 ADD CONSTRAINT [FK_EmpresaGestaoLeads]
@@ -863,45 +999,6 @@ ON [dbo].[AspNetUserClaims]
     ([UserId]);
 GO
 
--- Creating foreign key on [UserId] in table 'AspNetUserLogins'
-ALTER TABLE [dbo].[AspNetUserLogins]
-ADD CONSTRAINT [FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId]
-    FOREIGN KEY ([UserId])
-    REFERENCES [dbo].[AspNetUsers]
-        ([Id])
-    ON DELETE CASCADE ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId'
-CREATE INDEX [IX_FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId]
-ON [dbo].[AspNetUserLogins]
-    ([UserId]);
-GO
-
--- Creating foreign key on [AspNetRoles_Id] in table 'AspNetUserRoles'
-ALTER TABLE [dbo].[AspNetUserRoles]
-ADD CONSTRAINT [FK_AspNetUserRoles_AspNetRoles]
-    FOREIGN KEY ([AspNetRoles_Id])
-    REFERENCES [dbo].[AspNetRoles]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [AspNetUsers_Id] in table 'AspNetUserRoles'
-ALTER TABLE [dbo].[AspNetUserRoles]
-ADD CONSTRAINT [FK_AspNetUserRoles_AspNetUsers]
-    FOREIGN KEY ([AspNetUsers_Id])
-    REFERENCES [dbo].[AspNetUsers]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_AspNetUserRoles_AspNetUsers'
-CREATE INDEX [IX_FK_AspNetUserRoles_AspNetUsers]
-ON [dbo].[AspNetUserRoles]
-    ([AspNetUsers_Id]);
-GO
-
 -- Creating foreign key on [JustAvancoId] in table 'GestaoLeadsSet'
 ALTER TABLE [dbo].[GestaoLeadsSet]
 ADD CONSTRAINT [FK_JustAvancoGestaoLeads]
@@ -930,6 +1027,201 @@ GO
 CREATE INDEX [IX_FK_FilialGestaoLeads]
 ON [dbo].[GestaoLeadsSet]
     ([FilialId]);
+GO
+
+-- Creating foreign key on [CorretorId] in table 'GestaoLeadsSet'
+ALTER TABLE [dbo].[GestaoLeadsSet]
+ADD CONSTRAINT [FK_CorretorGestaoLeads]
+    FOREIGN KEY ([CorretorId])
+    REFERENCES [dbo].[CorretorSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CorretorGestaoLeads'
+CREATE INDEX [IX_FK_CorretorGestaoLeads]
+ON [dbo].[GestaoLeadsSet]
+    ([CorretorId]);
+GO
+
+-- Creating foreign key on [EtapaFunilId] in table 'FaseEtapaFunilSet'
+ALTER TABLE [dbo].[FaseEtapaFunilSet]
+ADD CONSTRAINT [FK_EtapaFunilFaseEtapaFunil]
+    FOREIGN KEY ([EtapaFunilId])
+    REFERENCES [dbo].[EtapaFunilSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_EtapaFunilFaseEtapaFunil'
+CREATE INDEX [IX_FK_EtapaFunilFaseEtapaFunil]
+ON [dbo].[FaseEtapaFunilSet]
+    ([EtapaFunilId]);
+GO
+
+-- Creating foreign key on [EtapaFunilId] in table 'GestaoLeadEtapaFunilSet'
+ALTER TABLE [dbo].[GestaoLeadEtapaFunilSet]
+ADD CONSTRAINT [FK_EtapaFunilLeadEtapa]
+    FOREIGN KEY ([EtapaFunilId])
+    REFERENCES [dbo].[EtapaFunilSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_EtapaFunilLeadEtapa'
+CREATE INDEX [IX_FK_EtapaFunilLeadEtapa]
+ON [dbo].[GestaoLeadEtapaFunilSet]
+    ([EtapaFunilId]);
+GO
+
+-- Creating foreign key on [EmpresaId] in table 'EtapaEmpresaSet'
+ALTER TABLE [dbo].[EtapaEmpresaSet]
+ADD CONSTRAINT [FK_EtapaPocentagemEmpresaEmpresa]
+    FOREIGN KEY ([EmpresaId])
+    REFERENCES [dbo].[EmpresaSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_EtapaPocentagemEmpresaEmpresa'
+CREATE INDEX [IX_FK_EtapaPocentagemEmpresaEmpresa]
+ON [dbo].[EtapaEmpresaSet]
+    ([EmpresaId]);
+GO
+
+-- Creating foreign key on [EtapaFunilId] in table 'EtapaEmpresaSet'
+ALTER TABLE [dbo].[EtapaEmpresaSet]
+ADD CONSTRAINT [FK_EtapaPocentagemEmpresaEtapaFunil]
+    FOREIGN KEY ([EtapaFunilId])
+    REFERENCES [dbo].[EtapaFunilSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_EtapaPocentagemEmpresaEtapaFunil'
+CREATE INDEX [IX_FK_EtapaPocentagemEmpresaEtapaFunil]
+ON [dbo].[EtapaEmpresaSet]
+    ([EtapaFunilId]);
+GO
+
+-- Creating foreign key on [RoleId] in table 'AspNetUserRoles'
+ALTER TABLE [dbo].[AspNetUserRoles]
+ADD CONSTRAINT [FK_AspNetRolesAspNetUserRoles]
+    FOREIGN KEY ([RoleId])
+    REFERENCES [dbo].[AspNetRoles]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_AspNetRolesAspNetUserRoles'
+CREATE INDEX [IX_FK_AspNetRolesAspNetUserRoles]
+ON [dbo].[AspNetUserRoles]
+    ([RoleId]);
+GO
+
+-- Creating foreign key on [UserId] in table 'AspNetUserRoles'
+ALTER TABLE [dbo].[AspNetUserRoles]
+ADD CONSTRAINT [FK_AspNetUsersAspNetUserRoles]
+    FOREIGN KEY ([UserId])
+    REFERENCES [dbo].[AspNetUsers]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_AspNetUsersAspNetUserRoles'
+CREATE INDEX [IX_FK_AspNetUsersAspNetUserRoles]
+ON [dbo].[AspNetUserRoles]
+    ([UserId]);
+GO
+
+-- Creating foreign key on [codUsuarioCriou] in table 'PiramideSucessoSet'
+ALTER TABLE [dbo].[PiramideSucessoSet]
+ADD CONSTRAINT [FK_PiramideSucessoEmpresa]
+    FOREIGN KEY ([codUsuarioCriou])
+    REFERENCES [dbo].[EmpresaSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PiramideSucessoEmpresa'
+CREATE INDEX [IX_FK_PiramideSucessoEmpresa]
+ON [dbo].[PiramideSucessoSet]
+    ([codUsuarioCriou]);
+GO
+
+-- Creating foreign key on [UserId] in table 'AspNetUserLogins'
+ALTER TABLE [dbo].[AspNetUserLogins]
+ADD CONSTRAINT [FK_AspNetUserLoginsAspNetUsers]
+    FOREIGN KEY ([UserId])
+    REFERENCES [dbo].[AspNetUsers]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_AspNetUserLoginsAspNetUsers'
+CREATE INDEX [IX_FK_AspNetUserLoginsAspNetUsers]
+ON [dbo].[AspNetUserLogins]
+    ([UserId]);
+GO
+
+-- Creating foreign key on [EmpresaId1] in table 'PiramideSucessoSet'
+ALTER TABLE [dbo].[PiramideSucessoSet]
+ADD CONSTRAINT [FK_PiramideSucessoEmpresa1]
+    FOREIGN KEY ([EmpresaId1])
+    REFERENCES [dbo].[EmpresaSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PiramideSucessoEmpresa1'
+CREATE INDEX [IX_FK_PiramideSucessoEmpresa1]
+ON [dbo].[PiramideSucessoSet]
+    ([EmpresaId1]);
+GO
+
+-- Creating foreign key on [EmpresaId] in table 'UsuarioSet'
+ALTER TABLE [dbo].[UsuarioSet]
+ADD CONSTRAINT [FK_UsuarioEmpresa]
+    FOREIGN KEY ([EmpresaId])
+    REFERENCES [dbo].[EmpresaSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_UsuarioEmpresa'
+CREATE INDEX [IX_FK_UsuarioEmpresa]
+ON [dbo].[UsuarioSet]
+    ([EmpresaId]);
+GO
+
+-- Creating foreign key on [FilialId] in table 'UsuarioSet'
+ALTER TABLE [dbo].[UsuarioSet]
+ADD CONSTRAINT [FK_UsuarioFilial]
+    FOREIGN KEY ([FilialId])
+    REFERENCES [dbo].[FilialSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_UsuarioFilial'
+CREATE INDEX [IX_FK_UsuarioFilial]
+ON [dbo].[UsuarioSet]
+    ([FilialId]);
+GO
+
+-- Creating foreign key on [EmpresaId] in table 'PiramideSucessoSet'
+ALTER TABLE [dbo].[PiramideSucessoSet]
+ADD CONSTRAINT [FK_PiramideSucessoEmpresa1]
+    FOREIGN KEY ([EmpresaId])
+    REFERENCES [dbo].[EmpresaSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PiramideSucessoEmpresa1'
+CREATE INDEX [IX_FK_PiramideSucessoEmpresa1]
+ON [dbo].[PiramideSucessoSet]
+    ([EmpresaId]);
 GO
 
 -- --------------------------------------------------

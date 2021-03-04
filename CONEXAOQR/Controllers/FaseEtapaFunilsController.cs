@@ -39,7 +39,7 @@ namespace CONEXAOQR.Controllers
         // GET: FaseEtapaFunils/Create
         public ActionResult Create()
         {
-            ViewBag.EtapaFunilId1 = new SelectList(db.EtapaFunilSet, "Id", "nome");
+            ViewBag.EtapaFunilId = new SelectList(db.EtapaFunilSet, "Id", "nome");
             return View();
         }
 
@@ -48,7 +48,7 @@ namespace CONEXAOQR.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,nome,EtapaFunilId,EtapaFunilId1")] FaseEtapaFunil faseEtapaFunil)
+        public ActionResult Create([Bind(Include = "Id,nome,EtapaFunilId,EtapaFunilId")] FaseEtapaFunil faseEtapaFunil)
         {
             if (ModelState.IsValid)
             {
@@ -57,7 +57,7 @@ namespace CONEXAOQR.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.EtapaFunilId1 = new SelectList(db.EtapaFunilSet, "Id", "nome", faseEtapaFunil.EtapaFunilId1);
+            ViewBag.EtapaFunilId = new SelectList(db.EtapaFunilSet, "Id", "nome", faseEtapaFunil.EtapaFunilId);
             return View(faseEtapaFunil);
         }
 
@@ -73,7 +73,7 @@ namespace CONEXAOQR.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.EtapaFunilId1 = new SelectList(db.EtapaFunilSet, "Id", "nome", faseEtapaFunil.EtapaFunilId1);
+            ViewBag.EtapaFunilId = new SelectList(db.EtapaFunilSet, "Id", "nome", faseEtapaFunil.EtapaFunilId);
             return View(faseEtapaFunil);
         }
 
@@ -82,7 +82,7 @@ namespace CONEXAOQR.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,nome,EtapaFunilId,EtapaFunilId1")] FaseEtapaFunil faseEtapaFunil)
+        public ActionResult Edit([Bind(Include = "Id,nome,EtapaFunilId,EtapaFunilId")] FaseEtapaFunil faseEtapaFunil)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +90,7 @@ namespace CONEXAOQR.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.EtapaFunilId1 = new SelectList(db.EtapaFunilSet, "Id", "nome", faseEtapaFunil.EtapaFunilId1);
+            ViewBag.EtapaFunilId = new SelectList(db.EtapaFunilSet, "Id", "nome", faseEtapaFunil.EtapaFunilId);
             return View(faseEtapaFunil);
         }
 

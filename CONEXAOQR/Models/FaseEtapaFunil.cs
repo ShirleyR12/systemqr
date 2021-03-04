@@ -17,7 +17,6 @@ namespace CONEXAOQR.Models
         public int Id { get; set; }
         public string nome { get; set; }
         public int EtapaFunilId { get; set; }
-        public int EtapaFunilId1 { get; set; }
     
         public virtual EtapaFunil EtapaFunil { get; set; }
     }

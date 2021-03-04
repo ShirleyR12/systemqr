@@ -1,0 +1,43 @@
+﻿@model CONEXAOQR.Models.GestaoLeadEtapaFunil
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>GestaoLeadEtapaFunil</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.GestaoLeadsId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GestaoLeadsId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dtEntrada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dtEntrada)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EtapaFunil.nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EtapaFunil.nome)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

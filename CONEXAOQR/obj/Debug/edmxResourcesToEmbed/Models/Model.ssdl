@@ -25,7 +25,11 @@
     <EntitySet Name="AspNetUserLogins" EntityType="Model.Store.AspNetUserLogins" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="AspNetUsers" EntityType="Model.Store.AspNetUsers" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="JustAvancoSet" EntityType="Model.Store.JustAvancoSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GestaoLeadEtapaFunilSet" EntityType="Model.Store.GestaoLeadEtapaFunilSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EtapaEmpresaSet" EntityType="Model.Store.EtapaEmpresaSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="AspNetUserRoles" EntityType="Model.Store.AspNetUserRoles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PiramideSucessoSet" EntityType="Model.Store.PiramideSucessoSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UsuarioSet" EntityType="Model.Store.UsuarioSet" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="CanalAtracaoGestaoLeads" Association="Model.Store.CanalAtracaoGestaoLeads">
       <End Role="CanalAtracao" EntitySet="CanalAtracaoSet" />
       <End Role="GestaoLeads" EntitySet="GestaoLeadsSet" />
@@ -66,10 +70,6 @@
       <End Role="Situacao" EntitySet="SituacaoSet" />
       <End Role="Atividades" EntitySet="AtividadesSet" />
     </AssociationSet>
-    <AssociationSet Name="EtapaFunilFaseEtapaFunil" Association="Model.Store.EtapaFunilFaseEtapaFunil">
-      <End Role="EtapaFunil" EntitySet="EtapaFunilSet" />
-      <End Role="FaseEtapaFunil" EntitySet="FaseEtapaFunilSet" />
-    </AssociationSet>
     <AssociationSet Name="EmpresaGestaoLeads" Association="Model.Store.EmpresaGestaoLeads">
       <End Role="Empresa" EntitySet="EmpresaSet" />
       <End Role="GestaoLeads" EntitySet="GestaoLeadsSet" />
@@ -98,18 +98,6 @@
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
     </AssociationSet>
-    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Model.Store.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-    </AssociationSet>
-    <AssociationSet Name="FK_AspNetUserRoles_AspNetRoles" Association="Model.Store.FK_AspNetUserRoles_AspNetRoles">
-      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
-    </AssociationSet>
-    <AssociationSet Name="FK_AspNetUserRoles_AspNetUsers" Association="Model.Store.FK_AspNetUserRoles_AspNetUsers">
-      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
-    </AssociationSet>
     <AssociationSet Name="JustAvancoGestaoLeads" Association="Model.Store.JustAvancoGestaoLeads">
       <End Role="JustAvanco" EntitySet="JustAvancoSet" />
       <End Role="GestaoLeads" EntitySet="GestaoLeadsSet" />
@@ -117,6 +105,58 @@
     <AssociationSet Name="FilialGestaoLeads" Association="Model.Store.FilialGestaoLeads">
       <End Role="Filial" EntitySet="FilialSet" />
       <End Role="GestaoLeads" EntitySet="GestaoLeadsSet" />
+    </AssociationSet>
+    <AssociationSet Name="CorretorGestaoLeads" Association="Model.Store.CorretorGestaoLeads">
+      <End Role="Corretor" EntitySet="CorretorSet" />
+      <End Role="GestaoLeads" EntitySet="GestaoLeadsSet" />
+    </AssociationSet>
+    <AssociationSet Name="EtapaFunilFaseEtapaFunil" Association="Model.Store.EtapaFunilFaseEtapaFunil">
+      <End Role="EtapaFunil" EntitySet="EtapaFunilSet" />
+      <End Role="FaseEtapaFunil" EntitySet="FaseEtapaFunilSet" />
+    </AssociationSet>
+    <AssociationSet Name="EtapaFunilLeadEtapa" Association="Model.Store.EtapaFunilLeadEtapa">
+      <End Role="EtapaFunil" EntitySet="EtapaFunilSet" />
+      <End Role="LeadEtapa" EntitySet="GestaoLeadEtapaFunilSet" />
+    </AssociationSet>
+    <AssociationSet Name="EtapaPocentagemEmpresaEmpresa" Association="Model.Store.EtapaPocentagemEmpresaEmpresa">
+      <End Role="EtapaPocentagemEmpresa" EntitySet="EtapaEmpresaSet" />
+      <End Role="Empresa" EntitySet="EmpresaSet" />
+    </AssociationSet>
+    <AssociationSet Name="EtapaPocentagemEmpresaEtapaFunil" Association="Model.Store.EtapaPocentagemEmpresaEtapaFunil">
+      <End Role="EtapaPocentagemEmpresa" EntitySet="EtapaEmpresaSet" />
+      <End Role="EtapaFunil" EntitySet="EtapaFunilSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetRolesAspNetUserRoles" Association="Model.Store.FK_AspNetRolesAspNetUserRoles">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetUsersAspNetUserRoles" Association="Model.Store.FK_AspNetUsersAspNetUserRoles">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="PiramideSucessoEmpresa" Association="Model.Store.PiramideSucessoEmpresa">
+      <End Role="PiramideSucesso" EntitySet="PiramideSucessoSet" />
+      <End Role="Empresa" EntitySet="EmpresaSet" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserLoginsAspNetUsers" Association="Model.Store.AspNetUserLoginsAspNetUsers">
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <AssociationSet Name="PiramideSucessoEmpresa1" Association="Model.Store.PiramideSucessoEmpresa1">
+      <End Role="PiramideSucesso" EntitySet="PiramideSucessoSet" />
+      <End Role="Empresa" EntitySet="EmpresaSet" />
+    </AssociationSet>
+    <AssociationSet Name="UsuarioEmpresa" Association="Model.Store.UsuarioEmpresa">
+      <End Role="Usuario" EntitySet="UsuarioSet" />
+      <End Role="Empresa" EntitySet="EmpresaSet" />
+    </AssociationSet>
+    <AssociationSet Name="UsuarioFilial" Association="Model.Store.UsuarioFilial">
+      <End Role="Usuario" EntitySet="UsuarioSet" />
+      <End Role="Filial" EntitySet="FilialSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PiramideSucessoEmpresa1" Association="Model.Store.FK_PiramideSucessoEmpresa1">
+      <End Role="Empresa" EntitySet="EmpresaSet" />
+      <End Role="PiramideSucesso" EntitySet="PiramideSucessoSet" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Historial">
@@ -148,6 +188,7 @@
     <Property Name="dtNascimento" Type="datetime" Nullable="true" />
     <Property Name="FilialId" Type="int" Nullable="true" />
     <Property Name="EmpresaId" Type="int" Nullable="false" />
+    <Property Name="tipoPessoa" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="EmpresaSet">
     <Key>
@@ -227,7 +268,7 @@
     <Property Name="JustContatoId" Type="int" Nullable="true" />
     <Property Name="CanalAtracaoId" Type="int" Nullable="true" />
     <Property Name="CanalComunicacaoId" Type="int" Nullable="true" />
-    <Property Name="midiaOrigem" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="valorImovel" Type="bigint" Nullable="true" />
     <Property Name="TipoContatoId" Type="int" Nullable="true" />
     <Property Name="sexo" Type="nvarchar(max)" Nullable="true" />
     <Property Name="cidade" Type="nvarchar(max)" Nullable="true" />
@@ -237,6 +278,14 @@
     <Property Name="EmpresaId" Type="int" Nullable="false" />
     <Property Name="JustAvancoId" Type="int" Nullable="true" />
     <Property Name="FilialId" Type="int" Nullable="true" />
+    <Property Name="ativo" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CorretorId" Type="int" Nullable="true" />
+    <Property Name="dataHoraDesativou" Type="datetime" Nullable="true" />
+    <Property Name="idCorretorDesativou" Type="int" Nullable="true" />
+    <Property Name="seguimento" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="tempoRespLead" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="JustInativaLead" Type="int" Nullable="true" />
+    <Property Name="importado" Type="bit" Nullable="true" />
   </EntityType>
   <EntityType Name="TipoContatoSet">
     <Key>
@@ -315,7 +364,6 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="nome" Type="nvarchar(max)" Nullable="false" />
     <Property Name="EtapaFunilId" Type="int" Nullable="false" />
-    <Property Name="EtapaFunilId1" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="C__MigrationHistory">
     <Key>
@@ -379,13 +427,98 @@
     <Property Name="descricao" Type="nvarchar(max)" Nullable="true" />
     <Property Name="ativo" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="GestaoLeadEtapaFunilSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GestaoLeadsId" Type="int" Nullable="false" />
+    <Property Name="EtapaFunilId" Type="int" Nullable="false" />
+    <Property Name="dtEntrada" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EtapaEmpresaSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="etapa" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="porcentagem" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="EmpresaId" Type="int" Nullable="true" />
+    <Property Name="EtapaFunilId" Type="int" Nullable="true" />
+    <Property Name="atividades" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="notaPassagem" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="objetivo" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
   <EntityType Name="AspNetUserRoles">
     <Key>
-      <PropertyRef Name="AspNetRoles_Id" />
-      <PropertyRef Name="AspNetUsers_Id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="AspNetRoles_Id" Type="nvarchar" Nullable="false" MaxLength="128" />
-    <Property Name="AspNetUsers_Id" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleId" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="UserId" Type="nvarchar" Nullable="false" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="PiramideSucessoSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="meta" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ir" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="obj1" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="obj2" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="obj3" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="obj4" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="obj5" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="atitude1_obj1" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="atitude2_obj1" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="atitude3_obj1" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="atitude4_obj1" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="atitude5_obj1" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="atitude1_obj2" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="atitude2_obj2" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="atitude3_obj2" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="atitude4_obj2" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="atitude5_obj2" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="atitude1_obj3" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="atitude2_obj3" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="atitude3_obj3" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="atitude4_obj3" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="atitude5_obj3" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="atitude1_obj4" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="atitude2_obj4" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="atitude3_obj4" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="atitude4_obj4" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="atitude5_obj4" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="atitude1_obj5" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="atitude2_obj5" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="atitude3_obj5" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="atitude4_obj5" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="atitude5_obj5" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="dtCriacao" Type="datetime" Nullable="true" />
+    <Property Name="dtUltimoUpdate" Type="datetime" Nullable="true" />
+    <Property Name="ativo" Type="bit" Nullable="true" />
+    <Property Name="metaBatida" Type="bit" Nullable="true" />
+    <Property Name="observacao" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="codValidado" Type="bit" Nullable="true" />
+    <Property Name="codUsuarioValidou" Type="int" Nullable="true" />
+    <Property Name="codUsuarioCriou" Type="int" Nullable="true" />
+    <Property Name="EmpresaId1" Type="int" Nullable="true" />
+    <Property Name="EmpresaId" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="UsuarioSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ativo" Type="bit" Nullable="false" />
+    <Property Name="tipoPessoa" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="observacao" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="EmpresaId" Type="int" Nullable="false" />
+    <Property Name="FilialId" Type="int" Nullable="false" />
+    <Property Name="imagem" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="nome" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="telefone" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="dtCriacao" Type="datetime" Nullable="false" />
   </EntityType>
   <Association Name="CanalAtracaoGestaoLeads">
     <End Role="CanalAtracao" Type="Model.Store.CanalAtracaoSet" Multiplicity="0..1" />
@@ -507,18 +640,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="EtapaFunilFaseEtapaFunil">
-    <End Role="EtapaFunil" Type="Model.Store.EtapaFunilSet" Multiplicity="1" />
-    <End Role="FaseEtapaFunil" Type="Model.Store.FaseEtapaFunilSet" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="EtapaFunil">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="FaseEtapaFunil">
-        <PropertyRef Name="EtapaFunilId1" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="EmpresaGestaoLeads">
     <End Role="Empresa" Type="Model.Store.EmpresaSet" Multiplicity="1" />
     <End Role="GestaoLeads" Type="Model.Store.GestaoLeadsSet" Multiplicity="*" />
@@ -605,20 +726,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-    <End Role="AspNetUsers" Type="Model.Store.AspNetUsers" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="AspNetUserLogins" Type="Model.Store.AspNetUserLogins" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="AspNetUsers">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="AspNetUserLogins">
-        <PropertyRef Name="UserId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="JustAvancoGestaoLeads">
     <End Role="JustAvanco" Type="Model.Store.JustAvancoSet" Multiplicity="0..1" />
     <End Role="GestaoLeads" Type="Model.Store.GestaoLeadsSet" Multiplicity="*" />
@@ -643,7 +750,67 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_AspNetUserRoles_AspNetRoles">
+  <Association Name="CorretorGestaoLeads">
+    <End Role="Corretor" Type="Model.Store.CorretorSet" Multiplicity="0..1" />
+    <End Role="GestaoLeads" Type="Model.Store.GestaoLeadsSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Corretor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GestaoLeads">
+        <PropertyRef Name="CorretorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EtapaFunilFaseEtapaFunil">
+    <End Role="EtapaFunil" Type="Model.Store.EtapaFunilSet" Multiplicity="1" />
+    <End Role="FaseEtapaFunil" Type="Model.Store.FaseEtapaFunilSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EtapaFunil">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FaseEtapaFunil">
+        <PropertyRef Name="EtapaFunilId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EtapaFunilLeadEtapa">
+    <End Role="EtapaFunil" Type="Model.Store.EtapaFunilSet" Multiplicity="1" />
+    <End Role="LeadEtapa" Type="Model.Store.GestaoLeadEtapaFunilSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EtapaFunil">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LeadEtapa">
+        <PropertyRef Name="EtapaFunilId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EtapaPocentagemEmpresaEmpresa">
+    <End Role="EtapaPocentagemEmpresa" Type="Model.Store.EtapaEmpresaSet" Multiplicity="*" />
+    <End Role="Empresa" Type="Model.Store.EmpresaSet" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Empresa">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EtapaPocentagemEmpresa">
+        <PropertyRef Name="EmpresaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EtapaPocentagemEmpresaEtapaFunil">
+    <End Role="EtapaPocentagemEmpresa" Type="Model.Store.EtapaEmpresaSet" Multiplicity="*" />
+    <End Role="EtapaFunil" Type="Model.Store.EtapaFunilSet" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="EtapaFunil">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EtapaPocentagemEmpresa">
+        <PropertyRef Name="EtapaFunilId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AspNetRolesAspNetUserRoles">
     <End Role="AspNetRoles" Type="Model.Store.AspNetRoles" Multiplicity="1" />
     <End Role="AspNetUserRoles" Type="Model.Store.AspNetUserRoles" Multiplicity="*" />
     <ReferentialConstraint>
@@ -651,19 +818,91 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="AspNetUserRoles">
-        <PropertyRef Name="AspNetRoles_Id" />
+        <PropertyRef Name="RoleId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_AspNetUserRoles_AspNetUsers">
-    <End Role="AspNetUserRoles" Type="Model.Store.AspNetUserRoles" Multiplicity="*" />
+  <Association Name="FK_AspNetUsersAspNetUserRoles">
     <End Role="AspNetUsers" Type="Model.Store.AspNetUsers" Multiplicity="1" />
+    <End Role="AspNetUserRoles" Type="Model.Store.AspNetUserRoles" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="AspNetUsers">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="AspNetUserRoles">
-        <PropertyRef Name="AspNetUsers_Id" />
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PiramideSucessoEmpresa">
+    <End Role="PiramideSucesso" Type="Model.Store.PiramideSucessoSet" Multiplicity="*" />
+    <End Role="Empresa" Type="Model.Store.EmpresaSet" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Empresa">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PiramideSucesso">
+        <PropertyRef Name="codUsuarioCriou" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetUserLoginsAspNetUsers">
+    <End Role="AspNetUserLogins" Type="Model.Store.AspNetUserLogins" Multiplicity="*" />
+    <End Role="AspNetUsers" Type="Model.Store.AspNetUsers" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PiramideSucessoEmpresa1">
+    <End Role="PiramideSucesso" Type="Model.Store.PiramideSucessoSet" Multiplicity="*" />
+    <End Role="Empresa" Type="Model.Store.EmpresaSet" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Empresa">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PiramideSucesso">
+        <PropertyRef Name="EmpresaId1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UsuarioEmpresa">
+    <End Role="Usuario" Type="Model.Store.UsuarioSet" Multiplicity="*" />
+    <End Role="Empresa" Type="Model.Store.EmpresaSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Empresa">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="EmpresaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UsuarioFilial">
+    <End Role="Usuario" Type="Model.Store.UsuarioSet" Multiplicity="*" />
+    <End Role="Filial" Type="Model.Store.FilialSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Filial">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="FilialId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PiramideSucessoEmpresa1">
+    <End Role="Empresa" Type="Model.Store.EmpresaSet" Multiplicity="0..1" />
+    <End Role="PiramideSucesso" Type="Model.Store.PiramideSucessoSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empresa">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PiramideSucesso">
+        <PropertyRef Name="EmpresaId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

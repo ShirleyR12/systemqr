@@ -31,6 +31,7 @@
           <ScalarProperty Name="dtNascimento" ColumnName="dtNascimento" />
           <ScalarProperty Name="FilialId" ColumnName="FilialId" />
           <ScalarProperty Name="EmpresaId" ColumnName="EmpresaId" />
+          <ScalarProperty Name="tipoPessoa" ColumnName="tipoPessoa" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -116,7 +117,7 @@
           <ScalarProperty Name="JustContatoId" ColumnName="JustContatoId" />
           <ScalarProperty Name="CanalAtracaoId" ColumnName="CanalAtracaoId" />
           <ScalarProperty Name="CanalComunicacaoId" ColumnName="CanalComunicacaoId" />
-          <ScalarProperty Name="midiaOrigem" ColumnName="midiaOrigem" />
+          <ScalarProperty Name="valorImovel" ColumnName="valorImovel" />
           <ScalarProperty Name="TipoContatoId" ColumnName="TipoContatoId" />
           <ScalarProperty Name="sexo" ColumnName="sexo" />
           <ScalarProperty Name="cidade" ColumnName="cidade" />
@@ -126,6 +127,14 @@
           <ScalarProperty Name="EmpresaId" ColumnName="EmpresaId" />
           <ScalarProperty Name="JustAvancoId" ColumnName="JustAvancoId" />
           <ScalarProperty Name="FilialId" ColumnName="FilialId" />
+          <ScalarProperty Name="ativo" ColumnName="ativo" />
+          <ScalarProperty Name="CorretorId" ColumnName="CorretorId" />
+          <ScalarProperty Name="dataHoraDesativou" ColumnName="dataHoraDesativou" />
+          <ScalarProperty Name="idCorretorDesativou" ColumnName="idCorretorDesativou" />
+          <ScalarProperty Name="seguimento" ColumnName="seguimento" />
+          <ScalarProperty Name="tempoRespLead" ColumnName="tempoRespLead" />
+          <ScalarProperty Name="JustInativaLead" ColumnName="JustInativaLead" />
+          <ScalarProperty Name="importado" ColumnName="importado" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -213,7 +222,6 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="nome" ColumnName="nome" />
           <ScalarProperty Name="EtapaFunilId" ColumnName="EtapaFunilId" />
-          <ScalarProperty Name="EtapaFunilId1" ColumnName="EtapaFunilId1" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -282,13 +290,103 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="AspNetUserRoles" TypeName="Model.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
-      <EndProperty Name="AspNetRoles">
-        <ScalarProperty Name="Id" ColumnName="AspNetRoles_Id" />
-      </EndProperty>
-      <EndProperty Name="AspNetUsers">
-        <ScalarProperty Name="Id" ColumnName="AspNetUsers_Id" />
-      </EndProperty>
-    </AssociationSetMapping>
+    <EntitySetMapping Name="GestaoLeadEtapaFunilSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.GestaoLeadEtapaFunil)">
+        <MappingFragment StoreEntitySet="GestaoLeadEtapaFunilSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GestaoLeadsId" ColumnName="GestaoLeadsId" />
+          <ScalarProperty Name="EtapaFunilId" ColumnName="EtapaFunilId" />
+          <ScalarProperty Name="dtEntrada" ColumnName="dtEntrada" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EtapaEmpresaSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.EtapaEmpresa)">
+        <MappingFragment StoreEntitySet="EtapaEmpresaSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="etapa" ColumnName="etapa" />
+          <ScalarProperty Name="porcentagem" ColumnName="porcentagem" />
+          <ScalarProperty Name="EmpresaId" ColumnName="EmpresaId" />
+          <ScalarProperty Name="EtapaFunilId" ColumnName="EtapaFunilId" />
+          <ScalarProperty Name="atividades" ColumnName="atividades" />
+          <ScalarProperty Name="notaPassagem" ColumnName="notaPassagem" />
+          <ScalarProperty Name="objetivo" ColumnName="objetivo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserRoles">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.AspNetUserRoles)">
+        <MappingFragment StoreEntitySet="AspNetUserRoles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PiramideSucessoSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.PiramideSucesso)">
+        <MappingFragment StoreEntitySet="PiramideSucessoSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="meta" ColumnName="meta" />
+          <ScalarProperty Name="ir" ColumnName="ir" />
+          <ScalarProperty Name="obj1" ColumnName="obj1" />
+          <ScalarProperty Name="obj2" ColumnName="obj2" />
+          <ScalarProperty Name="obj3" ColumnName="obj3" />
+          <ScalarProperty Name="obj4" ColumnName="obj4" />
+          <ScalarProperty Name="obj5" ColumnName="obj5" />
+          <ScalarProperty Name="atitude1_obj1" ColumnName="atitude1_obj1" />
+          <ScalarProperty Name="atitude2_obj1" ColumnName="atitude2_obj1" />
+          <ScalarProperty Name="atitude3_obj1" ColumnName="atitude3_obj1" />
+          <ScalarProperty Name="atitude4_obj1" ColumnName="atitude4_obj1" />
+          <ScalarProperty Name="atitude5_obj1" ColumnName="atitude5_obj1" />
+          <ScalarProperty Name="atitude1_obj2" ColumnName="atitude1_obj2" />
+          <ScalarProperty Name="atitude2_obj2" ColumnName="atitude2_obj2" />
+          <ScalarProperty Name="atitude3_obj2" ColumnName="atitude3_obj2" />
+          <ScalarProperty Name="atitude4_obj2" ColumnName="atitude4_obj2" />
+          <ScalarProperty Name="atitude5_obj2" ColumnName="atitude5_obj2" />
+          <ScalarProperty Name="atitude1_obj3" ColumnName="atitude1_obj3" />
+          <ScalarProperty Name="atitude2_obj3" ColumnName="atitude2_obj3" />
+          <ScalarProperty Name="atitude3_obj3" ColumnName="atitude3_obj3" />
+          <ScalarProperty Name="atitude4_obj3" ColumnName="atitude4_obj3" />
+          <ScalarProperty Name="atitude5_obj3" ColumnName="atitude5_obj3" />
+          <ScalarProperty Name="atitude1_obj4" ColumnName="atitude1_obj4" />
+          <ScalarProperty Name="atitude2_obj4" ColumnName="atitude2_obj4" />
+          <ScalarProperty Name="atitude3_obj4" ColumnName="atitude3_obj4" />
+          <ScalarProperty Name="atitude4_obj4" ColumnName="atitude4_obj4" />
+          <ScalarProperty Name="atitude5_obj4" ColumnName="atitude5_obj4" />
+          <ScalarProperty Name="atitude1_obj5" ColumnName="atitude1_obj5" />
+          <ScalarProperty Name="atitude2_obj5" ColumnName="atitude2_obj5" />
+          <ScalarProperty Name="atitude3_obj5" ColumnName="atitude3_obj5" />
+          <ScalarProperty Name="atitude4_obj5" ColumnName="atitude4_obj5" />
+          <ScalarProperty Name="atitude5_obj5" ColumnName="atitude5_obj5" />
+          <ScalarProperty Name="dtCriacao" ColumnName="dtCriacao" />
+          <ScalarProperty Name="dtUltimoUpdate" ColumnName="dtUltimoUpdate" />
+          <ScalarProperty Name="ativo" ColumnName="ativo" />
+          <ScalarProperty Name="metaBatida" ColumnName="metaBatida" />
+          <ScalarProperty Name="observacao" ColumnName="observacao" />
+          <ScalarProperty Name="codValidado" ColumnName="codValidado" />
+          <ScalarProperty Name="codUsuarioValidou" ColumnName="codUsuarioValidou" />
+          <ScalarProperty Name="codUsuarioCriou" ColumnName="codUsuarioCriou" />
+          <ScalarProperty Name="EmpresaId1" ColumnName="EmpresaId1" />
+          <ScalarProperty Name="EmpresaId" ColumnName="EmpresaId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UsuarioSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Usuario)">
+        <MappingFragment StoreEntitySet="UsuarioSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ativo" ColumnName="ativo" />
+          <ScalarProperty Name="tipoPessoa" ColumnName="tipoPessoa" />
+          <ScalarProperty Name="observacao" ColumnName="observacao" />
+          <ScalarProperty Name="EmpresaId" ColumnName="EmpresaId" />
+          <ScalarProperty Name="FilialId" ColumnName="FilialId" />
+          <ScalarProperty Name="imagem" ColumnName="imagem" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="telefone" ColumnName="telefone" />
+          <ScalarProperty Name="dtCriacao" ColumnName="dtCriacao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

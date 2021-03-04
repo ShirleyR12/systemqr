@@ -18,7 +18,15 @@ namespace CONEXAOQR.Controllers
         public ActionResult Index()
         {
             var empresaSet = db.EmpresaSet.Include(e => e.RedesSociais).Include(e => e.TipoNegocio);
+           
+            if (Request.IsAjaxRequest())
+            {
+
+                return PartialView("Empresa_partial", empresaSet.ToList());
+
+            }
             return View(empresaSet.ToList());
+
         }
 
         // GET: Empresas/Details/5

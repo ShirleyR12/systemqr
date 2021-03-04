@@ -519,7 +519,7 @@ V:\001 Shirley\QR\versao1\CONEXAOQR\CONEXAOQR\CONEXAOQR\bin\zh-CHT\Microsoft.Rep
 V:\001 Shirley\QR\versao1\CONEXAOQR\CONEXAOQR\CONEXAOQR\bin\pt-BR\Microsoft.VisualStudio.Data.Services.resources.dll
 V:\001 Shirley\QR\versao1\CONEXAOQR\CONEXAOQR\CONEXAOQR\bin\pt-BR\Microsoft.VisualStudio.Data.Core.resources.dll
 V:\001 Shirley\QR\versao1\CONEXAOQR\CONEXAOQR\CONEXAOQR\bin\pt-BR\Microsoft.VisualStudio.GraphModel.resources.dll
+V:\001 Shirley\QR\versao1\CONEXAOQR\CONEXAOQR\CONEXAOQR\obj\Debug\CONEXAOQR.csprojAssemblyReference.cache
 V:\001 Shirley\QR\versao1\CONEXAOQR\CONEXAOQR\CONEXAOQR\obj\Debug\CONEXAOQR.csproj.CopyComplete
 V:\001 Shirley\QR\versao1\CONEXAOQR\CONEXAOQR\CONEXAOQR\obj\Debug\CONEXAOQR.dll
 V:\001 Shirley\QR\versao1\CONEXAOQR\CONEXAOQR\CONEXAOQR\obj\Debug\CONEXAOQR.pdb
-V:\001 Shirley\QR\versao1\CONEXAOQR\CONEXAOQR\CONEXAOQR\obj\Debug\CONEXAOQR.csprojAssemblyReference.cache

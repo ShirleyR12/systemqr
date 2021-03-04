@@ -4,25 +4,25 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5f2b6d3cb38f433480e5a5113e89e688" Name="Diagram1" ZoomLevel="106" >
-        <EntityTypeShape EntityType="Model.Historial" Width="1.5" PointX="4.75" PointY="0.75" />
+      <Diagram DiagramId="5f2b6d3cb38f433480e5a5113e89e688" Name="Diagram1" ZoomLevel="102" >
+        <EntityTypeShape EntityType="Model.Historial" Width="1.5" PointX="2.75" PointY="0.875" />
         <EntityTypeShape EntityType="Model.CanalAtracao" Width="1.5" PointX="5.25" PointY="8" />
         <EntityTypeShape EntityType="Model.Corretor" Width="1.5" PointX="14.875" PointY="6.375" />
         <EntityTypeShape EntityType="Model.Empresa" Width="1.5" PointX="10.125" PointY="3.375" />
         <EntityTypeShape EntityType="Model.JustContato" Width="1.5" PointX="5.25" PointY="10.25" />
-        <EntityTypeShape EntityType="Model.EtapaFunil" Width="1.5" PointX="17" PointY="0.875" />
+        <EntityTypeShape EntityType="Model.EtapaFunil" Width="1.5" PointX="16.125" PointY="0.875" />
         <EntityTypeShape EntityType="Model.CanalComunicacao" Width="1.5" PointX="5.25" PointY="13.25" />
         <EntityTypeShape EntityType="Model.TipoImoveis" Width="1.5" PointX="5.25" PointY="18.25" />
         <EntityTypeShape EntityType="Model.GestaoLeads" Width="2.125" PointX="7.5" PointY="1.25" />
         <EntityTypeShape EntityType="Model.TipoContato" Width="1.5" PointX="5.25" PointY="21" />
         <EntityTypeShape EntityType="Model.Filial" Width="1.5" PointX="12" PointY="3.625" />
         <EntityTypeShape EntityType="Model.TipoNegocio" Width="1.5" PointX="10.375" PointY="9.625" />
-        <EntityTypeShape EntityType="Model.RedesSociais" Width="1.5" PointX="18.25" PointY="4.75" />
+        <EntityTypeShape EntityType="Model.RedesSociais" Width="1.5" PointX="16.75" PointY="4.75" />
         <EntityTypeShape EntityType="Model.Atividades" Width="1.5" PointX="3" PointY="4.375" />
-        <EntityTypeShape EntityType="Model.Situacao" Width="1.5" PointX="0.75" PointY="4.875" />
+        <EntityTypeShape EntityType="Model.Situacao" Width="1.5" PointX="0.5" PointY="4.5" />
         <EntityTypeShape EntityType="Model.TipoAtividade" Width="1.5" PointX="0.75" PointY="1.875" />
         <EntityTypeShape EntityType="Model.GestaoLeadsAtividades" Width="1.5" PointX="5.25" PointY="4.625" />
-        <EntityTypeShape EntityType="Model.FaseEtapaFunil" Width="1.5" PointX="14.75" PointY="1" />
+        <EntityTypeShape EntityType="Model.FaseEtapaFunil" Width="1.5" PointX="19.75" PointY="1.125" />
         <AssociationConnector Association="Model.CanalAtracaoGestaoLeads" />
         <AssociationConnector Association="Model.JustContatoGestaoLeads" />
         <AssociationConnector Association="Model.CanalComunicacaoGestaoLeads" />
@@ -33,7 +33,6 @@
         <AssociationConnector Association="Model.TipoAtividadeAtividades" />
         <AssociationConnector Association="Model.AtividadesGestaoLeadsAtividades" />
         <AssociationConnector Association="Model.SituacaoAtividades" />
-        <AssociationConnector Association="Model.EtapaFunilFaseEtapaFunil" />
         <AssociationConnector Association="Model.EmpresaGestaoLeads" />
         <AssociationConnector Association="Model.GestaoLeadsGestaoLeadsAtividades" />
         <AssociationConnector Association="Model.EmpresaFilial" />
@@ -41,16 +40,33 @@
         <AssociationConnector Association="Model.TipoNegocioEmpresa" />
         <AssociationConnector Association="Model.CorretorEmpresa" />
         <EntityTypeShape EntityType="Model.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="7.75" />
-        <EntityTypeShape EntityType="Model.AspNetRoles" Width="1.5" PointX="7.75" PointY="14.5" />
+        <EntityTypeShape EntityType="Model.AspNetRoles" Width="1.5" PointX="14.625" PointY="12.5" />
         <EntityTypeShape EntityType="Model.AspNetUserClaims" Width="1.5" PointX="12.25" PointY="13" />
-        <EntityTypeShape EntityType="Model.AspNetUserLogins" Width="1.5" PointX="12.25" PointY="15.75" />
-        <EntityTypeShape EntityType="Model.AspNetUsers" Width="1.5" PointX="10" PointY="13.375" />
+        <EntityTypeShape EntityType="Model.AspNetUserLogins" Width="1.5" PointX="13.375" PointY="16.75" />
+        <EntityTypeShape EntityType="Model.AspNetUsers" Width="1.875" PointX="10" PointY="13.375" />
         <AssociationConnector Association="Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
-        <AssociationConnector Association="Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
-        <AssociationConnector Association="Model.AspNetUserRoles" />
         <EntityTypeShape EntityType="Model.JustAvanco" Width="1.5" PointX="2.25" PointY="11" />
         <AssociationConnector Association="Model.JustAvancoGestaoLeads" />
         <AssociationConnector Association="Model.FilialGestaoLeads" />
+        <AssociationConnector Association="Model.CorretorGestaoLeads" />
+        <AssociationConnector Association="Model.EtapaFunilFaseEtapaFunil" />
+        <EntityTypeShape EntityType="Model.GestaoLeadEtapaFunil" Width="1.5" PointX="12.5" PointY="1" />
+        <AssociationConnector Association="Model.EtapaFunilLeadEtapa" />
+        <EntityTypeShape EntityType="Model.EtapaEmpresa" Width="1.5" PointX="19.375" PointY="4" />
+        <AssociationConnector Association="Model.EtapaPocentagemEmpresaEmpresa" />
+        <AssociationConnector Association="Model.EtapaPocentagemEmpresaEtapaFunil" />
+        <AssociationConnector Association="Model.AspNetRolesAspNetUsers" />
+        <EntityTypeShape EntityType="Model.AspNetUserRoles" Width="1.5" PointX="15.625" PointY="15" />
+        <AssociationConnector Association="Model.FK_AspNetRolesAspNetUserRoles" />
+        <AssociationConnector Association="Model.FK_AspNetUsersAspNetUserRoles" />
+        <EntityTypeShape EntityType="Model.PiramideSucesso" Width="3.25" PointX="20.25" PointY="8.75" />
+        <AssociationConnector Association="Model.PiramideSucessoEmpresa" />
+        <AssociationConnector Association="Model.AspNetUserLoginsAspNetUsers" />
+        <AssociationConnector Association="Model.PiramideSucessoEmpresa1" />
+        <EntityTypeShape EntityType="Model.Usuario" Width="1.5" PointX="16.75" PointY="9.625" />
+        <AssociationConnector Association="Model.UsuarioEmpresa" />
+        <AssociationConnector Association="Model.UsuarioFilial" />
+        <AssociationConnector Association="Model.FK_PiramideSucessoEmpresa1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

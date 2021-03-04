@@ -20,6 +20,11 @@ namespace CONEXAOQR.Models
             this.GestaoLeads = new HashSet<GestaoLeads>();
             this.Filial = new HashSet<Filial>();
             this.Corretor = new HashSet<Corretor>();
+            this.EtapaPocentagemEmpresa = new HashSet<EtapaEmpresa>();
+            this.PiramideSucesso = new HashSet<PiramideSucesso>();
+            this.PiramideSucesso1 = new HashSet<PiramideSucesso>();
+            this.Usuario = new HashSet<Usuario>();
+            this.PiramideSucessoSet = new HashSet<PiramideSucesso>();
         }
     
         public int Id { get; set; }
@@ -45,5 +50,15 @@ namespace CONEXAOQR.Models
         public virtual TipoNegocio TipoNegocio { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Corretor> Corretor { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EtapaEmpresa> EtapaPocentagemEmpresa { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PiramideSucesso> PiramideSucesso { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PiramideSucesso> PiramideSucesso1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Usuario> Usuario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PiramideSucesso> PiramideSucessoSet { get; set; }
     }
 }

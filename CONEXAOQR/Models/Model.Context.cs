@@ -49,5 +49,10 @@ namespace CONEXAOQR.Models
         public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<JustAvanco> JustAvancoSet { get; set; }
+        public virtual DbSet<GestaoLeadEtapaFunil> GestaoLeadEtapaFunilSet { get; set; }
+        public virtual DbSet<EtapaEmpresa> EtapaEmpresaSet { get; set; }
+        public virtual DbSet<AspNetUserRoles> AspNetUserRoles { get; set; }
+        public virtual DbSet<PiramideSucesso> PiramideSucessoSet { get; set; }
+        public virtual DbSet<Usuario> UsuarioSet { get; set; }
     }
 }

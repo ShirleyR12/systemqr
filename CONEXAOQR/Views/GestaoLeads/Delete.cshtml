@@ -1,273 +1,156 @@
 ﻿@model CONEXAOQR.Models.GestaoLeads
 
 @{
-    ViewBag.Title = "Delete";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Deletar Lead";
+    Layout = "~/Views/Shared/_LayoutTheme.cshtml";
 }
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>GestaoLeads</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.dtEntrada)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.dtEntrada)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.nome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.nome)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.qtdContato)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.qtdContato)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.dtPrimeiraVisita)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.dtPrimeiraVisita)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.tempoEntrada)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.tempoEntrada)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.bandB)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.bandB)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.bandA)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.bandA)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.bandN)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.bandN)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.bandD)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.bandD)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.etapaLEAD)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.etapaLEAD)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.etapaATENDIMENTO)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.etapaATENDIMENTO)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.etapaAGENDAMENTO)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.etapaAGENDAMENTO)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.etapaVISITA)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.etapaVISITA)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.etapaPROPOSTA)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.etapaPROPOSTA)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.etapaVENDA)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.etapaVENDA)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.observacao)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.observacao)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.dtCadastro)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.dtCadastro)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FilialId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FilialId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.midiaOrigem)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.midiaOrigem)
-        </dd>
+<style type="text/css">
+    .text-xs {
+        font-size: 13px !important;
+    }
+
+    .text-info {
+        color: #858796 !important;
+    }
+</style>
+
+<body id="page-top">
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "signupform" }))
+    {
+
+        <div class="container-fluid">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h5 class="m-0 font-weight-bold text-primary">Detalhes do Lead</h5>
+
+                    @Html.ActionLink("Listagem", "Index", new { @class = "btn btn-primary btn-user btn-block" })
+
+
+                </div>
+                <div>
+                    <div class="card border-left-info shadow h-100 py-2">
+                        <div class="card-body">
+
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+
+                                    <div class="col">
+                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+
+                                            <b>Empresa:</b>&nbsp; @Html.DisplayFor(model => model.Empresa.nome)<br />
+                                            <p />
+                                            <div class="col-xl-12 col-md-6 mb-4">
+                                                <div class="card border-left-primary shadow h-100 py-2">
+                                                    <div class="card-body">
+                                                        <div class="row no-gutters align-items-center">
+                                                            <div class="col mr-2">
+
+                                                                <div class="h12 mb-0 font-weight-bold text-gray-800">
+                                                                    <b>Nome:</b>&nbsp; @Html.DisplayFor(model => model.nome) <p />
+                                                                    <b>Data de entrada:</b>&nbsp; @Html.DisplayFor(model => model.dtEntrada)<br />
+
+                                                                    <b>Quantidade de Tentativas de Contato:</b>&nbsp; @Html.DisplayFor(model => model.qtdContato)<br />
+                                                                    <b>Data da primeira visita:</b>&nbsp; @Html.DisplayFor(model => model.dtPrimeiraVisita)<br />
+                                                                    <b>Tempo Entrada do Lead:</b>&nbsp; @Html.DisplayFor(model => model.tempoEntrada)<br />
+                                                                    <b>Data de cadastro:</b>&nbsp;@Html.DisplayFor(model => model.dtCadastro)<br />
+                                                                    <b>Sexo:</b>&nbsp;@Html.DisplayFor(model => model.sexo)<br />
+                                                                    <b>Possui e-mail / telefone?:</b>&nbsp; @Html.DisplayNameFor(model => model.midiaOrigem)<br />
+                                                                    <b>Cidade / Estado:</b>&nbsp;@Html.DisplayFor(model => model.cidade)<br />
+                                                                    <b>Canal de Atração:</b>&nbsp; @Html.DisplayFor(model => model.CanalAtracao.nome)<br />
+                                                                    <b>Camal de comunicação:</b>&nbsp;  @Html.DisplayFor(model => model.CanalComunicacao.nome)<br />
+                                                                    <b>Justificativa do não contato:</b>&nbsp; @Html.DisplayFor(model => model.JustContato.nome)<br />
+                                                                    <b>Justificativa do não avanço:</b>&nbsp;@Html.DisplayFor(model => model.JustAvanco.nome)<br />
+                                                                    <b>Tipo de imóvel:</b>&nbsp;@Html.DisplayFor(model => model.TipoImoveis.nome)<br />
+                                                                    <b>Tipo de contato:</b>&nbsp;@Html.DisplayFor(model => model.TipoContato.nome)<br />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <p />
+                                            <hr />
+
+
+
+                                            <div class="col-xl-12 col-md-6 mb-4">
+                                                <div class="card border-left-success shadow h-100 py-2">
+                                                    <div class="card-body">
+                                                        <div class="row no-gutters align-items-center">
+                                                            <div class="col mr-2">
+                                                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                                    EBANT
+                                                                </div>
+                                                                <div class="h10 mb-0 font-weight-bold text-gray-800">
+                                                                    <b>B:</b>&nbsp; @Html.CheckBox("bandB")&nbsp;&nbsp;&nbsp;
+                                                                    <b>A:</b>&nbsp;  @Html.CheckBox("bandA")&nbsp;&nbsp;&nbsp;
+                                                                    <b>N:</b>&nbsp; @Html.CheckBox("bandN")&nbsp;&nbsp;&nbsp;
+                                                                    <b>T:</b>&nbsp;  @Html.CheckBox("bandD")&nbsp;&nbsp;&nbsp;
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-12 col-md-6 mb-4">
+                                                <div class="card border-left-warning shadow h-100 py-2">
+                                                    <div class="card-body">
+                                                        <div class="row no-gutters align-items-center">
+                                                            <div class="col mr-2">
+                                                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                                    Etapas do Lead
+                                                                </div>
+                                                                <div class="h10 mb-0 font-weight-bold text-gray-800">
+
+                                                                    <b>LEAD</b>&nbsp; @Html.CheckBox("etapaLEAD")&nbsp;&nbsp;&nbsp;
+                                                                    <b>ATENDIMENTO</b>&nbsp;@Html.CheckBox("etapaATENDIMENTO")&nbsp;&nbsp;&nbsp;
+                                                                    <b>AGENDAMENTO</b>&nbsp; @Html.CheckBox("etapaAGENDAMENTO")&nbsp;&nbsp;&nbsp;
+                                                                    <b>VISITA</b>&nbsp;  @Html.CheckBox("etapaVISITA")&nbsp;&nbsp;&nbsp;
+                                                                    <b>PROPOSTA</b>&nbsp;  @Html.CheckBox("etapaPROPOSTA")&nbsp;&nbsp;&nbsp;
+                                                                    <b>VENDA</b>&nbsp; @Html.CheckBox("etapaVENDA")&nbsp;&nbsp;&nbsp;
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    @using (Html.BeginForm())
+                                    {
+                                        @Html.AntiForgeryToken()
+
+                                <div class="form-actions no-color">
+                                    <a href="javascript:document.getElementById('signupform').submit();" class="btn btn-success btn-icon-split">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-check"></i>
+                                        </span>
+                                        <span class="text">Detelar</span>
+                                    </a>
+
+                                    <a href="/GestaoLeads/Index" class="btn btn-secondary btn-icon-split">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-arrow-right"></i>
+                                        </span>
+                                        <span class="text">Voltar</span>
+                                    </a>
+                                </div>
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.sexo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.sexo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.cidade)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.cidade)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.VisitasId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.VisitasId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SituacaoId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SituacaoId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CanalAtracao.nome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CanalAtracao.nome)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.JustContato.nome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.JustContato.nome)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CanalComunicacao.nome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CanalComunicacao.nome)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.JustAvanco.nome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.JustAvanco.nome)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TipoImoveis.nome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TipoImoveis.nome)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TipoContato.nome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TipoContato.nome)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Empresa.nome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Empresa.nome)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Filial.nome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Filial.nome)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
         </div>
     }
-</div>
+  </body>

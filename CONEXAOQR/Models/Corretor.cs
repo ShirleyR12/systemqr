@@ -14,6 +14,12 @@ namespace CONEXAOQR.Models
     
     public partial class Corretor
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Corretor()
+        {
+            this.GestaoLeads = new HashSet<GestaoLeads>();
+        }
+    
         public int Id { get; set; }
         public string nome { get; set; }
         public string telefone { get; set; }
@@ -22,8 +28,11 @@ namespace CONEXAOQR.Models
         public Nullable<System.DateTime> dtNascimento { get; set; }
         public Nullable<int> FilialId { get; set; }
         public int EmpresaId { get; set; }
+        public int tipoPessoa { get; set; }
     
         public virtual Filial Filial { get; set; }
         public virtual Empresa Empresa { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GestaoLeads> GestaoLeads { get; set; }
     }
 }

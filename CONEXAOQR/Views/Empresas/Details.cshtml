@@ -2,122 +2,104 @@
 
 @{
     ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutTheme.cshtml";
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>Empresa</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.nome)
-        </dt>
+<style type="text/css">
+    .text-xs {
+        font-size: 13px !important;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.nome)
-        </dd>
+    .text-info {
+        color: #858796 !important;
+    }
+</style>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.cnpj)
-        </dt>
+<body id="page-top">
 
-        <dd>
-            @Html.DisplayFor(model => model.cnpj)
-        </dd>
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 ml-auto mr-auto">
+                    <div class="card">
+                        <div class="card-header card-header-primary">
+                            <h4 class="card-title"><i class="material-icons">person</i> &nbsp;&nbsp;EMPRESA</h4>
+                            <p class="card-category">Dados cadastrais</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive table-upgrade">
+                                <table class="table">
+                                    <tr>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.email)
-        </dt>
+                                        <td>
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <b style="color:orangered">Nome:</b>&nbsp; @Html.DisplayFor(model => model.nome)
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <b>CNPJ:</b>&nbsp; @Html.DisplayFor(model => model.cnpj)
+                                        </td>
+                                        <td>
+                                            <b>E-MAIL:</b>&nbsp; @Html.DisplayFor(model => model.email)
+                                        </td>
+                                        <td>
+                                            <b>TELEFONE:</b>&nbsp; @Html.DisplayFor(model => model.telefone)
+                                        </td>
 
-        <dd>
-            @Html.DisplayFor(model => model.email)
-        </dd>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>ENDEREÇO:</b>&nbsp; @Html.DisplayFor(model => model.endereco)
+                                        </td>
+                                        <td>
+                                            <b>NOME FANTASIA:</b>&nbsp;@Html.DisplayFor(model => model.nomeFantasia)
+                                        </td>
+                                        <td>
+                                            <b>GERENTE:</b>&nbsp;@Html.DisplayFor(model => model.gerente)
+                                        </td>
+                                        <td>
+                                            <b>DIRETOR:</b>&nbsp; @Html.DisplayNameFor(model => model.diretor)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>MQI:</b>&nbsp;@Html.DisplayFor(model => model.mqi)
+                                        </td>
+                                        <td>
+                                            <b>CRM:</b>&nbsp; @Html.DisplayFor(model => model.crm)
+                                        </td>
+                                        <td>
+                                            <b>SITE:</b>&nbsp;  @Html.DisplayFor(model => model.site)
+                                        </td>
+                                        <td>
+                                            <b>SEGUIMENTO:</b>&nbsp; @Html.DisplayFor(model => model.TipoNegocio.nome)
+                                        </td>
+                                    </tr>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.telefone)
-        </dt>
+                                </table>
 
-        <dd>
-            @Html.DisplayFor(model => model.telefone)
-        </dd>
+                                <br />
 
-        <dt>
-            @Html.DisplayNameFor(model => model.endereco)
-        </dt>
+                                <table class="table">
+                                    <tr>
+                                        <td class="text-left">
+                                            <div class="card-body">
+                                                <a href="/Empresas/Index" class="btn btn-round btn-fill btn-default">
+                                                    <span class="text">Voltar</span>
+                                                </a>
 
-        <dd>
-            @Html.DisplayFor(model => model.endereco)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.nomeFantasia)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.nomeFantasia)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.gerente)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.gerente)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.diretor)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.diretor)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.mqi)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.mqi)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.crm)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.crm)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.site)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.site)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.RedesSociais.nome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RedesSociais.nome)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TipoNegocio.nome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TipoNegocio.nome)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body> 
+        

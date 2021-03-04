@@ -2,69 +2,74 @@
 
 @{
     ViewBag.Title = "Index";
-     Layout = "~/Views/Shared/_LayoutTheme.cshtml";
+    Layout = "~/Views/Shared/_LayoutTheme.cshtml";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.nome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.telefone)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.dtCadastro)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.dtNascimento)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Filial.nome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Empresa.nome)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.telefone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.dtCadastro)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.dtNascimento)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Filial.nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Empresa.nome)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+<link href="~/Scripts/templete/assets/css/material-dashboard.min.css?v=2.1.2" rel="stylesheet" />
+<body id="page-top">
 
-</table>
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-success">
+                            <h4 class="card-title ">Corretores</h4>
+                            <p class="card-title ">@Html.ActionLink("Cadastrar Pessoas", "Create")</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class=" text-primary">
+                                        <tr>
+                                            <th>
+                                               Nome
+                                            </th>
+                                            <th>
+                                                Telefone
+                                            </th>
+                                            <th>
+                                               Empresa
+                                            </th>
+                                            <th>
+                                                Filial
+                                            </th>
+                                            <th></th>
+                                        </tr>
+
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.nome)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.telefone)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Filial.nome)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Empresa.nome)
+                                                </td>
+                                                <td>
+                                                    @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                                                    @Html.ActionLink("Detalhes", "Details", new { id = item.Id }) |
+                                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                                </td>
+                                            </tr>
+                                        }
+
+
+                                        </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
