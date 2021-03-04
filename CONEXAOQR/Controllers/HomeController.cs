@@ -25,32 +25,32 @@ namespace CONEXAOQR.Controllers
             var totalP = db.GestaoLeadsSet.Where(l => l.etapaPROPOSTA == true && l.EmpresaId == 1).Count();
             var totalE = db.GestaoLeadsSet.Where(l => l.etapaVENDA == true && l.EmpresaId == 1).Count();
 
-            var lead = totalL > 0 ? totalL : 1;
+            var lead = totalL > 0 ? totalL : 0;
             Grafico leady = new Grafico();
             leady.y = lead;
             leady.label = "LEAD";
 
-            var atendimento = totalA > 0 ? totalA : 1;
+            var atendimento = totalA > 0 ? totalA : 0;
             Grafico atendimentoy = new Grafico();
             atendimentoy.y = atendimento;
             atendimentoy.label = "ATENDIMENTO";
 
-            var agendamento = totalG > 0 ? totalG : 1;
+            var agendamento = totalG > 0 ? totalG : 0;
             Grafico agendamentoy = new Grafico();
             agendamentoy.y = agendamento;
             agendamentoy.label = "AGENDAMENTO";
 
-            var visita = totalV > 0 ? totalV : 1;
+            var visita = totalV > 0 ? totalV : 0;
             Grafico visitay = new Grafico();
             visitay.y = visita;
             visitay.label = "VISITA";
 
-            var proposta = totalP > 0 ? totalP : 1;
+            var proposta = totalP > 0 ? totalP : 0;
             Grafico propostay = new Grafico();
             propostay.y = proposta;
             propostay.label = "PROPOSTA";
 
-            var venda = totalE > 0 ? totalE: 1;
+            var venda = totalE > 0 ? totalE: 0;
             Grafico venday = new Grafico();
             venday.y = venda;
             venday.label = "VENDA";

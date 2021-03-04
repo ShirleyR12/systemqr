@@ -157,14 +157,9 @@
                                                                 </div>
                                                                 <div class="col-md-3">
                                                                     <div class="form-group">
-                                                                        <label class="bmd-label-floating">Gerente</label>
-                                                                        <input type="text" class="form-control">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <div class="form-group">
-                                                                        <label class="bmd-label-floating">Diretor</label>
-                                                                        <input type="text" name="diretor" class="form-control">
+                                                                        <label class="bmd-label-floating">@Html.LabelFor(model => model.CorretorId, "Corretor", htmlAttributes: new { @class = "m-0 font-weight-bold text-primary" })</label>
+                                                                        @Html.DropDownList("CorretorId", null, htmlAttributes: new { @class = "btn btn-primary dropdown-toggle" })
+                                                                        @Html.ValidationMessageFor(model => model.CorretorId, "", new { @class = "text-danger" })
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -236,7 +231,19 @@
                                                                     <div class="col-md-4">
                                                                         <div class="form-group">
                                                                             <label class="bmd-label-floating"> @Html.LabelFor(model => model.valorImovel, "Valor do Imóvel", htmlAttributes: new { @class = "m-0 font-weight-bold" })</label>
-                                                                            <input type="text" name="valorImovel" id="valorImovel" class="form-control">
+                                                                            <select id="valorImovel" name="valorImovel" class="btn btn-primary dropdown-toggle">
+                                                                                <option value="0">Não informado</option>
+                                                                                <option value="1">100 mil </option>
+                                                                                <option value="2">200 mil </option>
+                                                                                <option value="3">300 mil </option>
+                                                                                <option value="4">400 mil </option>
+                                                                                <option value="5">500 mil </option>
+                                                                                <option value="6">600 mil</option>
+                                                                                <option value="7">700 mil </option>
+                                                                                <option value="8">800 mil </option>
+                                                                                <option value="9">900 mil </option>
+                                                                                <option value="10">Superior</option>
+                                                                            </select>
                                                                             @Html.ValidationMessageFor(model => model.valorImovel, "", new { @class = "text-danger" })
                                                                         </div>
                                                                     </div>

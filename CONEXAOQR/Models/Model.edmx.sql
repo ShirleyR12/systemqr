@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/04/2021 12:48:35
--- Generated from EDMX file: V:\001 Shirley\QR\versao1\CONEXAOQR\CONEXAOQR\CONEXAOQR\Models\Model.edmx
+-- Date Created: 03/04/2021 19:19:02
+-- Generated from EDMX file: C:\Users\Pichau\Desktop\QR\systemqr\CONEXAOQR\Models\Model.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [aspnet-CONEXAOQR-20210203105021];
+USE [trinity];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -17,41 +17,65 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_AspNetRolesAspNetUserRoles]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AspNetUserRoles] DROP CONSTRAINT [FK_AspNetRolesAspNetUserRoles];
-GO
-IF OBJECT_ID(N'[dbo].[FK_AspNetUserLoginsAspNetUsers]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AspNetUserLogins] DROP CONSTRAINT [FK_AspNetUserLoginsAspNetUsers];
-GO
-IF OBJECT_ID(N'[dbo].[FK_AspNetUsersAspNetUserRoles]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AspNetUserRoles] DROP CONSTRAINT [FK_AspNetUsersAspNetUserRoles];
-GO
-IF OBJECT_ID(N'[dbo].[FK_AtividadesGestaoLeadsAtividades]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[GestaoLeadsAtividadesSet] DROP CONSTRAINT [FK_AtividadesGestaoLeadsAtividades];
-GO
 IF OBJECT_ID(N'[dbo].[FK_CanalAtracaoGestaoLeads]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[GestaoLeadsSet] DROP CONSTRAINT [FK_CanalAtracaoGestaoLeads];
+GO
+IF OBJECT_ID(N'[dbo].[FK_JustContatoGestaoLeads]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GestaoLeadsSet] DROP CONSTRAINT [FK_JustContatoGestaoLeads];
 GO
 IF OBJECT_ID(N'[dbo].[FK_CanalComunicacaoGestaoLeads]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[GestaoLeadsSet] DROP CONSTRAINT [FK_CanalComunicacaoGestaoLeads];
 GO
-IF OBJECT_ID(N'[dbo].[FK_CorretorEmpresa]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CorretorSet] DROP CONSTRAINT [FK_CorretorEmpresa];
+IF OBJECT_ID(N'[dbo].[FK_TipoImoveisGestaoLeads]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GestaoLeadsSet] DROP CONSTRAINT [FK_TipoImoveisGestaoLeads];
 GO
-IF OBJECT_ID(N'[dbo].[FK_CorretorFilial]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CorretorSet] DROP CONSTRAINT [FK_CorretorFilial];
+IF OBJECT_ID(N'[dbo].[FK_TipoContatoGestaoLeads]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GestaoLeadsSet] DROP CONSTRAINT [FK_TipoContatoGestaoLeads];
 GO
-IF OBJECT_ID(N'[dbo].[FK_CorretorGestaoLeads]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[GestaoLeadsSet] DROP CONSTRAINT [FK_CorretorGestaoLeads];
+IF OBJECT_ID(N'[dbo].[FK_RedesSociaisEmpresa]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[EmpresaSet] DROP CONSTRAINT [FK_RedesSociaisEmpresa];
 GO
-IF OBJECT_ID(N'[dbo].[FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AspNetUserClaims] DROP CONSTRAINT [FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId];
+IF OBJECT_ID(N'[dbo].[FK_RedesSociaisFilial]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[FilialSet] DROP CONSTRAINT [FK_RedesSociaisFilial];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TipoAtividadeAtividades]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AtividadesSet] DROP CONSTRAINT [FK_TipoAtividadeAtividades];
+GO
+IF OBJECT_ID(N'[dbo].[FK_AtividadesGestaoLeadsAtividades]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GestaoLeadsAtividadesSet] DROP CONSTRAINT [FK_AtividadesGestaoLeadsAtividades];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SituacaoAtividades]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AtividadesSet] DROP CONSTRAINT [FK_SituacaoAtividades];
+GO
+IF OBJECT_ID(N'[dbo].[FK_EmpresaGestaoLeads]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GestaoLeadsSet] DROP CONSTRAINT [FK_EmpresaGestaoLeads];
+GO
+IF OBJECT_ID(N'[dbo].[FK_GestaoLeadsGestaoLeadsAtividades]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GestaoLeadsAtividadesSet] DROP CONSTRAINT [FK_GestaoLeadsGestaoLeadsAtividades];
 GO
 IF OBJECT_ID(N'[dbo].[FK_EmpresaFilial]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[FilialSet] DROP CONSTRAINT [FK_EmpresaFilial];
 GO
-IF OBJECT_ID(N'[dbo].[FK_EmpresaGestaoLeads]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[GestaoLeadsSet] DROP CONSTRAINT [FK_EmpresaGestaoLeads];
+IF OBJECT_ID(N'[dbo].[FK_CorretorFilial]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CorretorSet] DROP CONSTRAINT [FK_CorretorFilial];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TipoNegocioEmpresa]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[EmpresaSet] DROP CONSTRAINT [FK_TipoNegocioEmpresa];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CorretorEmpresa]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CorretorSet] DROP CONSTRAINT [FK_CorretorEmpresa];
+GO
+IF OBJECT_ID(N'[dbo].[FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AspNetUserClaims] DROP CONSTRAINT [FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId];
+GO
+IF OBJECT_ID(N'[dbo].[FK_JustAvancoGestaoLeads]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GestaoLeadsSet] DROP CONSTRAINT [FK_JustAvancoGestaoLeads];
+GO
+IF OBJECT_ID(N'[dbo].[FK_FilialGestaoLeads]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GestaoLeadsSet] DROP CONSTRAINT [FK_FilialGestaoLeads];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CorretorGestaoLeads]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GestaoLeadsSet] DROP CONSTRAINT [FK_CorretorGestaoLeads];
 GO
 IF OBJECT_ID(N'[dbo].[FK_EtapaFunilFaseEtapaFunil]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[FaseEtapaFunilSet] DROP CONSTRAINT [FK_EtapaFunilFaseEtapaFunil];
@@ -65,41 +89,20 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_EtapaPocentagemEmpresaEtapaFunil]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[EtapaEmpresaSet] DROP CONSTRAINT [FK_EtapaPocentagemEmpresaEtapaFunil];
 GO
-IF OBJECT_ID(N'[dbo].[FK_FilialGestaoLeads]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[GestaoLeadsSet] DROP CONSTRAINT [FK_FilialGestaoLeads];
+IF OBJECT_ID(N'[dbo].[FK_AspNetRolesAspNetUserRoles]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AspNetUserRoles] DROP CONSTRAINT [FK_AspNetRolesAspNetUserRoles];
 GO
-IF OBJECT_ID(N'[dbo].[FK_GestaoLeadsGestaoLeadsAtividades]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[GestaoLeadsAtividadesSet] DROP CONSTRAINT [FK_GestaoLeadsGestaoLeadsAtividades];
+IF OBJECT_ID(N'[dbo].[FK_AspNetUsersAspNetUserRoles]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AspNetUserRoles] DROP CONSTRAINT [FK_AspNetUsersAspNetUserRoles];
 GO
-IF OBJECT_ID(N'[dbo].[FK_JustAvancoGestaoLeads]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[GestaoLeadsSet] DROP CONSTRAINT [FK_JustAvancoGestaoLeads];
+IF OBJECT_ID(N'[dbo].[FK_PiramideSucessoEmpresa]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PiramideSucessoSet] DROP CONSTRAINT [FK_PiramideSucessoEmpresa];
 GO
-IF OBJECT_ID(N'[dbo].[FK_JustContatoGestaoLeads]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[GestaoLeadsSet] DROP CONSTRAINT [FK_JustContatoGestaoLeads];
+IF OBJECT_ID(N'[dbo].[FK_AspNetUserLoginsAspNetUsers]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AspNetUserLogins] DROP CONSTRAINT [FK_AspNetUserLoginsAspNetUsers];
 GO
 IF OBJECT_ID(N'[dbo].[FK_PiramideSucessoEmpresa1]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PiramideSucessoSet] DROP CONSTRAINT [FK_PiramideSucessoEmpresa1];
-GO
-IF OBJECT_ID(N'[dbo].[FK_RedesSociaisEmpresa]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[EmpresaSet] DROP CONSTRAINT [FK_RedesSociaisEmpresa];
-GO
-IF OBJECT_ID(N'[dbo].[FK_RedesSociaisFilial]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[FilialSet] DROP CONSTRAINT [FK_RedesSociaisFilial];
-GO
-IF OBJECT_ID(N'[dbo].[FK_SituacaoAtividades]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AtividadesSet] DROP CONSTRAINT [FK_SituacaoAtividades];
-GO
-IF OBJECT_ID(N'[dbo].[FK_TipoAtividadeAtividades]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AtividadesSet] DROP CONSTRAINT [FK_TipoAtividadeAtividades];
-GO
-IF OBJECT_ID(N'[dbo].[FK_TipoContatoGestaoLeads]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[GestaoLeadsSet] DROP CONSTRAINT [FK_TipoContatoGestaoLeads];
-GO
-IF OBJECT_ID(N'[dbo].[FK_TipoImoveisGestaoLeads]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[GestaoLeadsSet] DROP CONSTRAINT [FK_TipoImoveisGestaoLeads];
-GO
-IF OBJECT_ID(N'[dbo].[FK_TipoNegocioEmpresa]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[EmpresaSet] DROP CONSTRAINT [FK_TipoNegocioEmpresa];
 GO
 IF OBJECT_ID(N'[dbo].[FK_UsuarioEmpresa]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[UsuarioSet] DROP CONSTRAINT [FK_UsuarioEmpresa];
@@ -107,11 +110,71 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_UsuarioFilial]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[UsuarioSet] DROP CONSTRAINT [FK_UsuarioFilial];
 GO
+IF OBJECT_ID(N'[dbo].[FK_PiramideSucessoEmpresa1]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PiramideSucessoSet] DROP CONSTRAINT [FK_PiramideSucessoEmpresa1];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[Historial]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Historial];
+GO
+IF OBJECT_ID(N'[dbo].[CanalAtracaoSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CanalAtracaoSet];
+GO
+IF OBJECT_ID(N'[dbo].[CorretorSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CorretorSet];
+GO
+IF OBJECT_ID(N'[dbo].[EmpresaSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[EmpresaSet];
+GO
+IF OBJECT_ID(N'[dbo].[JustContatoSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[JustContatoSet];
+GO
+IF OBJECT_ID(N'[dbo].[EtapaFunilSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[EtapaFunilSet];
+GO
+IF OBJECT_ID(N'[dbo].[CanalComunicacaoSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CanalComunicacaoSet];
+GO
+IF OBJECT_ID(N'[dbo].[TipoImoveisSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TipoImoveisSet];
+GO
+IF OBJECT_ID(N'[dbo].[GestaoLeadsSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[GestaoLeadsSet];
+GO
+IF OBJECT_ID(N'[dbo].[TipoContatoSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TipoContatoSet];
+GO
+IF OBJECT_ID(N'[dbo].[FilialSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[FilialSet];
+GO
+IF OBJECT_ID(N'[dbo].[TipoNegocioSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TipoNegocioSet];
+GO
+IF OBJECT_ID(N'[dbo].[RedesSociaisSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[RedesSociaisSet];
+GO
+IF OBJECT_ID(N'[dbo].[AtividadesSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[AtividadesSet];
+GO
+IF OBJECT_ID(N'[dbo].[SituacaoSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[SituacaoSet];
+GO
+IF OBJECT_ID(N'[dbo].[TipoAtividadeSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TipoAtividadeSet];
+GO
+IF OBJECT_ID(N'[dbo].[GestaoLeadsAtividadesSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[GestaoLeadsAtividadesSet];
+GO
+IF OBJECT_ID(N'[dbo].[FaseEtapaFunilSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[FaseEtapaFunilSet];
+GO
+IF OBJECT_ID(N'[dbo].[C__MigrationHistory]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[C__MigrationHistory];
+GO
 IF OBJECT_ID(N'[dbo].[AspNetRoles]', 'U') IS NOT NULL
     DROP TABLE [dbo].[AspNetRoles];
 GO
@@ -121,80 +184,23 @@ GO
 IF OBJECT_ID(N'[dbo].[AspNetUserLogins]', 'U') IS NOT NULL
     DROP TABLE [dbo].[AspNetUserLogins];
 GO
-IF OBJECT_ID(N'[dbo].[AspNetUserRoles]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[AspNetUserRoles];
-GO
 IF OBJECT_ID(N'[dbo].[AspNetUsers]', 'U') IS NOT NULL
     DROP TABLE [dbo].[AspNetUsers];
-GO
-IF OBJECT_ID(N'[dbo].[AtividadesSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[AtividadesSet];
-GO
-IF OBJECT_ID(N'[dbo].[C__MigrationHistory]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[C__MigrationHistory];
-GO
-IF OBJECT_ID(N'[dbo].[CanalAtracaoSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[CanalAtracaoSet];
-GO
-IF OBJECT_ID(N'[dbo].[CanalComunicacaoSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[CanalComunicacaoSet];
-GO
-IF OBJECT_ID(N'[dbo].[CorretorSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[CorretorSet];
-GO
-IF OBJECT_ID(N'[dbo].[EmpresaSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[EmpresaSet];
-GO
-IF OBJECT_ID(N'[dbo].[EtapaEmpresaSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[EtapaEmpresaSet];
-GO
-IF OBJECT_ID(N'[dbo].[EtapaFunilSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[EtapaFunilSet];
-GO
-IF OBJECT_ID(N'[dbo].[FaseEtapaFunilSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[FaseEtapaFunilSet];
-GO
-IF OBJECT_ID(N'[dbo].[FilialSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[FilialSet];
-GO
-IF OBJECT_ID(N'[dbo].[GestaoLeadEtapaFunilSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[GestaoLeadEtapaFunilSet];
-GO
-IF OBJECT_ID(N'[dbo].[GestaoLeadsAtividadesSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[GestaoLeadsAtividadesSet];
-GO
-IF OBJECT_ID(N'[dbo].[GestaoLeadsSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[GestaoLeadsSet];
-GO
-IF OBJECT_ID(N'[dbo].[Historial]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Historial];
 GO
 IF OBJECT_ID(N'[dbo].[JustAvancoSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[JustAvancoSet];
 GO
-IF OBJECT_ID(N'[dbo].[JustContatoSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[JustContatoSet];
+IF OBJECT_ID(N'[dbo].[GestaoLeadEtapaFunilSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[GestaoLeadEtapaFunilSet];
+GO
+IF OBJECT_ID(N'[dbo].[EtapaEmpresaSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[EtapaEmpresaSet];
+GO
+IF OBJECT_ID(N'[dbo].[AspNetUserRoles]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[AspNetUserRoles];
 GO
 IF OBJECT_ID(N'[dbo].[PiramideSucessoSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PiramideSucessoSet];
-GO
-IF OBJECT_ID(N'[dbo].[RedesSociaisSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[RedesSociaisSet];
-GO
-IF OBJECT_ID(N'[dbo].[SituacaoSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[SituacaoSet];
-GO
-IF OBJECT_ID(N'[dbo].[TipoAtividadeSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[TipoAtividadeSet];
-GO
-IF OBJECT_ID(N'[dbo].[TipoContatoSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[TipoContatoSet];
-GO
-IF OBJECT_ID(N'[dbo].[TipoImoveisSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[TipoImoveisSet];
-GO
-IF OBJECT_ID(N'[dbo].[TipoNegocioSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[TipoNegocioSet];
 GO
 IF OBJECT_ID(N'[dbo].[UsuarioSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[UsuarioSet];

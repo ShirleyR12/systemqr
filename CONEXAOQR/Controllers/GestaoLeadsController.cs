@@ -17,7 +17,7 @@ namespace CONEXAOQR.Controllers
         // GET: GestaoLeads
         public ActionResult Index()
         {
-            var gestaoLeadsSet = db.GestaoLeadsSet.Include(g => g.CanalAtracao).Include(g => g.JustContato).Include(g => g.CanalComunicacao).Include(g => g.TipoImoveis).Include(g => g.TipoContato).Include(g => g.Empresa).Include(g => g.Filial).Include(g => g.JustAvanco);
+            var gestaoLeadsSet = db.GestaoLeadsSet.Include(g => g.CanalAtracao).Include(g => g.JustContato).Include(g => g.CanalComunicacao).Include(g => g.TipoImoveis).Include(g => g.TipoContato).Include(g => g.Empresa).Include(g => g.Filial).Include(g => g.JustAvanco).Include(g => g.Corretor);
             return View(gestaoLeadsSet.ToList());
         }
 
@@ -48,6 +48,7 @@ namespace CONEXAOQR.Controllers
             ViewBag.EmpresaId = new SelectList(db.EmpresaSet, "Id", "nome");
             ViewBag.FilialId = new SelectList(db.FilialSet, "Id", "nome");
             ViewBag.JustAvancoId = new SelectList(db.JustAvancoSet, "Id", "nome");
+            ViewBag.CorretorId = new SelectList(db.CorretorSet, "Id", "nome");
             return View();
         }
 
@@ -62,6 +63,7 @@ namespace CONEXAOQR.Controllers
             ViewBag.EmpresaId = new SelectList(db.EmpresaSet, "Id", "nome");
             ViewBag.FilialId = new SelectList(db.FilialSet, "Id", "nome");
             ViewBag.JustAvancoId = new SelectList(db.JustAvancoSet, "Id", "nome");
+            ViewBag.CorretorId = new SelectList(db.CorretorSet, "Id", "nome");
 
 
             return View();
@@ -72,8 +74,7 @@ namespace CONEXAOQR.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Administrador")]
-        public ActionResult Create([Bind(Include = "Id,dtEntrada,nome,qtdContato,dtPrimeiraVisita,tempoEntrada,bandB,bandA,bandN,bandD,etapaLEAD,etapaATENDIMENTO,etapaAGENDAMENTO,etapaVISITA,etapaPROPOSTA,etapaVENDA,observacao,dtCadastro,JustContatoId,CanalAtracaoId,CanalComunicacaoId,valorImovel,TipoContatoId,sexo,cidade,TipoImoveisId,VisitasId,SituacaoId,EmpresaId,FilialId,JustAvancoId,importado")] GestaoLeads gestaoLeads)
+        public ActionResult Create([Bind(Include = "Id,dtEntrada,nome,qtdContato,dtPrimeiraVisita,tempoEntrada,bandB,bandA,bandN,bandD,etapaLEAD,etapaATENDIMENTO,etapaAGENDAMENTO,etapaVISITA,etapaPROPOSTA,etapaVENDA,observacao,dtCadastro,JustContatoId,CanalAtracaoId,CanalComunicacaoId,valorImovel,TipoContatoId,sexo,cidade,TipoImoveisId,VisitasId,SituacaoId,EmpresaId,FilialId,JustAvancoId,Importado,Corretor")] GestaoLeads gestaoLeads)
         {
             if (ModelState.IsValid)
             {
@@ -83,7 +84,7 @@ namespace CONEXAOQR.Controllers
                 gestaoLeads.SituacaoId = 1;
                 gestaoLeads.importado = false; 
                 //Colocar o usuario vinculado ao corretor cadastrado
-                gestaoLeads.CorretorId  = db.CorretorSet.FirstOrDefault().Id;
+               // gestaoLeads.CorretorId  = db.CorretorSet.FirstOrDefault().Id;
                 gestaoLeads.ativo = "ATIVO";
                 gestaoLeads.FilialId = 1;
 
@@ -92,6 +93,7 @@ namespace CONEXAOQR.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.CanalAtracaoId = new SelectList(db.CanalAtracaoSet, "Id", "nome", gestaoLeads.CanalAtracaoId);
+            ViewBag.CorretorId = new SelectList(db.CorretorSet, "Id", "nome", gestaoLeads.CorretorId);
             ViewBag.JustContatoId = new SelectList(db.JustContatoSet, "Id", "nome", gestaoLeads.JustContatoId);
             ViewBag.CanalComunicacaoId = new SelectList(db.CanalComunicacaoSet, "Id", "nome", gestaoLeads.CanalComunicacaoId);
             ViewBag.TipoImoveisId = new SelectList(db.TipoImoveisSet, "Id", "nome", gestaoLeads.TipoImoveisId);
@@ -129,6 +131,7 @@ namespace CONEXAOQR.Controllers
             ViewBag.EmpresaId = new SelectList(db.EmpresaSet, "Id", "nome", gestaoLeads.EmpresaId);
             ViewBag.FilialId = new SelectList(db.FilialSet, "Id", "nome", gestaoLeads.FilialId);
             ViewBag.JustAvancoId = new SelectList(db.JustAvancoSet, "Id", "nome", gestaoLeads.JustAvancoId);
+            ViewBag.CorretorId = new SelectList(db.CorretorSet, "Id", "nome", gestaoLeads.CorretorId);
             return View(gestaoLeads);
         }
 
@@ -137,7 +140,7 @@ namespace CONEXAOQR.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,dtEntrada,nome,qtdContato,dtPrimeiraVisita,tempoEntrada,bandB,bandA,bandN,bandD,etapaLEAD,etapaATENDIMENTO,etapaAGENDAMENTO,etapaVISITA,etapaPROPOSTA,etapaVENDA,observacao,dtCadastro,JustContatoId,CanalAtracaoId,CanalComunicacaoId,valorImovel,TipoContatoId,sexo,cidade,TipoImoveisId,VisitasId,SituacaoId,EmpresaId,FilialId,JustAvancoId,importado")] GestaoLeads gestaoLeads)
+        public ActionResult Edit([Bind(Include = "Id,dtEntrada,nome,qtdContato,dtPrimeiraVisita,tempoEntrada,bandB,bandA,bandN,bandD,etapaLEAD,etapaATENDIMENTO,etapaAGENDAMENTO,etapaVISITA,etapaPROPOSTA,etapaVENDA,observacao,dtCadastro,JustContatoId,CanalAtracaoId,CanalComunicacaoId,valorImovel,TipoContatoId,sexo,cidade,TipoImoveisId,VisitasId,SituacaoId,EmpresaId,FilialId,JustAvancoId,Importado,Corretor")] GestaoLeads gestaoLeads)
         {
             if (ModelState.IsValid)
             {
@@ -151,8 +154,9 @@ namespace CONEXAOQR.Controllers
             ViewBag.TipoImoveisId = new SelectList(db.TipoImoveisSet, "Id", "nome", gestaoLeads.TipoImoveisId);
             ViewBag.TipoContatoId = new SelectList(db.TipoContatoSet, "Id", "nome", gestaoLeads.TipoContatoId);
             ViewBag.EmpresaId = new SelectList(db.EmpresaSet, "Id", "nome", gestaoLeads.EmpresaId);
-            ViewBag.FilialId1 = new SelectList(db.FilialSet, "Id", "nome", gestaoLeads.FilialId);
+            ViewBag.FilialId = new SelectList(db.FilialSet, "Id", "nome", gestaoLeads.FilialId);
             ViewBag.JustAvancoId = new SelectList(db.JustAvancoSet, "Id", "nome", gestaoLeads.JustAvancoId);
+            ViewBag.CorretorId = new SelectList(db.CorretorSet, "Id", "nome", gestaoLeads.CorretorId);
             return View(gestaoLeads);
         }
 

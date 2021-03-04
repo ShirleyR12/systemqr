@@ -2,39 +2,63 @@
 
 @{
     ViewBag.Title = "Index";
-     Layout = "~/Views/Shared/_LayoutTheme.cshtml";
+    Layout = "~/Views/Shared/_LayoutTheme.cshtml";
 }
 
-<h2>Index</h2>
+<link href="~/Scripts/templete/assets/css/material-dashboard.min.css?v=2.1.2" rel="stylesheet" />
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.nome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.link)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.link)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-success">
+                            <h4 class="card-title ">REDES SOCIAIS</h4>
+                            <p class="card-title">
+                                @Html.ActionLink("Cadastrar nova REDE SOCIAL", "Create")
+                            </p>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class=" text-primary">
+                                        <tr>
+                                            <th>
+                                                Nome
+                                            </th>
+                                            <th>
+                                                Link
+                                            </th>
+                                            <th>
+                                                Ações
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                        <tr>
 
-</table>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.nome)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.link)
+                                            </td>
+
+                                            <td>
+                                                @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                                                @Html.ActionLink("Deletar", "Delete", new { id = item.Id })
+                                            </td>
+                                        </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

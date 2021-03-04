@@ -5,40 +5,56 @@
     Layout = "~/Views/Shared/_LayoutTheme.cshtml";
 }
 
-<div class="container-fluid">
-    <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Detalhes</h6>
+<link href="~/Scripts/templete/assets/css/material-dashboard.min.css?v=2.1.2" rel="stylesheet" />
+<body id="page-top">
+
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-success">
+                            <h4 class="card-title ">TIPO DE NEGÓCIO</h4>
+                            <p class="card-title">
+                                @Html.ActionLink("Cadastrar novo TIPO DE NEGÓCIO", "Create")
+                            </p>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class=" text-primary">
+                                        <tr>
+                                            <th>
+                                                Nome
+                                            </th>
+                                            <th>
+                                                Ações
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.nome)
+                                                </td>
+
+                                                <td>
+                                                    @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                                                    @Html.ActionLink("Deletar", "Delete", new { id = item.Id })
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
+</body>
 
-        <div>
-            <br />
-            <p>
-                @Html.ActionLink("Cadastrar Novo", "Create")
-            </p>
-            <table class="table">
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.nome)
-                    </th>
-                    <th></th>
-                </tr>
-
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.nome)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                        </td>
-                    </tr>
-                }
-
-            </table>
-</div>
-</div>
-</div>
