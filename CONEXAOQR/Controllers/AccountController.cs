@@ -192,7 +192,7 @@ namespace CONEXAOQR.Controllers
                     var userId = new ApplicationUser { UserName = model.Email, Email = model.Email };
                     Session["userIdSession"] = userId.Id;
 
-                    return RedirectToAction("Index", "Usuarios");
+                    return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }
